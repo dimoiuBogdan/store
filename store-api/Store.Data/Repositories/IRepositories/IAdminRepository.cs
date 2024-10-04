@@ -4,6 +4,6 @@ namespace store_api.Store.Data.Repositories.IRepositories;
 
 public interface IAdminRepository
 {
-    Task<List<ProductModel>> GetBestProductsWithCategoriesAsync();
+    Task<List<ProductModel>> GetBestProductsAsync();
     Task<List<ProductImageModel>> GetImagesForProductsAsync(List<int> productIds);
 }

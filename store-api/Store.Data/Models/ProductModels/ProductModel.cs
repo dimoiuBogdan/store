@@ -12,8 +12,8 @@ public class ProductModel
     [Description("product_id")]
     public required int ProductId { get; set; }
 
-    // [Description("sales_count")]
-    // public required int SalesCount { get; set; }
+    [Description("sales_count")]
+    public required string SalesCount { get; set; }
 
     [Description("price")]
     public required decimal Price { get; set; }

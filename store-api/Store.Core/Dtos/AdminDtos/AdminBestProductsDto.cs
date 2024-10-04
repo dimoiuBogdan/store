@@ -11,8 +11,8 @@ namespace store_api.Store.Core.Dtos.AdminDtos
         [Required]
         public required string Name { get; set; }
 
-        // [Required]
-        // public required int SalesCount { get; set; }
+        [Required]
+        public required int SalesCount { get; set; }
 
         [Required]
         public required decimal Price { get; set; }

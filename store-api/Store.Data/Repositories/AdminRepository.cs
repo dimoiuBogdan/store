@@ -3,6 +3,7 @@ using Npgsql;
 using store_api.Store.Data.Helpers;
 using store_api.Store.Data.Repositories.IRepositories;
 using store_api.Store.Data.Models.ProductModels;
+using Newtonsoft.Json;
 
 namespace store_api.Store.Data.Repositories
 {
@@ -20,13 +21,19 @@ namespace store_api.Store.Data.Repositories
             return new NpgsqlConnection(_connectionString);
         }
 
-        public async Task<List<ProductModel>> GetBestProductsWithCategoriesAsync()
+        public async Task<List<ProductModel>> GetBestProductsAsync()
         {
             const string sql = @"
-                SELECT p.product_id, p.name, p.price, p.stock, c.category_id, c.name
+                SELECT p.product_id, p.name, p.price, p.stock, c.category_id, c.name, op.sales_count
                 FROM product p
                 LEFT JOIN product_category pc ON p.product_id = pc.product_id
                 LEFT JOIN category c ON pc.category_id = c.category_id
+                LEFT JOIN LATERAL (
+                    SELECT SUM(op.quantity)::int as sales_count
+                    FROM order_product op
+                    WHERE op.product_id = p.product_id
+                ) op ON true
+                ORDER BY op.sales_count DESC
                 LIMIT 5";
 
             await using var connection = GetConnection();
@@ -37,6 +44,8 @@ namespace store_api.Store.Data.Repositories
                 sql,
                 (product, category) =>
                 {
+                    Console.WriteLine(product.SalesCount);
+
                     if (!productDictionary.TryGetValue(product.ProductId, out var existingProduct))
                     {
                         existingProduct = product;
@@ -45,6 +54,7 @@ namespace store_api.Store.Data.Repositories
                     }
 
                     existingProduct.Categories.Add(category);
+
                     return existingProduct;
                 },
                 splitOn: "category_id"
@@ -70,5 +80,7 @@ namespace store_api.Store.Data.Repositories
 
             return images.ToList();
         }
+
+
     }
 }
