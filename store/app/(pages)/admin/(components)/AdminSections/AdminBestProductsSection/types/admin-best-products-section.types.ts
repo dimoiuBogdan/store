@@ -5,6 +5,7 @@ export type AdminBestProductModel = {
     name: string;
     price: number;
     stock: number;
+    salesCount: number;
     categories: CategoryModel[];
     productImage: string;
 };

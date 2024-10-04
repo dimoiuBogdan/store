@@ -86,7 +86,7 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
       >
         <Column field="productId" header={idHeader} body={idBodyTemplate} />
         <Column field="name" header="Name" />
-        {/* <Column field="salesCount" header="Sales" /> */}
+        <Column field="salesCount" header="Sales" />
         <Column field="price" header="Price" body={priceBodyTemplate} />
         <Column field="stock" header="Stock" body={stockBodyTemplate} />
         <Column
