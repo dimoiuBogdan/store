@@ -24,7 +24,7 @@ namespace store_api.Store.Data.Repositories
         public async Task<List<ProductModel>> GetBestProductsAsync()
         {
             const string sql = @"
-                SELECT p.product_id, p.name, p.price, p.stock, c.category_id, c.name, op.sales_count
+                SELECT p.product_id, p.name, p.price, p.stock, op.sales_count, c.category_id, c.name
                 FROM product p
                 LEFT JOIN product_category pc ON p.product_id = pc.product_id
                 LEFT JOIN category c ON pc.category_id = c.category_id
@@ -44,8 +44,6 @@ namespace store_api.Store.Data.Repositories
                 sql,
                 (product, category) =>
                 {
-                    Console.WriteLine(product.SalesCount);
-
                     if (!productDictionary.TryGetValue(product.ProductId, out var existingProduct))
                     {
                         existingProduct = product;
