@@ -2,6 +2,7 @@ using AutoMapper;
 using Newtonsoft.Json;
 using store_api.Store.Core.Dtos.AdminDtos;
 using store_api.Store.Core.Services.IServices;
+using store_api.Store.Data.Models.UserModels;
 using store_api.Store.Data.Repositories.IRepositories;
 
 namespace store_api.Store.Core.Services
@@ -43,6 +44,22 @@ namespace store_api.Store.Core.Services
             var bestCategoriesData = await _adminRepository.GetBestCategoriesAsync();
 
             return _mapper.Map<List<AdminBestCategoriesDto>>(bestCategoriesData);
+        }
+
+        public async Task<List<AdminLatestOrdersDto>> GetAdminLatestOrdersAsync()
+        {
+            var latestOrdersData = await _adminRepository.GetLatestOrdersAsync();
+            var latestOrdersUser = await _adminRepository.GetLatestOrdersUserAsync(latestOrdersData.Select(o => o.UserId).ToList());
+
+            var latestOrders = latestOrdersData.Select(order =>
+            {
+                var orderDto = _mapper.Map<AdminLatestOrdersDto>(order);
+                orderDto.User = _mapper.Map<AdminLatestOrdersUserDto>(latestOrdersUser[order.OrderId]);
+
+                return orderDto;
+            }).ToList();
+
+            return latestOrders;
         }
     }
 }

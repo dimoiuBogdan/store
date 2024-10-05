@@ -28,5 +28,12 @@ namespace store_api.Store.Api.Controllers
             var bestCategoriesData = await _adminService.GetAdminBestCategoriesAsync();
             return Ok(bestCategoriesData);
         }
+
+        [HttpGet("latest-orders")]
+        public async Task<ActionResult<List<AdminLatestOrdersDto>>> GetAdminLatestOrders()
+        {
+            var latestOrdersData = await _adminService.GetAdminLatestOrdersAsync();
+            return Ok(latestOrdersData);
+        }
     }
 }

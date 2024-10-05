@@ -4,6 +4,8 @@ using store_api.Store.Data.Helpers;
 using store_api.Store.Data.Repositories.IRepositories;
 using store_api.Store.Data.Models.ProductModels;
 using Newtonsoft.Json;
+using store_api.Store.Data.Models.UserModels;
+using Supabase.Gotrue;
 
 namespace store_api.Store.Data.Repositories
 {
@@ -97,6 +99,52 @@ namespace store_api.Store.Data.Repositories
             await connection.CloseAsync();
 
             return categories.ToList();
+        }
+
+        public async Task<List<OrderModel>> GetLatestOrdersAsync()
+        {
+            const string sql = @"
+                SELECT o.order_id, o.created_at, o.total, o.order_status_id, o.user_id, o.shipping_order_address_id, o.billing_order_address_id, o.payment_method_id, o.paid
+                FROM ""order"" o
+                ORDER BY o.created_at DESC
+                LIMIT 5";
+
+            await using var connection = GetConnection();
+
+            var orders = await connection.QueryAsync<OrderModel>(sql);
+
+            await connection.CloseAsync();
+
+            return orders.ToList();
+        }
+
+        public async Task<Dictionary<int, UserModel>> GetLatestOrdersUserAsync(List<int> userIds)
+        {
+            const string sql = @"
+                SELECT u.user_id, u.first_name, u.last_name, o.order_id
+                FROM ""user"" u
+                INNER JOIN ""order"" o ON u.user_id = o.user_id
+                WHERE u.user_id = ANY(@userIds)";
+
+            await using var connection = GetConnection();
+
+            var usersDictionary = new Dictionary<int, UserModel>();
+
+            var users = await connection.QueryAsync<UserModel, OrderModel, UserModel>(
+                sql,
+                (user, order) =>
+                {
+                    usersDictionary.Add(order.OrderId, user);
+
+                    return user;
+                },
+                param: new { userIds },
+                splitOn: "order_id"
+            );
+
+            await connection.CloseAsync();
+
+            return usersDictionary;
         }
     }
 }

@@ -43,7 +43,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   const paidBodyTemplate = (rowData: AdminLatestOrderModel) => {
     return (
       <span>
-        {rowData.orderPaid ? (
+        {rowData.paid ? (
           <Check className="h-5 w-5 text-emerald-500" />
         ) : (
           <X className="h-5 w-5 text-red-500" />
@@ -55,7 +55,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   const totalBodyTemplate = (rowData: AdminLatestOrderModel) => {
     return (
       <span className="truncate font-bold">
-        {rowData.orderTotal.toLocaleString()} $
+        {rowData.total.toLocaleString()} $
       </span>
     );
   };
@@ -63,8 +63,8 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   const dateBodyTemplate = (rowData: AdminLatestOrderModel) => {
     return (
       <span>
-        {new Date(rowData.orderDate).toLocaleDateString()}{" "}
-        {new Date(rowData.orderDate).toLocaleTimeString()}
+        {new Date(rowData.createdAt).toLocaleDateString()}{" "}
+        {new Date(rowData.createdAt).toLocaleTimeString()}
       </span>
     );
   };
@@ -75,12 +75,12 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
         <Tooltip
           className="text-xs"
           position="top"
-          target={`.customer-tooltip-${rowData.id}`}
+          target={`.customer-tooltip-${rowData.orderId}`}
         >
-          {rowData.customerName}
+          {rowData.user.firstName} {rowData.user.lastName}
         </Tooltip>
-        <span className={`customer-tooltip-${rowData.id}`}>
-          {rowData.customerName}
+        <span className={`customer-tooltip-${rowData.orderId}`}>
+          {rowData.user.firstName} {rowData.user.lastName}
         </span>
       </div>
     );
@@ -93,10 +93,10 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   const orderNumberBodyTemplate = (rowData: AdminLatestOrderModel) => {
     return (
       <div
-        onClick={() => handleEditOrder(rowData.id)}
+        onClick={() => handleEditOrder(rowData.orderId)}
         className="cursor-pointer font-bold text-purple-500"
       >
-        {rowData.id}
+        {rowData.orderId}
       </div>
     );
   };
@@ -138,7 +138,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
         <Column field="orderTotal" header="Total" body={totalBodyTemplate} />
         <Column field="orderPaid" header="Paid" body={paidBodyTemplate} />
         <Column field="orderStatus" header="Status" body={statusBodyTemplate} />
-        <Column field="orderDate" header="Date" body={dateBodyTemplate} />
+        <Column field="createdAt" header="Date" body={dateBodyTemplate} />
       </DataTable>
       {orderToEdit ? (
         <AdminLatestOrdersDetailsPopup

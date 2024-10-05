@@ -6,5 +6,6 @@ namespace store_api.Store.Core.Services.IServices
     {
         Task<List<AdminBestProductsDto>> GetAdminBestProductsAsync();
         Task<List<AdminBestCategoriesDto>> GetAdminBestCategoriesAsync();
+        Task<List<AdminLatestOrdersDto>> GetAdminLatestOrdersAsync();
     }
 }
