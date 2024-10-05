@@ -21,5 +21,12 @@ namespace store_api.Store.Api.Controllers
             var bestProductsData = await _adminService.GetAdminBestProductsAsync();
             return Ok(bestProductsData);
         }
+
+        [HttpGet("best-categories")]
+        public async Task<ActionResult<List<AdminBestCategoriesDto>>> GetAdminBestCategories()
+        {
+            var bestCategoriesData = await _adminService.GetAdminBestCategoriesAsync();
+            return Ok(bestCategoriesData);
+        }
     }
 }

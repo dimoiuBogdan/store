@@ -79,6 +79,24 @@ namespace store_api.Store.Data.Repositories
             return images.ToList();
         }
 
+        public async Task<List<CategoryModel>> GetBestCategoriesAsync()
+        {
+            const string sql = @"
+                SELECT c.category_id, c.name, SUM(op.quantity)::int as sales_count
+                FROM category c
+                JOIN product_category pc ON c.category_id = pc.category_id
+                JOIN order_product op ON pc.product_id = op.product_id
+                GROUP BY c.category_id, c.name
+                ORDER BY sales_count DESC
+                LIMIT 5";
 
+            await using var connection = GetConnection();
+
+            var categories = await connection.QueryAsync<CategoryModel>(sql);
+
+            await connection.CloseAsync();
+
+            return categories.ToList();
+        }
     }
 }

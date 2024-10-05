@@ -9,4 +9,7 @@ public class CategoryModel
 
     [Description("name")]
     public required string Name { get; set; }
+
+    [Description("sales_count")]
+    public int SalesCount { get; set; }
 }

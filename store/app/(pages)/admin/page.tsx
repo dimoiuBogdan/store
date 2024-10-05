@@ -4,7 +4,7 @@ import { getQueryClient } from "../../get-query-client";
 import AdminBestProductsSectionDataProvider from "./(components)/AdminSections/AdminBestProductsSection/AdminBestProductsSectionDataProvider";
 import AdminLatestOrdersSectionDataProvider from "./(components)/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersSectionDataProvider";
 import AdminOverviewSection from "./(components)/AdminSections/AdminOverviewSection/AdminOverviewSection";
-import AdminTopCategoriesSection from "./(components)/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
+import AdminBestCategoriesSection from "./(components)/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
 
 export default function AdminPage() {
   const queryClient = getQueryClient();
@@ -19,8 +19,8 @@ export default function AdminPage() {
           <Suspense fallback={<div>Loading Latest Orders...</div>}>
             <AdminLatestOrdersSectionDataProvider />
           </Suspense>
-          <Suspense fallback={<div>Loading Top Categories...</div>}>
-            <AdminTopCategoriesSection />
+          <Suspense fallback={<div>Loading Best Categories...</div>}>
+            <AdminBestCategoriesSection />
           </Suspense>
         </div>
         <Suspense fallback={<div>Loading Best Products...</div>}>

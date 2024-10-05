@@ -22,8 +22,6 @@ namespace store_api.Store.Core.Services
             var bestProductsData = await _adminRepository.GetBestProductsAsync();
             var bestProductsImagesData = await _adminRepository.GetImagesForProductsAsync(bestProductsData.Select(p => p.ProductId).ToList());
 
-            // Console.WriteLine(JsonConvert.SerializeObject(bestProductsData, Formatting.Indented));
-
             var imageDict = bestProductsImagesData
                 .GroupBy(i => i.ProductId)
                 .ToDictionary(i => i.Key, i => i.Select(image => image.Url).FirstOrDefault() ?? string.Empty);
@@ -38,6 +36,13 @@ namespace store_api.Store.Core.Services
             }).ToList();
 
             return bestProducts;
+        }
+
+        public async Task<List<AdminBestCategoriesDto>> GetAdminBestCategoriesAsync()
+        {
+            var bestCategoriesData = await _adminRepository.GetBestCategoriesAsync();
+
+            return _mapper.Map<List<AdminBestCategoriesDto>>(bestCategoriesData);
         }
     }
 }
