@@ -1,4 +1,5 @@
 using store_api.Store.Core.Dtos.AdminDtos;
+using store_api.Store.Data.Models.ProductModels;
 
 namespace store_api.Store.Core.Services.IServices
 {
@@ -6,6 +7,9 @@ namespace store_api.Store.Core.Services.IServices
     {
         Task<List<AdminBestProductsDto>> GetAdminBestProductsAsync();
         Task<List<AdminBestCategoriesDto>> GetAdminBestCategoriesAsync();
-        Task<List<AdminLatestOrdersDto>> GetAdminLatestOrdersAsync();
+        Task<List<AdminLatestOrderDto>> GetAdminLatestOrdersAsync();
+        Task<AdminLatestOrderDto> GetAdminLatestOrderByIdAsync(int orderId);
+        Task<List<OrderedProductDto>> GetAdminLatestOrderProductsAsync(int orderId);
+        Task<AdminOverviewDto> GetAdminOverviewAsync();
     }
 }

@@ -28,7 +28,7 @@ export default function AdminLatestOrdersDetailsPopup({
       }}
     >
       <Suspense fallback={<div>Loading order details...</div>}>
-        <AdminLatestOrdersDetailsPopupContent />
+        <AdminLatestOrdersDetailsPopupContent orderToEdit={orderToEdit} />
       </Suspense>
     </Dialog>
   );

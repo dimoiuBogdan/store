@@ -30,7 +30,5 @@ export default async function AdminLatestOrdersSectionDataProvider() {
     return <AdminLatestOrdersSectionError />;
   }
 
-  console.log(latestOrders);
-
   return <AdminLatestOrdersSection latestOrdersData={latestOrders} />;
 }

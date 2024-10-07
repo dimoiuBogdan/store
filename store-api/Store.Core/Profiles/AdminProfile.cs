@@ -12,8 +12,11 @@ namespace store_api.Store.Core.Profiles
             CreateMap<ProductModel, AdminBestProductsDto>().ReverseMap();
             CreateMap<ProductImageModel, ProductImageDto>().ReverseMap();
             CreateMap<CategoryModel, AdminBestCategoriesDto>().ReverseMap();
-            CreateMap<OrderModel, AdminLatestOrdersDto>().ReverseMap();
-            CreateMap<UserModel, AdminLatestOrdersUserDto>().ReverseMap();
+            CreateMap<OrderModel, AdminLatestOrderDto>().ReverseMap();
+            CreateMap<UserModel, AdminLatestOrderUserDto>().ReverseMap();
+            CreateMap<OrderModel, AdminLatestOrderDetailsDto>().ReverseMap();
+            CreateMap<OrderedProductModel, OrderedProductDto>().ReverseMap();
+            CreateMap<AdminOverviewModel, AdminOverviewDto>().ReverseMap();
         }
     }
 }

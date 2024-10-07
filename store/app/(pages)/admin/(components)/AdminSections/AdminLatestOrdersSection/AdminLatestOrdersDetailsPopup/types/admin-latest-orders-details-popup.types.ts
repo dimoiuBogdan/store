@@ -1,25 +1,25 @@
-import { OrderStatus } from "../../../../../../../common/types/enums";
+import { OrderStatus, type PaymentMethod } from "../../../../../../../common/types/enums";
+import type { AddressModel, CategoryModel, UserModel } from "../../../../../../../common/types/types";
 
-export type AdminOrderDetailsProductModel = {
+export type AdminOrderedProductModel = {
   productId: number;
-  productName: string;
-  productPrice: number;
+  name: string;
+  price: number;
   quantity: number;
   total: number;
-  category: string;
-  image: string;
+  categories: CategoryModel[];
+  productImage: string;
 };
 
 export type AdminOrderDetailsModel = {
-  orderNumber: number;
-  customer: string;
+  orderId: number;
+  user: UserModel;
   total: number;
   paid: boolean;
-  status: OrderStatus;
-  date: string;
-  phoneNumber: string;
-  email: string;
-  shippingAddress: string;
-  billingAddress: string;
-  paymentMethod: string;
+  orderStatus: OrderStatus;
+  createdAt: string;
+  shippingOrderAddress: AddressModel;
+  billingOrderAddress: AddressModel;
+  paymentMethod: PaymentMethod;
 };
+

@@ -17,17 +17,19 @@ namespace store_api.Store.Api.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.AddAdminServices();
+            services.AddServicesAndRepositories();
             services.AddCorsPolicy();
 
             return services;
         }
 
 
-        private static IServiceCollection AddAdminServices(this IServiceCollection services)
+        private static IServiceCollection AddServicesAndRepositories(this IServiceCollection services)
         {
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IAdminService, AdminService>();
+
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
             return services;
         }

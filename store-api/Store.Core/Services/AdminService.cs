@@ -1,8 +1,9 @@
 using AutoMapper;
 using Newtonsoft.Json;
+using store_api.Store.Core.Dtos.AddressDtos;
 using store_api.Store.Core.Dtos.AdminDtos;
 using store_api.Store.Core.Services.IServices;
-using store_api.Store.Data.Models.UserModels;
+using store_api.Store.Data.Models.ProductModels;
 using store_api.Store.Data.Repositories.IRepositories;
 
 namespace store_api.Store.Core.Services
@@ -11,10 +12,12 @@ namespace store_api.Store.Core.Services
     {
         private readonly IMapper _mapper;
         private readonly IAdminRepository _adminRepository;
+        private readonly IAddressRepository _addressRepository;
 
-        public AdminService(IMapper mapper, IAdminRepository adminRepository)
+        public AdminService(IMapper mapper, IAdminRepository adminRepository, IAddressRepository addressRepository)
         {
             _adminRepository = adminRepository;
+            _addressRepository = addressRepository;
             _mapper = mapper;
         }
 
@@ -46,20 +49,63 @@ namespace store_api.Store.Core.Services
             return _mapper.Map<List<AdminBestCategoriesDto>>(bestCategoriesData);
         }
 
-        public async Task<List<AdminLatestOrdersDto>> GetAdminLatestOrdersAsync()
+        public async Task<List<AdminLatestOrderDto>> GetAdminLatestOrdersAsync()
         {
             var latestOrdersData = await _adminRepository.GetLatestOrdersAsync();
             var latestOrdersUser = await _adminRepository.GetLatestOrdersUserAsync(latestOrdersData.Select(o => o.UserId).ToList());
 
             var latestOrders = latestOrdersData.Select(order =>
             {
-                var orderDto = _mapper.Map<AdminLatestOrdersDto>(order);
-                orderDto.User = _mapper.Map<AdminLatestOrdersUserDto>(latestOrdersUser[order.OrderId]);
+                var orderDto = _mapper.Map<AdminLatestOrderDto>(order);
+                orderDto.User = _mapper.Map<AdminLatestOrderUserDto>(latestOrdersUser[order.OrderId]);
 
                 return orderDto;
             }).ToList();
 
             return latestOrders;
+        }
+
+        public async Task<AdminLatestOrderDto> GetAdminLatestOrderByIdAsync(int orderId)
+        {
+            var latestOrderData = await _adminRepository.GetLatestOrderByIdAsync(orderId);
+            var latestOrderUserTask = _adminRepository.GetLatestOrderUserByIdAsync(latestOrderData.UserId);
+            var latestOrderShippingAddressTask = _addressRepository.GetAddressByIdAsync(latestOrderData.ShippingOrderAddressId);
+            var latestOrderBillingAddressTask = _addressRepository.GetAddressByIdAsync(latestOrderData.BillingOrderAddressId);
+
+            await Task.WhenAll(latestOrderUserTask, latestOrderShippingAddressTask, latestOrderBillingAddressTask);
+
+            var latestOrderUser = await latestOrderUserTask;
+            var latestOrderShippingAddress = await latestOrderShippingAddressTask;
+            var latestOrderBillingAddress = await latestOrderBillingAddressTask;
+
+            var latestOrder = _mapper.Map<AdminLatestOrderDto>(latestOrderData);
+            latestOrder.User = _mapper.Map<AdminLatestOrderUserDto>(latestOrderUser);
+            latestOrder.ShippingOrderAddress = _mapper.Map<AddressDto>(latestOrderShippingAddress);
+            latestOrder.BillingOrderAddress = _mapper.Map<AddressDto>(latestOrderBillingAddress);
+
+            return latestOrder;
+        }
+
+        public async Task<List<OrderedProductDto>> GetAdminLatestOrderProductsAsync(int orderId)
+        {
+            var latestOrderProductsData = await _adminRepository.GetLatestOrderProductsAsync(orderId);
+
+            return _mapper.Map<List<OrderedProductDto>>(latestOrderProductsData);
+        }
+
+        public async Task<AdminOverviewDto> GetAdminOverviewAsync()
+        {
+            var overviewDataAsync = _adminRepository.GetOverviewAsync();
+            var newCustomersAsync = _adminRepository.GetOverviewNewCustomersAsync();
+
+            await Task.WhenAll(overviewDataAsync, newCustomersAsync);
+
+            var overviewData = await overviewDataAsync;
+            var newCustomers = await newCustomersAsync;
+
+            overviewData.NewCustomers = newCustomers;
+
+            return _mapper.Map<AdminOverviewDto>(overviewData);
         }
     }
 }

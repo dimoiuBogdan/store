@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using store_api.Store.Data.Enums;
-
+using store_api.Store.Core.Dtos.AddressDtos;
 namespace store_api.Store.Core.Dtos.AdminDtos
 {
-    public class AdminLatestOrdersDto
+    public class AdminLatestOrderDto
     {
         [Required]
         public required int OrderId { get; set; }
@@ -18,16 +18,15 @@ namespace store_api.Store.Core.Dtos.AdminDtos
         public required OrderStatus OrderStatus { get; set; }
 
         [Required]
-        public required AdminLatestOrdersUserDto User { get; set; }
+        public required AdminLatestOrderUserDto User { get; set; }
 
         [Required]
-        public required int ShippingOrderAddressId { get; set; }
+        public required AddressDto ShippingOrderAddress { get; set; }
 
         [Required]
-        public required int BillingOrderAddressId { get; set; }
-
+        public required AddressDto BillingOrderAddress { get; set; }
         [Required]
-        public required PaymentMethods PaymentMethodId { get; set; }
+        public required PaymentMethods PaymentMethod { get; set; }
 
         [Required]
         public required bool Paid { get; set; }

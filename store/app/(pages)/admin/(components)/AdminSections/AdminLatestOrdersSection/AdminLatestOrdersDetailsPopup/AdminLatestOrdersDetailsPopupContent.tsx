@@ -1,23 +1,35 @@
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { Badge } from "primereact/badge";
-import { OrderStatus } from "../../../../../../common/types/enums";
+import {
+  OrderStatus,
+  PaymentMethod,
+} from "../../../../../../common/types/enums";
 import AdminLatestOrdersDetailsPopupDownloadInvoice from "./AdminLatestOrdersDetailsPopupDownloadInvoice";
 import AdminLatestOrdersDetailsPopupNotifyUser from "./AdminLatestOrdersDetailsPopupNotifyUser";
 import AdminLatestOrdersDetailsPopupOrderActions from "./AdminLatestOrdersDetailsPopupOrderActions";
 import AdminLatestOrdersDetailsPopupProducts from "./AdminLatestOrdersDetailsPopupProducts";
+import type { AdminOrderDetailsModel } from "./types/admin-latest-orders-details-popup.types";
 
-export default function AdminLatestOrdersDetailsPopupContent() {
-  // const response = queryOptions<AdminOrderDetailsModel>({
-  //   queryKey: ["orderDetails", orderToEdit],
-  //   queryFn: async () => {
-  //     const response = await fetch(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/admin/order-details/${orderToEdit}`,
-  //     );
+type Props = {
+  orderToEdit: number;
+};
 
-  //     return response.json();
-  //   },
-  // });
+export default function AdminLatestOrdersDetailsPopupContent({
+  orderToEdit,
+}: Props) {
+  const response = queryOptions<AdminOrderDetailsModel>({
+    queryKey: ["orderDetails", orderToEdit],
+    queryFn: async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/admin/latest-orders/${orderToEdit}`,
+      );
 
-  // const { data: orderDetailsData } = useSuspenseQuery(response);
+      return response.json();
+    },
+  });
+
+  const { data: orderDetailsData } = useSuspenseQuery(response);
 
   const statusBodyTemplate = (status: OrderStatus) => {
     const statusColor: Record<keyof typeof OrderStatus, string> = {
@@ -46,52 +58,91 @@ export default function AdminLatestOrdersDetailsPopupContent() {
       <div className="grid grid-cols-3 gap-4">
         <div className="flex gap-x-2">
           <div>Order Number: </div>
-          <div className="font-semibold">123456</div>
+          <div className="font-semibold">{orderDetailsData.orderId}</div>
         </div>
         <div className="flex gap-x-2">
           <div>Total: </div>
-          <div className="font-semibold">123456</div>
+          <div className="font-semibold">
+            {orderDetailsData.total.toLocaleString()} $
+          </div>
         </div>
         <div className="flex gap-x-2">
           <div>Paid: </div>
-          <div className="font-semibold">Yes</div>
+          <div className="font-bold">
+            {orderDetailsData.paid ? (
+              <div className="text-emerald-500">Yes</div>
+            ) : (
+              <div className="text-red-500">No</div>
+            )}
+          </div>
         </div>
         <div className="flex gap-x-2">
           <div>Status: </div>
           <div className="font-semibold">
-            {statusBodyTemplate(OrderStatus.DELIVERED)}
+            {statusBodyTemplate(orderDetailsData.orderStatus)}
           </div>
         </div>
         <div className="flex gap-x-2">
           <div>Payment Method: </div>
-          <div className="font-semibold">Cash on Delivery</div>
+          <div className="font-semibold">
+            {PaymentMethod[orderDetailsData.paymentMethod]}
+          </div>
         </div>
         <div className="flex gap-x-2">
           <div>Date: </div>
-          <div className="font-semibold">123456</div>
+          <div className="font-semibold">
+            {new Date(orderDetailsData.createdAt).toLocaleDateString()}{" "}
+            {new Date(orderDetailsData.createdAt).toLocaleTimeString()}
+          </div>
         </div>
         <div className="flex gap-x-2">
           <div>Customer: </div>
-          <div className="font-semibold">John Doe</div>
+          <div className="font-semibold">
+            {orderDetailsData.user.firstName} {orderDetailsData.user.lastName}
+          </div>
         </div>
         <div className="flex gap-x-2">
           <div>Phone Number: </div>
-          <div className="font-semibold">123456</div>
+          <Link
+            href={`tel:${orderDetailsData.user.phoneNumber}`}
+            className="font-semibold underline"
+          >
+            {orderDetailsData.user.phoneNumber}
+          </Link>
         </div>
         <div className="flex gap-x-2">
           <div>Email: </div>
-          <div className="font-semibold">johndoe@gmail.com</div>
+          <Link
+            href={`mailto:${orderDetailsData.user.email}`}
+            className="font-semibold underline"
+          >
+            {orderDetailsData.user.email}
+          </Link>
         </div>
         <div className="flex gap-x-2">
           <div>Billing Address: </div>
           <div className="font-semibold">
-            <div>123456</div>
+            <div>{orderDetailsData.billingOrderAddress.street}</div>
+            <div>{orderDetailsData.billingOrderAddress.number}</div>
+            <div>{orderDetailsData.billingOrderAddress.postcode}</div>
+            <div>
+              {orderDetailsData.billingOrderAddress.city},{" "}
+              {orderDetailsData.billingOrderAddress.county},{" "}
+              {orderDetailsData.billingOrderAddress.country}
+            </div>
           </div>
         </div>
         <div className="flex gap-x-2">
           <div>Shipping Address: </div>
           <div className="font-semibold">
-            <div>123456</div>
+            <div>{orderDetailsData.shippingOrderAddress.street}</div>
+            <div>{orderDetailsData.shippingOrderAddress.number}</div>
+            <div>{orderDetailsData.shippingOrderAddress.postcode}</div>
+            <div>
+              {orderDetailsData.shippingOrderAddress.city},{" "}
+              {orderDetailsData.shippingOrderAddress.county},{" "}
+              {orderDetailsData.shippingOrderAddress.country}
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +154,7 @@ export default function AdminLatestOrdersDetailsPopupContent() {
           <AdminLatestOrdersDetailsPopupOrderActions />
         </div>
       </div>
-      <AdminLatestOrdersDetailsPopupProducts />
+      <AdminLatestOrdersDetailsPopupProducts orderToEdit={orderToEdit} />
     </div>
   );
 }

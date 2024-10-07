@@ -10,5 +10,10 @@ public interface IAdminRepository
     Task<List<CategoryModel>> GetBestCategoriesAsync();
     Task<List<OrderModel>> GetLatestOrdersAsync();
     Task<Dictionary<int, UserModel>> GetLatestOrdersUserAsync(List<int> userIds);
+    Task<UserModel> GetLatestOrderUserByIdAsync(int userId);
+    Task<OrderModel> GetLatestOrderByIdAsync(int orderId);
+    Task<List<OrderedProductModel>> GetLatestOrderProductsAsync(int orderId);
+    Task<AdminOverviewModel> GetOverviewAsync();
+    Task<int> GetOverviewNewCustomersAsync();
 }
 

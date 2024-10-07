@@ -1,79 +1,36 @@
 "use client";
 
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { Image } from "primereact/image";
-import type { AdminOrderDetailsProductModel } from "./types/admin-latest-orders-details-popup.types";
+import type { AdminOrderedProductModel } from "./types/admin-latest-orders-details-popup.types";
 
-export default function AdminLatestOrdersDetailsPopupProducts() {
-  const DATA: AdminOrderDetailsProductModel[] = [
-    {
-      productId: 1,
-      productName: "Product 1",
-      productPrice: 100,
-      quantity: 1,
-      total: 100,
-      category: "Category 1",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      productId: 2,
-      productName: "Product 2",
-      productPrice: 200,
-      quantity: 1,
-      total: 100,
-      category: "Category 2",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      productId: 3,
-      productName: "Product 3",
-      productPrice: 300,
-      quantity: 1,
-      total: 100,
-      category: "Category 3",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      productId: 4,
-      productName: "Product 4",
-      productPrice: 400,
-      quantity: 1,
-      total: 100,
-      category: "Category 4",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      productId: 5,
-      productName: "Product 5",
-      productPrice: 500,
-      quantity: 3,
-      total: 1500,
-      category: "Category 5",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      productId: 6,
-      productName: "Product 6",
-      productPrice: 600,
-      quantity: 2,
-      total: 1200,
-      category: "Category 6",
-      image:
-        "https://images.unsplash.com/photo-1719937050445-098888c0625e?q=80&w=2396&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ];
+type Props = {
+  orderToEdit: number;
+};
 
-  const imageBodyTemplate = (rowData: AdminOrderDetailsProductModel) => {
+export default function AdminLatestOrdersDetailsPopupProducts({
+  orderToEdit,
+}: Props) {
+  const response = queryOptions<AdminOrderedProductModel[]>({
+    queryKey: ["orderProducts", orderToEdit],
+    queryFn: async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/admin/order-products/${orderToEdit}`,
+      );
+
+      return response.json();
+    },
+  });
+
+  const { data: orderedProductsData } = useSuspenseQuery(response);
+
+  const imageBodyTemplate = (rowData: AdminOrderedProductModel) => {
     return (
       <Image
-        src={rowData.image}
-        alt={rowData.productName}
+        src={rowData.productImage}
+        alt={rowData.name}
         className="h-14 w-14 overflow-hidden rounded-md shadow-sm"
         pt={{
           toolbar: {
@@ -91,7 +48,7 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
     );
   };
 
-  const totalBodyTemplate = (rowData: AdminOrderDetailsProductModel) => {
+  const totalBodyTemplate = (rowData: AdminOrderedProductModel) => {
     return (
       <div className="font-semibold text-purple-500">
         {rowData.total.toLocaleString()} $
@@ -99,21 +56,37 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
     );
   };
 
+  const categoriesBodyTemplate = (rowData: AdminOrderedProductModel) => {
+    return (
+      <div>
+        {rowData.categories.map((category) => category.name).join(" / ")}
+      </div>
+    );
+  };
+
+  const priceBodyTemplate = (rowData: AdminOrderedProductModel) => {
+    return <div>{rowData.price.toLocaleString()} $</div>;
+  };
+
   return (
     <DataTable
-      value={DATA}
+      value={orderedProductsData}
       className="mt-8 overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm"
       size="small"
       scrollable
       scrollHeight="40vh"
     >
       <Column field="productId" header="ID" />
-      <Column field="productName" header="Name" />
-      <Column field="productPrice" header="Price" />
+      <Column field="name" header="Name" />
+      <Column field="price" header="Price" body={priceBodyTemplate} />
       <Column field="quantity" header="Quantity" />
       <Column field="total" header="Total" body={totalBodyTemplate} />
-      <Column field="category" header="Category" />
-      <Column field="image" header="Image" body={imageBodyTemplate} />
+      <Column
+        field="categories"
+        header="Category"
+        body={categoriesBodyTemplate}
+      />
+      <Column field="productImage" header="Image" body={imageBodyTemplate} />
     </DataTable>
   );
 }
