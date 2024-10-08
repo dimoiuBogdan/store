@@ -5,6 +5,7 @@ import {
   OrderStatus,
   PaymentMethod,
 } from "../../../../../../common/types/enums";
+import { fetchOrderDetails } from "./admin-latest-orders-details-popup-content.action";
 import AdminLatestOrdersDetailsPopupDownloadInvoice from "./AdminLatestOrdersDetailsPopupDownloadInvoice";
 import AdminLatestOrdersDetailsPopupNotifyUser from "./AdminLatestOrdersDetailsPopupNotifyUser";
 import AdminLatestOrdersDetailsPopupOrderActions from "./AdminLatestOrdersDetailsPopupOrderActions";
@@ -19,11 +20,9 @@ export default function AdminLatestOrdersDetailsPopupContent({
   orderToEdit,
 }: Props) {
   const response = queryOptions<AdminOrderDetailsModel>({
-    queryKey: ["orderDetails", orderToEdit],
+    queryKey: ["admin-order-details", orderToEdit],
     queryFn: async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/admin/latest-orders/${orderToEdit}`,
-      );
+      const response = await fetchOrderDetails(orderToEdit);
 
       return response.json();
     },

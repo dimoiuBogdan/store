@@ -14,7 +14,7 @@ export default function AdminLatestOrdersDetailsPopupProducts({
   orderToEdit,
 }: Props) {
   const response = queryOptions<AdminOrderedProductModel[]>({
-    queryKey: ["orderProducts", orderToEdit],
+    queryKey: ["admin-order-products", orderToEdit],
     queryFn: async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/admin/order-products/${orderToEdit}`,

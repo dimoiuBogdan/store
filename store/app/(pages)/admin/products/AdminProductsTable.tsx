@@ -22,7 +22,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 2, name: "Phones" },
     ],
-    productImage: "https://example.com/smartphone-x.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 2,
@@ -34,7 +35,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 3, name: "Computers" },
     ],
-    productImage: "https://example.com/laptop-pro.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 3,
@@ -46,7 +48,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 4, name: "Audio" },
     ],
-    productImage: "https://example.com/wireless-earbuds.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 4,
@@ -58,7 +61,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 5, name: "TVs" },
     ],
-    productImage: "https://example.com/4k-smart-tv.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 5,
@@ -70,7 +74,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 6, name: "Gaming" },
     ],
-    productImage: "https://example.com/gaming-console.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 6,
@@ -82,7 +87,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 7, name: "Cameras" },
     ],
-    productImage: "https://example.com/digital-camera.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 7,
@@ -94,7 +100,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 8, name: "Wearables" },
     ],
-    productImage: "https://example.com/fitness-tracker.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 8,
@@ -106,7 +113,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 4, name: "Audio" },
     ],
-    productImage: "https://example.com/bluetooth-speaker.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 9,
@@ -118,7 +126,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 9, name: "Tablets" },
     ],
-    productImage: "https://example.com/tablet-pro.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
   {
     productId: 10,
@@ -130,7 +139,8 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
       { categoryId: 1, name: "Electronics" },
       { categoryId: 8, name: "Wearables" },
     ],
-    productImage: "https://example.com/smart-watch.jpg",
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
 ];
 
@@ -171,7 +181,9 @@ export default function AdminProductsTable() {
       <Column
         field="productImage"
         header="Image"
-        body={AdminProductsImageColumn}
+        body={(rowData: AdminBestProductModel) => (
+          <AdminProductsImageColumn rowData={rowData} />
+        )}
         style={{ width: "10%" }}
       />
       <Column
@@ -185,7 +197,9 @@ export default function AdminProductsTable() {
       <Column
         field="price"
         header="Price"
-        body={AdminProductsPriceColumn}
+        body={(rowData: AdminBestProductModel) => (
+          <AdminProductsPriceColumn price={rowData.price} />
+        )}
         sortable
         filter
         filterPlaceholder="Search by price"
@@ -194,7 +208,9 @@ export default function AdminProductsTable() {
       <Column
         field="stock"
         header="Stock"
-        body={AdminProductsStockColumn}
+        body={(rowData: AdminBestProductModel) => (
+          <AdminProductsStockColumn stock={rowData.stock} />
+        )}
         sortable
         filter
         filterPlaceholder="Search by stock"
@@ -211,7 +227,9 @@ export default function AdminProductsTable() {
       <Column
         field="categories.name"
         header="Categories"
-        body={AdminProductsCategoriesColumn}
+        body={(rowData: AdminBestProductModel) => (
+          <AdminProductsCategoriesColumn categories={rowData.categories} />
+        )}
         filter
         filterField="categories.name"
         filterPlaceholder="Search by category"

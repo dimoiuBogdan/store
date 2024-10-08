@@ -3,7 +3,7 @@ import { cn } from "../../../../../common/utils/utils";
 
 interface AdminOverviewSectionCardProps {
   title: string;
-  value: number;
+  value: number | undefined;
   icon: ReactNode;
   color: "green" | "yellow" | "blue" | "purple";
   currency?: string;
