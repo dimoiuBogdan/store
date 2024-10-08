@@ -254,11 +254,15 @@ namespace store_api.Store.Data.Repositories
         public async Task<int> GetOverviewNewCustomersAsync()
         {
             const string sql = @"
-                SELECT COUNT(DISTINCT u.user_id)::int as new_customers
-                FROM ""user"" u
-                LEFT JOIN ""order"" o ON u.user_id = o.user_id
-                HAVING MIN(o.created_at) >= DATE_TRUNC('month', CURRENT_DATE)
-                AND MIN(o.created_at) < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'";
+                WITH new_customers AS (
+                    SELECT u.user_id
+                    FROM ""user"" u
+                    LEFT JOIN ""order"" o ON u.user_id = o.user_id
+                    GROUP BY u.user_id
+                    HAVING MIN(o.created_at) >= DATE_TRUNC('month', CURRENT_DATE)
+                    AND MIN(o.created_at) < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+                )
+                SELECT COUNT(*) FROM new_customers;";
 
             await using var connection = GetConnection();
 
