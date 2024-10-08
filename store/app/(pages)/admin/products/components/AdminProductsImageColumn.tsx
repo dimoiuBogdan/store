@@ -1,7 +1,7 @@
 "use client";
 
 import { Image } from "primereact/image";
-import { AdminBestProductModel } from "../../(components)/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
+import type { AdminBestProductModel } from "../../components/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
 
 export default function AdminProductsImageColumn({
   rowData,

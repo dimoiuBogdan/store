@@ -37,8 +37,6 @@ export default async function AdminOverviewSection() {
     return <AdminOverviewSectionError />;
   }
 
-  console.log(overview);
-
   return (
     <section>
       <div className="mb-4 flex items-center gap-x-4">

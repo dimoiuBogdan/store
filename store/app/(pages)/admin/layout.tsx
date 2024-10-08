@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import AdminNavbar from "./(components)/AdminNavbar/AdminNavbar";
-import AdminSidebar from "./(components)/AdminSidebar";
+import AdminNavbar from "./components/AdminNavbar/AdminNavbar";
+import AdminSidebar from "./components/AdminSidebar";
 
 export const metadata: Metadata = {
   title: "Admin - My Store",

@@ -2,8 +2,8 @@ import { ShoppingBag } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import type { AdminBestCategoriesModel } from "../AdminBestProductsSection/types/admin-best-categories-section.types";
 import AdminTopCategoriesSectionError from "./error";
+import type { AdminBestCategoriesModel } from "./types/admin-best-categories-section.types";
 
 export default async function AdminBestCategoriesSection() {
   let bestCategories: AdminBestCategoriesModel[] = [];

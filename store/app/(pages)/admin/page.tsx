@@ -1,10 +1,10 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { getQueryClient } from "../../get-query-client";
-import AdminBestProductsSectionDataProvider from "./(components)/AdminSections/AdminBestProductsSection/AdminBestProductsSectionDataProvider";
-import AdminLatestOrdersSectionDataProvider from "./(components)/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersSectionDataProvider";
-import AdminOverviewSection from "./(components)/AdminSections/AdminOverviewSection/AdminOverviewSection";
-import AdminBestCategoriesSection from "./(components)/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
+import AdminBestProductsSectionDataProvider from "./components/AdminSections/AdminBestProductsSection/AdminBestProductsSectionDataProvider";
+import AdminLatestOrdersSectionDataProvider from "./components/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersSectionDataProvider";
+import AdminOverviewSection from "./components/AdminSections/AdminOverviewSection/AdminOverviewSection";
+import AdminBestCategoriesSection from "./components/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
 
 export default function AdminPage() {
   const queryClient = getQueryClient();
