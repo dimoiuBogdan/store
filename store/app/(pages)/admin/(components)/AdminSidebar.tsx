@@ -2,12 +2,10 @@
 
 import {
   Clipboard,
-  FileText,
   HelpCircle,
   Rocket,
   Settings,
   Store,
-  Ticket,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -23,15 +21,9 @@ type MenuItemType = {
 
 const MENU_ITEMS: MenuItemType[] = [
   { name: "Overview", icon: <Rocket />, href: "/admin" },
+  { name: "Products", icon: <Store />, href: "/admin/products" },
   { name: "Orders", icon: <Clipboard />, href: "/admin/orders" },
   { name: "Customers", icon: <Users />, href: "/admin/customers" },
-  { name: "Store", icon: <Store />, href: "/admin/store" },
-  { name: "Voucher", icon: <Ticket />, href: "/admin/voucher" },
-  {
-    name: "Issued Voucher",
-    icon: <FileText />,
-    href: "/admin/issued-voucher",
-  },
   { name: "Settings", icon: <Settings />, href: "/admin/settings" },
   { name: "Help", icon: <HelpCircle />, href: "/admin/help" },
 ];
