@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
-import AdminSidebar from "../../(pages)/admin/components/AdminSidebar";
+import AdminSidebar from "../../[lang]/(pages)/admin/components/AdminSidebar";
 
 // Mock the next/navigation module
 jest.mock("next/navigation", () => ({
