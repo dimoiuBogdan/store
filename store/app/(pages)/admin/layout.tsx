@@ -17,7 +17,7 @@ export default function AdminLayout({
       <AdminSidebar />
       <div className="flex-1 overflow-y-auto pl-4 pr-6">
         <AdminNavbar />
-        <main className="mb-6 min-h-[calc(100vh-6.4rem)] rounded-xl bg-zinc-200/30 p-6 shadow-md">
+        <main className="mb-6 min-h-[calc(100vh-6.4rem)] rounded-xl bg-zinc-700/50 p-6 shadow-md">
           {children}
         </main>
       </div>

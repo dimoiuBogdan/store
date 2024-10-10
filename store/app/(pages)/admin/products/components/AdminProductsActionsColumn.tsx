@@ -1,14 +1,12 @@
 "use client";
 
+import { EditIcon, TrashIcon } from "lucide-react";
+
 export default function AdminProductsActionsColumn() {
   return (
-    <div className="flex gap-x-2">
-      <button className="rounded bg-blue-500 px-2 py-1 text-xs text-white hover:bg-blue-600">
-        Edit
-      </button>
-      <button className="rounded bg-red-500 px-2 py-1 text-xs text-white hover:bg-red-600">
-        Delete
-      </button>
+    <div className="flex gap-x-4">
+      <EditIcon className="h-6 w-6 cursor-pointer text-yellow-500" />
+      <TrashIcon className="h-6 w-6 cursor-pointer text-red-500" />
     </div>
   );
 }

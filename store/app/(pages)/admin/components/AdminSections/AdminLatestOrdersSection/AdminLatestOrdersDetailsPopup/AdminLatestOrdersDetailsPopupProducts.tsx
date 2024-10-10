@@ -1,56 +1,46 @@
 "use client";
 
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { Image } from "primereact/image";
+import PRImage from "../../../../../../common/components/PRImage";
+import AdminService from "../../../../../../common/services/admin/admin.service";
 import type { AdminOrderedProductModel } from "./types/admin-latest-orders-details-popup.types";
 
-type Props = {
-  orderToEdit: number;
-};
+export default function AdminLatestOrdersDetailsPopupProducts() {
+  const searchParams = useSearchParams();
+  const orderToEdit = searchParams.get("orderToEdit");
 
-export default function AdminLatestOrdersDetailsPopupProducts({
-  orderToEdit,
-}: Props) {
   const response = queryOptions<AdminOrderedProductModel[]>({
     queryKey: ["admin-order-products", orderToEdit],
+    enabled: !!orderToEdit,
     queryFn: async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/admin/order-products/${orderToEdit}`,
-      );
+      if (!orderToEdit) {
+        return [];
+      }
 
-      return response.json();
+      const { getLatestOrderProducts } = AdminService;
+
+      const orderedProducts = await getLatestOrderProducts(orderToEdit);
+
+      return orderedProducts;
     },
   });
 
   const { data: orderedProductsData } = useSuspenseQuery(response);
 
+  if (!orderedProductsData) {
+    return <div>No data</div>;
+  }
+
   const imageBodyTemplate = (rowData: AdminOrderedProductModel) => {
-    return (
-      <Image
-        src={rowData.productImage}
-        alt={rowData.name}
-        className="h-14 w-14 overflow-hidden rounded-md shadow-sm"
-        pt={{
-          toolbar: {
-            className: "text-purple-500",
-          },
-          image: {
-            className: "h-20 w-20 object-cover object-center",
-          },
-          preview: {
-            className: "max-h-[80vh] max-w-[80vw] object-center object-cover",
-          },
-        }}
-        preview
-      />
-    );
+    return <PRImage src={rowData.productImage} alt={rowData.name} />;
   };
 
   const totalBodyTemplate = (rowData: AdminOrderedProductModel) => {
     return (
-      <div className="font-semibold text-purple-500">
+      <div className="font-semibold text-primary">
         {rowData.total.toLocaleString()} $
       </div>
     );

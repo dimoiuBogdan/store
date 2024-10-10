@@ -1,41 +1,52 @@
+"use client";
+
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Badge } from "primereact/badge";
+import AdminService from "../../../../../../common/services/admin/admin.service";
 import {
   OrderStatus,
   PaymentMethod,
 } from "../../../../../../common/types/enums";
-import { fetchOrderDetails } from "./admin-latest-orders-details-popup-content.action";
 import AdminLatestOrdersDetailsPopupDownloadInvoice from "./AdminLatestOrdersDetailsPopupDownloadInvoice";
 import AdminLatestOrdersDetailsPopupNotifyUser from "./AdminLatestOrdersDetailsPopupNotifyUser";
 import AdminLatestOrdersDetailsPopupOrderActions from "./AdminLatestOrdersDetailsPopupOrderActions";
 import AdminLatestOrdersDetailsPopupProducts from "./AdminLatestOrdersDetailsPopupProducts";
 import type { AdminOrderDetailsModel } from "./types/admin-latest-orders-details-popup.types";
 
-type Props = {
-  orderToEdit: number;
-};
+export default function AdminLatestOrdersDetailsPopupContent() {
+  const searchParams = useSearchParams();
+  const orderToEdit = searchParams.get("orderToEdit");
 
-export default function AdminLatestOrdersDetailsPopupContent({
-  orderToEdit,
-}: Props) {
-  const response = queryOptions<AdminOrderDetailsModel>({
+  const response = queryOptions<AdminOrderDetailsModel | null>({
     queryKey: ["admin-order-details", orderToEdit],
+    enabled: !!orderToEdit,
     queryFn: async () => {
-      const response = await fetchOrderDetails(orderToEdit);
+      if (!orderToEdit) {
+        return null;
+      }
 
-      return response.json();
+      const { getLatestOrderDetails } = AdminService;
+
+      const orderDetails = await getLatestOrderDetails(orderToEdit);
+
+      return orderDetails;
     },
   });
 
   const { data: orderDetailsData } = useSuspenseQuery(response);
+
+  if (!orderDetailsData) {
+    return <div>No order details</div>;
+  }
 
   const statusBodyTemplate = (status: OrderStatus) => {
     const statusColor: Record<keyof typeof OrderStatus, string> = {
       PENDING: "bg-yellow-500",
       PROCESSING: "bg-sky-500",
       SHIPPED: "bg-purple-500",
-      DELIVERED: "bg-emerald-500",
+      DELIVERED: "bg-secondary",
       CANCELLED: "bg-red-500",
       REFUNDED: "bg-zinc-500",
     };
@@ -69,7 +80,7 @@ export default function AdminLatestOrdersDetailsPopupContent({
           <div>Paid: </div>
           <div className="font-bold">
             {orderDetailsData.paid ? (
-              <div className="text-emerald-500">Yes</div>
+              <div className="text-secondary">Yes</div>
             ) : (
               <div className="text-red-500">No</div>
             )}
@@ -153,7 +164,7 @@ export default function AdminLatestOrdersDetailsPopupContent({
           <AdminLatestOrdersDetailsPopupOrderActions />
         </div>
       </div>
-      <AdminLatestOrdersDetailsPopupProducts orderToEdit={orderToEdit} />
+      <AdminLatestOrdersDetailsPopupProducts />
     </div>
   );
 }

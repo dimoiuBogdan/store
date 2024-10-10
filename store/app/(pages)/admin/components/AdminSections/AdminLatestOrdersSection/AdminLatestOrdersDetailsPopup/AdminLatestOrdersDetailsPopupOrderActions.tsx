@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDown, Edit } from "lucide-react";
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";

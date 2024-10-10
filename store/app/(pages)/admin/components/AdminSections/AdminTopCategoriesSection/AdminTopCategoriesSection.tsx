@@ -1,12 +1,14 @@
 import { ShoppingBag } from "lucide-react";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { fetchBestCategories } from "./admin-top-categories-section.action";
+import AdminService from "../../../../../common/services/admin/admin.service";
 import AdminTopCategoriesSectionError from "./error";
 
 export default async function AdminBestCategoriesSection() {
   try {
-    const bestCategories = await fetchBestCategories();
+    const { getBestCategories } = AdminService;
+
+    const bestCategories = await getBestCategories();
 
     return (
       <section>
@@ -17,8 +19,21 @@ export default async function AdminBestCategoriesSection() {
         <DataTable
           value={bestCategories}
           rows={5}
-          tableClassName="h-[400px] text-sm"
+          tableClassName="h-[400px]"
           className="overflow-hidden rounded-lg shadow-sm"
+          pt={{
+            wrapper: {
+              className: "bg-background",
+            },
+            column: {
+              headerCell: {
+                className: "bg-zinc-800 text-zinc-200",
+              },
+              bodyCell: {
+                className: "bg-background text-zinc-200",
+              },
+            },
+          }}
         >
           <Column field="name" header="Category" />
           <Column field="salesCount" header="Sales" />

@@ -1,10 +1,20 @@
 "use client";
 
-import { Column } from "primereact/column";
+import {
+  Column,
+  type ColumnBodyOptions,
+  type ColumnFilterApplyTemplateOptions,
+  type ColumnFilterClearTemplateOptions,
+  type ColumnProps,
+} from "primereact/column";
 import { DataTable } from "primereact/datatable";
+import { cn } from "../../../common/utils/utils";
 import type { AdminBestProductModel } from "../components/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
+import styles from "./AdminProductsTable.module.css";
 import AdminProductsActionsColumn from "./components/AdminProductsActionsColumn";
 import AdminProductsCategoriesColumn from "./components/AdminProductsCategoriesColumn";
+import AdminProductsFilterApply from "./components/AdminProductsFilter/AdminProductsFilterApply";
+import AdminProductsFilterClear from "./components/AdminProductsFilter/AdminProductsFilterClear";
 import AdminProductsImageColumn from "./components/AdminProductsImageColumn";
 import AdminProductsPriceColumn from "./components/AdminProductsPriceColumn";
 import AdminProductsStockColumn from "./components/AdminProductsStockColumn";
@@ -142,21 +152,98 @@ const DUMMY_PRODUCTS: AdminBestProductModel[] = [
     productImage:
       "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
   },
+  {
+    productId: 11,
+    name: "Smart Watch",
+    price: 199.99,
+    stock: 90,
+    salesCount: 1200,
+    categories: [
+      { categoryId: 1, name: "Electronics" },
+      { categoryId: 8, name: "Wearables" },
+    ],
+    productImage:
+      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
+  },
+];
+
+const COLUMNS: ColumnProps[] = [
+  {
+    field: "productId",
+    header: "ID",
+    sortable: true,
+    filter: true,
+    style: { width: "5%" },
+  },
+  {
+    field: "productImage",
+    header: "Image",
+    body: (data: AdminBestProductModel) => (
+      <AdminProductsImageColumn rowData={data} />
+    ),
+    style: { width: "5%" },
+  },
+  {
+    field: "name",
+    header: "Name",
+    sortable: true,
+    filter: true,
+    style: { width: "20%" },
+  },
+  {
+    field: "price",
+    header: "Price",
+    sortable: true,
+    filter: true,
+    style: { width: "10%" },
+    body: (data: AdminBestProductModel) => (
+      <AdminProductsPriceColumn price={data.price} />
+    ),
+  },
+  {
+    field: "stock",
+    header: "Stock",
+    sortable: true,
+    filter: true,
+    style: { width: "10%" },
+    body: (data: AdminBestProductModel) => (
+      <AdminProductsStockColumn stock={data.stock} />
+    ),
+  },
+  {
+    field: "salesCount",
+    header: "Sales",
+    sortable: true,
+    filter: true,
+    style: { width: "10%" },
+  },
+  {
+    field: "categories.name",
+    header: "Categories",
+    sortable: false,
+    filter: true,
+    style: { width: "15%" },
+    body: (data: AdminBestProductModel) => (
+      <AdminProductsCategoriesColumn categories={data.categories} />
+    ),
+  },
 ];
 
 export default function AdminProductsTable() {
-  const { filters } = useAdminProductTable();
+  const { filters, globalFilterValue, onGlobalFilterChange, clearFilters } =
+    useAdminProductTable();
 
   return (
     <DataTable
       value={DUMMY_PRODUCTS}
       paginator
-      rows={10}
-      rowsPerPageOptions={[10, 25, 50]}
+      rows={25}
       removableSort
+      scrollable
       dataKey="productId"
       filters={filters}
       filterDisplay="menu"
+      scrollHeight="calc(100vh - 20.5rem)"
       globalFilterFields={[
         "productId",
         "name",
@@ -165,76 +252,67 @@ export default function AdminProductsTable() {
         "salesCount",
         "categories.name",
       ]}
-      header={<AdminProductsTableHeader />}
+      pt={{
+        paginator: {
+          root: {
+            className: "bg-zinc-800 text-primary",
+          },
+        },
+        header: {
+          className: "bg-background text-primary",
+        },
+        wrapper: {
+          className: "bg-background",
+        },
+        column: {
+          headerCell: {
+            className: "bg-zinc-800 text-zinc-200",
+          },
+          footerCell: {
+            className: "bg-background text-primary",
+          },
+          bodyCell: {
+            className: "bg-background text-zinc-200",
+          },
+        },
+      }}
+      header={
+        <AdminProductsTableHeader
+          globalFilterValue={globalFilterValue}
+          onGlobalFilterChange={onGlobalFilterChange}
+          clearFilters={clearFilters}
+        />
+      }
       emptyMessage="No products found."
-      tableStyle={{ minWidth: "50rem" }}
       className="overflow-hidden rounded-lg text-sm shadow-sm"
     >
-      <Column
-        field="productId"
-        header="ID"
-        sortable
-        filter
-        filterPlaceholder="Search by ID"
-        style={{ width: "5%" }}
-      />
-      <Column
-        field="productImage"
-        header="Image"
-        body={(rowData: AdminBestProductModel) => (
-          <AdminProductsImageColumn rowData={rowData} />
-        )}
-        style={{ width: "10%" }}
-      />
-      <Column
-        field="name"
-        header="Name"
-        sortable
-        filter
-        filterPlaceholder="Search by name"
-        style={{ width: "20%" }}
-      />
-      <Column
-        field="price"
-        header="Price"
-        body={(rowData: AdminBestProductModel) => (
-          <AdminProductsPriceColumn price={rowData.price} />
-        )}
-        sortable
-        filter
-        filterPlaceholder="Search by price"
-        style={{ width: "10%" }}
-      />
-      <Column
-        field="stock"
-        header="Stock"
-        body={(rowData: AdminBestProductModel) => (
-          <AdminProductsStockColumn stock={rowData.stock} />
-        )}
-        sortable
-        filter
-        filterPlaceholder="Search by stock"
-        style={{ width: "10%" }}
-      />
-      <Column
-        field="salesCount"
-        header="Sales"
-        sortable
-        filter
-        filterPlaceholder="Search by sales"
-        style={{ width: "10%" }}
-      />
-      <Column
-        field="categories.name"
-        header="Categories"
-        body={(rowData: AdminBestProductModel) => (
-          <AdminProductsCategoriesColumn categories={rowData.categories} />
-        )}
-        filter
-        filterField="categories.name"
-        filterPlaceholder="Search by category"
-        style={{ width: "20%" }}
-      />
+      {COLUMNS.map((column) => (
+        <Column
+          key={column.field}
+          body={(data: AdminBestProductModel, options: ColumnBodyOptions) =>
+            typeof column.body === "function" ? (
+              column.body(data, options)
+            ) : (
+              <>{data[column.field as keyof AdminBestProductModel]}</>
+            )
+          }
+          {...column}
+          pt={{
+            filterButtonbar: { className: "p-4" },
+            filterConstraint: {
+              className: cn("p-4 pb-0", styles["filter-constraint"]),
+            },
+          }}
+          showFilterMatchModes={false}
+          filterApply={(options: ColumnFilterApplyTemplateOptions) => (
+            <AdminProductsFilterApply onClick={options.filterApplyCallback} />
+          )}
+          filterClear={(options: ColumnFilterClearTemplateOptions) => (
+            <AdminProductsFilterClear onClick={options.filterClearCallback} />
+          )}
+        />
+      ))}
+
       <Column
         body={AdminProductsActionsColumn}
         exportable={false}

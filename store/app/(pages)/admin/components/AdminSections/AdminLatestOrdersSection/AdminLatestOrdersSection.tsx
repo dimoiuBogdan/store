@@ -1,13 +1,12 @@
 "use client";
 
 import { Check, Info, Truck, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "primereact/badge";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { Tooltip } from "primereact/tooltip";
-import { useState } from "react";
 import { OrderStatus } from "../../../../../common/types/enums";
-import AdminLatestOrdersDetailsPopup from "./AdminLatestOrdersDetailsPopup/AdminLatestOrdersDetailsPopup";
 import { AdminLatestOrderModel } from "./types/admin-latest-orders-section.types";
 
 type Props = {
@@ -15,14 +14,15 @@ type Props = {
 };
 
 export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
-  const [orderToEdit, setOrderToEdit] = useState<number | null>(null);
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
 
   const statusBodyTemplate = (rowData: AdminLatestOrderModel) => {
     const statusColor: Record<keyof typeof OrderStatus, string> = {
       PENDING: "bg-yellow-500",
       PROCESSING: "bg-sky-500",
       SHIPPED: "bg-purple-500",
-      DELIVERED: "bg-emerald-500",
+      DELIVERED: "bg-secondary",
       CANCELLED: "bg-red-500",
       REFUNDED: "bg-zinc-500",
     };
@@ -44,7 +44,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     return (
       <span>
         {rowData.paid ? (
-          <Check className="h-5 w-5 text-emerald-500" />
+          <Check className="text-secondary h-5 w-5" />
         ) : (
           <X className="h-5 w-5 text-red-500" />
         )}
@@ -87,14 +87,18 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   };
 
   const handleEditOrder = (id: number) => {
-    setOrderToEdit(id);
+    const params = new URLSearchParams(searchParams);
+
+    params.set("orderToEdit", id.toString());
+
+    replace(`?${params.toString()}`);
   };
 
   const orderNumberBodyTemplate = (rowData: AdminLatestOrderModel) => {
     return (
       <div
         onClick={() => handleEditOrder(rowData.orderId)}
-        className="cursor-pointer font-bold text-purple-500"
+        className="text-primary cursor-pointer font-bold"
       >
         {rowData.orderId}
       </div>
@@ -104,7 +108,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
   const orderNumberHeader = (
     <div className="flex items-center gap-x-2">
       <h2 className="font-medium">Order Number</h2>
-      <Info className="order-number h-5 w-5 text-purple-500" />
+      <Info className="order-number text-primary h-5 w-5" />
       <Tooltip target=".order-number" className="text-xs" position="bottom">
         Click on the order number to view details and take actions
       </Tooltip>
@@ -113,7 +117,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
 
   return (
     <section className="col-span-2">
-      <div className="mb-4 flex items-center gap-x-4">
+      <div className="text-primary mb-4 flex items-center gap-x-4">
         <Truck className="h-5 w-5" />
         <h2 className="font-medium">Latest Orders</h2>
       </div>
@@ -123,6 +127,20 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
         scrollable
         className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm"
         tableClassName="h-[400px]"
+        emptyMessage="No orders found"
+        pt={{
+          wrapper: {
+            className: "bg-background",
+          },
+          column: {
+            headerCell: {
+              className: "bg-zinc-800 text-zinc-200",
+            },
+            bodyCell: {
+              className: "bg-background text-zinc-200",
+            },
+          },
+        }}
       >
         <Column
           field="orderNumber"
@@ -140,12 +158,6 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
         <Column field="orderStatus" header="Status" body={statusBodyTemplate} />
         <Column field="createdAt" header="Date" body={dateBodyTemplate} />
       </DataTable>
-      {orderToEdit ? (
-        <AdminLatestOrdersDetailsPopup
-          orderToEdit={orderToEdit}
-          setOrderToEdit={setOrderToEdit}
-        />
-      ) : null}
     </section>
   );
 }

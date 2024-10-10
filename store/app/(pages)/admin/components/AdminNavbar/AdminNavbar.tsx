@@ -10,7 +10,7 @@ export default function AdminNavbar() {
   const { getPageTitle } = AdminNavbarHelper;
 
   return (
-    <div className="flex h-16 w-full items-center bg-white px-2">
+    <div className="text-primary flex h-16 w-full items-center px-2">
       <div className="flex items-center gap-x-2">
         <ChevronRight className="cursor-pointer" />
         <h1 className="text-2xl font-medium">{getPageTitle(pathname)}</h1>

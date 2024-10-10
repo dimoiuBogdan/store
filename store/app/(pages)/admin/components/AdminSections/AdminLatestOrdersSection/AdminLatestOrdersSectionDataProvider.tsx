@@ -1,12 +1,20 @@
-import { fetchLatestOrders } from "./admin-latest-orders-section-data-provider.action";
+import AdminService from "../../../../../common/services/admin/admin.service";
+import AdminLatestOrdersDetailsPopup from "./AdminLatestOrdersDetailsPopup/AdminLatestOrdersDetailsPopup";
 import AdminLatestOrdersSection from "./AdminLatestOrdersSection";
 import AdminLatestOrdersSectionError from "./error";
 
 export default async function AdminLatestOrdersSectionDataProvider() {
   try {
-    const latestOrders = await fetchLatestOrders();
+    const { getLatestOrders } = AdminService;
 
-    return <AdminLatestOrdersSection latestOrdersData={latestOrders} />;
+    const latestOrders = await getLatestOrders();
+
+    return (
+      <>
+        <AdminLatestOrdersDetailsPopup />
+        <AdminLatestOrdersSection latestOrdersData={latestOrders} />
+      </>
+    );
   } catch (error) {
     console.error("Failed to fetch latest orders:", error);
 

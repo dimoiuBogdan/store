@@ -1,10 +1,11 @@
 "use client";
 
 import { Box, Info } from "lucide-react";
+import Link from "next/link";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { Image } from "primereact/image";
 import { Tooltip } from "primereact/tooltip";
+import PRImage from "../../../../../common/components/PRImage";
 import { cn } from "../../../../../common/utils/utils";
 import { AdminBestProductModel } from "./types/admin-best-products-section.types";
 
@@ -14,25 +15,7 @@ type Props = {
 
 export default function AdminBestProductsSection({ bestProducts }: Props) {
   const imageBodyTemplate = (rowData: AdminBestProductModel) => {
-    return (
-      <Image
-        src={rowData.productImage}
-        alt={rowData.name}
-        className="h-20 w-20 overflow-hidden rounded-md shadow-sm"
-        pt={{
-          toolbar: {
-            className: "text-purple-500",
-          },
-          image: {
-            className: "h-20 w-20 object-cover object-center",
-          },
-          preview: {
-            className: "max-h-[80vh] max-w-[80vw] object-center object-cover",
-          },
-        }}
-        preview
-      />
-    );
+    return <PRImage src={rowData.productImage} alt={rowData.name} />;
   };
 
   const priceBodyTemplate = (rowData: AdminBestProductModel) => {
@@ -48,7 +31,7 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
   const idHeader = (
     <div className="flex items-center gap-x-2">
       <h2 className="font-medium">ID</h2>
-      <Info className="id h-5 w-5 text-purple-500" />
+      <Info className="id text-primary h-5 w-5" />
       <Tooltip target=".id" className="text-xs" position="bottom">
         Click on the ID to view details and take actions
       </Tooltip>
@@ -57,7 +40,7 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
 
   const idBodyTemplate = (rowData: AdminBestProductModel) => {
     return (
-      <div className="cursor-pointer font-bold text-purple-500">
+      <div className="text-primary cursor-pointer font-bold">
         {rowData.productId}
       </div>
     );
@@ -73,9 +56,17 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
 
   return (
     <section>
-      <div className="mb-4 flex items-center gap-x-4">
-        <Box className="h-5 w-5" />
-        <h2 className="font-medium">Best Selling Products</h2>
+      <div className="mb-4 flex items-center justify-between gap-x-4">
+        <div className="text-primary flex items-center gap-x-2">
+          <Box className="h-5 w-5" />
+          <h2 className="font-medium">Best Selling Products</h2>
+        </div>
+        <Link
+          href="/admin/products"
+          className="text-primary cursor-pointer font-medium underline"
+        >
+          View All
+        </Link>
       </div>
       <DataTable
         value={bestProducts}
@@ -83,6 +74,19 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
         scrollable
         className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm"
         tableClassName="h-[400px]"
+        pt={{
+          wrapper: {
+            className: "bg-background",
+          },
+          column: {
+            headerCell: {
+              className: "bg-zinc-800 text-zinc-200",
+            },
+            bodyCell: {
+              className: "bg-background text-zinc-200",
+            },
+          },
+        }}
       >
         <Column field="productId" header={idHeader} body={idBodyTemplate} />
         <Column field="name" header="Name" />

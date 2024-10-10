@@ -1,19 +1,16 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import { Dialog } from "primereact/dialog";
 import { Suspense } from "react";
 import AdminLatestOrdersDetailsPopupContent from "./AdminLatestOrdersDetailsPopupContent";
 
-type Props = {
-  orderToEdit: number | null;
-  setOrderToEdit: (orderToEdit: number | null) => void;
-};
+export default function AdminLatestOrdersDetailsPopup() {
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
 
-export default function AdminLatestOrdersDetailsPopup({
-  orderToEdit,
-  setOrderToEdit,
-}: Props) {
-  if (!orderToEdit) return null;
+  const orderToEdit = params.get("orderToEdit");
 
   return (
     <Dialog
@@ -24,11 +21,15 @@ export default function AdminLatestOrdersDetailsPopup({
       blockScroll
       dismissableMask
       onHide={() => {
-        setOrderToEdit(null);
+        if (orderToEdit) {
+          params.delete("orderToEdit");
+
+          replace(`?${params.toString()}`);
+        }
       }}
     >
       <Suspense fallback={<div>Loading order details...</div>}>
-        <AdminLatestOrdersDetailsPopupContent orderToEdit={orderToEdit} />
+        <AdminLatestOrdersDetailsPopupContent />
       </Suspense>
     </Dialog>
   );

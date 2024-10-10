@@ -1,0 +1,3 @@
+.filter-constraint > input {
+  @apply shadow-inner mb-1.5 p-1.5;
+}

@@ -1,12 +1,19 @@
-import { Search, X } from "lucide-react";
-import { Button } from "primereact/button";
+import { FilterX, Search } from "lucide-react";
 import { InputText } from "primereact/inputtext";
-import useAdminProductTable from "../hooks/useAdminProductTable";
+import { Tooltip } from "primereact/tooltip";
+import type { ChangeEvent } from "react";
 
-export default function AdminProductsTableHeader() {
-  const { onGlobalFilterChange, clearFilters, globalFilterValue } =
-    useAdminProductTable();
+type Props = {
+  globalFilterValue: string | null;
+  onGlobalFilterChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  clearFilters: () => void;
+};
 
+export default function AdminProductsTableHeader({
+  globalFilterValue,
+  onGlobalFilterChange,
+  clearFilters,
+}: Props) {
   return (
     <div className="flex items-center justify-between">
       <span className="relative">
@@ -14,22 +21,26 @@ export default function AdminProductsTableHeader() {
         <InputText
           value={globalFilterValue}
           onChange={onGlobalFilterChange}
-          placeholder="Keyword Search"
-          className="pl-10"
+          placeholder="Global Search"
+          className="bg-zinc-800 pl-10 text-zinc-200"
           pt={{
-            root: { className: "p-inputtext-sm" },
+            root: { className: "shadow-inner p-2" },
           }}
         />
       </span>
-      <Button
-        type="button"
-        icon={<X className="h-4 w-4" />}
-        label="Clear Filters"
-        severity="secondary"
-        text
-        size="small"
-        onClick={clearFilters}
-      />
+      <div className="flex items-center gap-2">
+        <FilterX
+          id="clear-filters"
+          className="h-6 w-6 cursor-pointer"
+          onClick={clearFilters}
+        />
+        <Tooltip
+          target="#clear-filters"
+          position="bottom"
+          content="Clear Filters"
+          className="text-xs"
+        />
+      </div>
     </div>
   );
 }
