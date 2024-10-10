@@ -1,12 +1,6 @@
 import ProductCard from "./components/productCard/ProductCard";
 
-type Props = {
-  lang: string;
-};
-
-export default function ProductsPage({ lang }: Props) {
-  console.log(lang);
-
+export default function ProductsPage() {
   return (
     <div>
       <ProductCard

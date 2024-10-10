@@ -1,11 +1,11 @@
-import type { AdminBestProductModel } from "../../../(pages)/admin/components/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
+import type { AdminBestProductModel } from "../../../[lang]/(pages)/admin/components/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
 import type {
   AdminOrderDetailsModel,
   AdminOrderedProductModel,
-} from "../../../(pages)/admin/components/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersDetailsPopup/types/admin-latest-orders-details-popup.types";
-import type { AdminLatestOrderModel } from "../../../(pages)/admin/components/AdminSections/AdminLatestOrdersSection/types/admin-latest-orders-section.types";
-import type { AdminOverviewModel } from "../../../(pages)/admin/components/AdminSections/AdminOverviewSection/types/admin-overview-section.types";
-import type { AdminBestCategoriesModel } from "../../../(pages)/admin/components/AdminSections/AdminTopCategoriesSection/types/admin-best-categories-section.types";
+} from "../../../[lang]/(pages)/admin/components/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersDetailsPopup/types/admin-latest-orders-details-popup.types";
+import type { AdminLatestOrderModel } from "../../../[lang]/(pages)/admin/components/AdminSections/AdminLatestOrdersSection/types/admin-latest-orders-section.types";
+import type { AdminOverviewModel } from "../../../[lang]/(pages)/admin/components/AdminSections/AdminOverviewSection/types/admin-overview-section.types";
+import type { AdminBestCategoriesModel } from "../../../[lang]/(pages)/admin/components/AdminSections/AdminTopCategoriesSection/types/admin-best-categories-section.types";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/admin`;
 
