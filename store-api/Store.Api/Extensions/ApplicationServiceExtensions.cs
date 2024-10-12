@@ -2,7 +2,7 @@ using Npgsql;
 using store_api.Store.Core.Services;
 using store_api.Store.Core.Services.IServices;
 using store_api.Store.Data.Helpers;
-using store_api.Store.Data.Repositories;
+using store_api.Store.Data.Repositories.Admin;
 using store_api.Store.Data.Repositories.IRepositories;
 
 namespace store_api.Store.Api.Extensions
@@ -26,8 +26,11 @@ namespace store_api.Store.Api.Extensions
 
         private static IServiceCollection AddServicesAndRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IAdminProductsRepository, AdminProductsRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IAdminProductsService, AdminProductsService>();
 
             services.AddScoped<IAddressRepository, AddressRepository>();
 

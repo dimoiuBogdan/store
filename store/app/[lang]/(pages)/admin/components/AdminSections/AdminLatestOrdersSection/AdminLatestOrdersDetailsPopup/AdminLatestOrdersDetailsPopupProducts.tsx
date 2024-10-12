@@ -61,10 +61,23 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
   return (
     <DataTable
       value={orderedProductsData}
-      className="mt-8 overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm"
+      className="mt-8 overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm shadow-primary/20"
       size="small"
       scrollable
       scrollHeight="40vh"
+      pt={{
+        column: {
+          headerCell: {
+            className: "bg-zinc-800 text-zinc-200",
+          },
+          footerCell: {
+            className: "bg-background text-primary",
+          },
+          bodyCell: {
+            className: "bg-background text-zinc-200",
+          },
+        },
+      }}
     >
       <Column field="productId" header="ID" />
       <Column field="name" header="Name" />

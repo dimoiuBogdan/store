@@ -20,7 +20,7 @@ export default async function AdminBestCategoriesSection() {
           value={bestCategories}
           rows={5}
           tableClassName="h-[400px]"
-          className="overflow-hidden rounded-lg shadow-sm"
+          className="overflow-hidden rounded-lg shadow-sm shadow-primary/20"
           pt={{
             wrapper: {
               className: "bg-background",

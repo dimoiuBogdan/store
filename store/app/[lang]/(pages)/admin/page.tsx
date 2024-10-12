@@ -6,7 +6,7 @@ import AdminLatestOrdersSectionDataProvider from "./components/AdminSections/Adm
 import AdminOverviewSection from "./components/AdminSections/AdminOverviewSection/AdminOverviewSection";
 import AdminBestCategoriesSection from "./components/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
 
-export default function AdminPage() {
+export default async function AdminPage() {
   const queryClient = getQueryClient();
 
   return (

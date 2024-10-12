@@ -1,5 +1,4 @@
 using store_api.Store.Core.Dtos.AdminDtos;
-using store_api.Store.Data.Models.ProductModels;
 
 namespace store_api.Store.Core.Services.IServices
 {

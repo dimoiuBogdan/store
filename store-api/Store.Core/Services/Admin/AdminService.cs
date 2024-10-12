@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using store_api.Store.Core.Dtos.AddressDtos;
 using store_api.Store.Core.Dtos.AdminDtos;
 using store_api.Store.Core.Services.IServices;
-using store_api.Store.Data.Models.ProductModels;
 using store_api.Store.Data.Repositories.IRepositories;
 
 namespace store_api.Store.Core.Services

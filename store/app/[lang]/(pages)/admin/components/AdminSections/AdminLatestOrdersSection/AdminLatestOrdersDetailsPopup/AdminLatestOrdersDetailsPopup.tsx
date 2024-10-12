@@ -17,6 +17,8 @@ export default function AdminLatestOrdersDetailsPopup() {
       header="Order Details"
       visible={!!orderToEdit}
       className="w-[75vw] max-w-screen-lg"
+      headerClassName="bg-background text-zinc-200"
+      contentClassName="bg-background text-zinc-200"
       closable
       blockScroll
       dismissableMask

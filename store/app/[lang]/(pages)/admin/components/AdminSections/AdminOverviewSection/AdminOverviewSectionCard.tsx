@@ -24,7 +24,7 @@ export default function AdminOverviewSectionCard({
   };
 
   return (
-    <div className="flex items-center rounded-lg bg-background p-6 shadow-sm">
+    <div className="flex items-center rounded-lg bg-background p-6 shadow-sm shadow-primary/20">
       <div
         className={cn(
           "rounded-lg p-4 shadow-sm",

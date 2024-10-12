@@ -19,7 +19,7 @@ export default function AdminProductsTableHeader({
       <span className="relative">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <InputText
-          value={globalFilterValue}
+          value={globalFilterValue ?? ""}
           onChange={onGlobalFilterChange}
           placeholder="Global Search"
           className="bg-zinc-800 pl-10 text-zinc-200"

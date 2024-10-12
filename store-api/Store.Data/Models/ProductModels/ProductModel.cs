@@ -21,6 +21,9 @@ public class ProductModel
     [Description("stock")]
     public required int Stock { get; set; }
 
+    [Description("is_active")]
+    public required bool IsActive { get; set; }
+
     public required List<CategoryModel> Categories { get; set; }
 
     public required List<ProductImageModel> ProductImages { get; set; }

@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.primary") theme("colors.background");
+  }
+
+  ::-webkit-scrollbar-track {
+      background: theme('colors.background');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: theme("colors.primary");
+      border-radius: 20px;
+    border: 3px solid theme("colors.background");
+  }
+
+  img {
+    @apply select-none;
+  }
+}

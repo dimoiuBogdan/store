@@ -11,13 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
-import { cn } from "../../../../common/utils/utils";
-
-type MenuItemType = {
-  name: string;
-  icon: ReactNode;
-  href: string;
-};
+import { cn, getCurrentPathWithoutLang } from "../../../../common/utils/utils";
 
 const MENU_ITEMS: MenuItemType[] = [
   { name: "Overview", icon: <Rocket />, href: "/admin" },
@@ -28,8 +22,14 @@ const MENU_ITEMS: MenuItemType[] = [
   { name: "Help", icon: <HelpCircle />, href: "/admin/help" },
 ];
 
+type MenuItemType = {
+  name: string;
+  icon: ReactNode;
+  href: string;
+};
+
 export default function AdminSidebar() {
-  const pathname = usePathname();
+  const pathname = getCurrentPathWithoutLang(usePathname());
 
   return (
     <nav className="flex h-screen flex-col p-2 py-4">

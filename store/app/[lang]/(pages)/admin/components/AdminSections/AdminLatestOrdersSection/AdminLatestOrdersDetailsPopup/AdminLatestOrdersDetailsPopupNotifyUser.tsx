@@ -33,8 +33,14 @@ export default function AdminLatestOrdersDetailsPopupNotifyUser() {
       </div>
       <div className="text-sm">
         <Menu
-          className="text-sm"
+          className="bg-background text-sm"
           pt={{
+            label: {
+              className: "text-zinc-200",
+            },
+            action: {
+              className: "bg-background hover:bg-background/90",
+            },
             submenuHeader: {
               className: "p-0",
             },

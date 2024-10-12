@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using store_api.Store.Core.Dtos.CategoryDtos;
 

@@ -72,7 +72,7 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
         value={bestProducts}
         rows={5}
         scrollable
-        className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm"
+        className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow-sm shadow-primary/20"
         tableClassName="h-[400px]"
         pt={{
           wrapper: {

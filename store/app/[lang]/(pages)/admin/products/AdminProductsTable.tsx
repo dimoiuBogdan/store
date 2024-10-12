@@ -1,5 +1,6 @@
 "use client";
 
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import {
   Column,
   type ColumnBodyOptions,
@@ -8,10 +9,12 @@ import {
   type ColumnProps,
 } from "primereact/column";
 import { DataTable } from "primereact/datatable";
+import AdminService from "../../../../common/services/admin/admin.service";
 import { cn } from "../../../../common/utils/utils";
 import type { AdminBestProductModel } from "../components/AdminSections/AdminBestProductsSection/types/admin-best-products-section.types";
 import styles from "./AdminProductsTable.module.css";
 import AdminProductsActionsColumn from "./components/AdminProductsActionsColumn";
+import AdminProductsActiveColumn from "./components/AdminProductsActiveColumn";
 import AdminProductsCategoriesColumn from "./components/AdminProductsCategoriesColumn";
 import AdminProductsFilterApply from "./components/AdminProductsFilter/AdminProductsFilterApply";
 import AdminProductsFilterClear from "./components/AdminProductsFilter/AdminProductsFilterClear";
@@ -20,152 +23,7 @@ import AdminProductsPriceColumn from "./components/AdminProductsPriceColumn";
 import AdminProductsStockColumn from "./components/AdminProductsStockColumn";
 import AdminProductsTableHeader from "./components/AdminProductsTableHeader";
 import useAdminProductTable from "./hooks/useAdminProductTable";
-
-const DUMMY_PRODUCTS: AdminBestProductModel[] = [
-  {
-    productId: 1,
-    name: "Smartphone X",
-    price: 699.99,
-    stock: 50,
-    salesCount: 1000,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 2, name: "Phones" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 2,
-    name: "Laptop Pro",
-    price: 1299.99,
-    stock: 30,
-    salesCount: 500,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 3, name: "Computers" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 3,
-    name: "Wireless Earbuds",
-    price: 129.99,
-    stock: 100,
-    salesCount: 2000,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 4, name: "Audio" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 4,
-    name: "4K Smart TV",
-    price: 799.99,
-    stock: 20,
-    salesCount: 300,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 5, name: "TVs" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 5,
-    name: "Gaming Console",
-    price: 499.99,
-    stock: 40,
-    salesCount: 800,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 6, name: "Gaming" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 6,
-    name: "Digital Camera",
-    price: 599.99,
-    stock: 25,
-    salesCount: 400,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 7, name: "Cameras" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 7,
-    name: "Fitness Tracker",
-    price: 79.99,
-    stock: 150,
-    salesCount: 1500,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 8, name: "Wearables" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 8,
-    name: "Bluetooth Speaker",
-    price: 89.99,
-    stock: 75,
-    salesCount: 900,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 4, name: "Audio" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 9,
-    name: "Tablet Pro",
-    price: 449.99,
-    stock: 60,
-    salesCount: 700,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 9, name: "Tablets" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 10,
-    name: "Smart Watch",
-    price: 199.99,
-    stock: 90,
-    salesCount: 1200,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 8, name: "Wearables" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-  {
-    productId: 11,
-    name: "Smart Watch",
-    price: 199.99,
-    stock: 90,
-    salesCount: 1200,
-    categories: [
-      { categoryId: 1, name: "Electronics" },
-      { categoryId: 8, name: "Wearables" },
-    ],
-    productImage:
-      "https://img.kwcdn.com/product/open/2023-06-02/1685670738188-7c95f67ad79449d08f22dea5a9bc8690-goods.jpeg?imageView2/2/w/800/q/70/format/webp",
-  },
-];
+import type { AdminProductModel } from "./types/admin-products-table.types";
 
 const COLUMNS: ColumnProps[] = [
   {
@@ -178,7 +36,7 @@ const COLUMNS: ColumnProps[] = [
   {
     field: "productImage",
     header: "Image",
-    body: (data: AdminBestProductModel) => (
+    body: (data: AdminProductModel) => (
       <AdminProductsImageColumn rowData={data} />
     ),
     style: { width: "5%" },
@@ -196,7 +54,7 @@ const COLUMNS: ColumnProps[] = [
     sortable: true,
     filter: true,
     style: { width: "10%" },
-    body: (data: AdminBestProductModel) => (
+    body: (data: AdminProductModel) => (
       <AdminProductsPriceColumn price={data.price} />
     ),
   },
@@ -206,7 +64,7 @@ const COLUMNS: ColumnProps[] = [
     sortable: true,
     filter: true,
     style: { width: "10%" },
-    body: (data: AdminBestProductModel) => (
+    body: (data: AdminProductModel) => (
       <AdminProductsStockColumn stock={data.stock} />
     ),
   },
@@ -223,8 +81,18 @@ const COLUMNS: ColumnProps[] = [
     sortable: false,
     filter: true,
     style: { width: "15%" },
-    body: (data: AdminBestProductModel) => (
+    body: (data: AdminProductModel) => (
       <AdminProductsCategoriesColumn categories={data.categories} />
+    ),
+  },
+  {
+    field: "isActive",
+    header: "Status",
+    sortable: false,
+    filter: true,
+    style: { width: "10%" },
+    body: (data: AdminProductModel) => (
+      <AdminProductsActiveColumn isActive={data.isActive} />
     ),
   },
 ];
@@ -233,9 +101,22 @@ export default function AdminProductsTable() {
   const { filters, globalFilterValue, onGlobalFilterChange, clearFilters } =
     useAdminProductTable();
 
+  const response = queryOptions<AdminProductModel[] | null>({
+    queryKey: ["admin-products"],
+    queryFn: async () => {
+      const { getProducts } = AdminService;
+
+      const products = await getProducts();
+
+      return products;
+    },
+  });
+
+  const { data: productsData } = useSuspenseQuery(response);
+
   return (
     <DataTable
-      value={DUMMY_PRODUCTS}
+      value={productsData ?? []}
       paginator
       rows={25}
       removableSort
@@ -244,6 +125,7 @@ export default function AdminProductsTable() {
       filters={filters}
       filterDisplay="menu"
       scrollHeight="calc(100vh - 20.5rem)"
+      tableClassName="h-[calc(100vh-20.5rem)]"
       globalFilterFields={[
         "productId",
         "name",
@@ -255,7 +137,7 @@ export default function AdminProductsTable() {
       pt={{
         paginator: {
           root: {
-            className: "bg-zinc-800 text-primary",
+            className: "bg-zinc-800 text-primary shadow-sm",
           },
         },
         header: {
@@ -265,6 +147,12 @@ export default function AdminProductsTable() {
           className: "bg-background",
         },
         column: {
+          filterOverlay: {
+            className: "bg-zinc-800",
+          },
+          sortIcon: {
+            className: "text-primary",
+          },
           headerCell: {
             className: "bg-zinc-800 text-zinc-200",
           },
@@ -284,7 +172,7 @@ export default function AdminProductsTable() {
         />
       }
       emptyMessage="No products found."
-      className="overflow-hidden rounded-lg text-sm shadow-sm"
+      className="overflow-hidden rounded-lg text-sm shadow-sm shadow-primary/20"
     >
       {COLUMNS.map((column) => (
         <Column

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using store_api.Store.Core.Dtos.AdminDtos;
 using store_api.Store.Core.Services.IServices;
 using store_api.Store.Data.Models.ProductModels;

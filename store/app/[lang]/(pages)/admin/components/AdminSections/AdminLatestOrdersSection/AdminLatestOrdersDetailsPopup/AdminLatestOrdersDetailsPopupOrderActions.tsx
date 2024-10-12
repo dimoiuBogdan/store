@@ -46,8 +46,14 @@ export default function AdminLatestOrdersDetailsPopupOrderActions() {
       </div>
       <div className="text-sm">
         <Menu
-          className="text-sm"
+          className="bg-background text-sm"
           pt={{
+            label: {
+              className: "text-zinc-200",
+            },
+            action: {
+              className: "bg-background hover:bg-background/90",
+            },
             submenuHeader: {
               className: "p-0",
             },
@@ -63,3 +69,5 @@ export default function AdminLatestOrdersDetailsPopupOrderActions() {
     </div>
   );
 }
+
+// TODO: Component cleanup ( Primereact ) | Primereact custom theme | Translations | rerendering table
