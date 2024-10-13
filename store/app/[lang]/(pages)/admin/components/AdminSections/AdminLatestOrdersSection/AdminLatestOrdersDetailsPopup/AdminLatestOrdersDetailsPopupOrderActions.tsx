@@ -70,4 +70,4 @@ export default function AdminLatestOrdersDetailsPopupOrderActions() {
   );
 }
 
-// TODO: Component cleanup ( Primereact ) | Primereact custom theme | Translations | rerendering table
+// TODO: Component cleanup ( Primereact ) | Primereact custom theme | rerendering table | Translations

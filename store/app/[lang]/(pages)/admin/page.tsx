@@ -1,32 +1,26 @@
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
-import { getQueryClient } from "../../../get-query-client";
 import AdminBestProductsSectionDataProvider from "./components/AdminSections/AdminBestProductsSection/AdminBestProductsSectionDataProvider";
 import AdminLatestOrdersSectionDataProvider from "./components/AdminSections/AdminLatestOrdersSection/AdminLatestOrdersSectionDataProvider";
 import AdminOverviewSection from "./components/AdminSections/AdminOverviewSection/AdminOverviewSection";
 import AdminBestCategoriesSection from "./components/AdminSections/AdminTopCategoriesSection/AdminTopCategoriesSection";
 
-export default async function AdminPage() {
-  const queryClient = getQueryClient();
-
+export default function AdminPage() {
   return (
     <div className="flex flex-col gap-y-10">
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<div>Loading Overview...</div>}>
-          <AdminOverviewSection />
+      <Suspense fallback={<div>Loading Overview...</div>}>
+        <AdminOverviewSection />
+      </Suspense>
+      <div className="grid grid-cols-3 gap-x-6">
+        <Suspense fallback={<div>Loading Latest Orders...</div>}>
+          <AdminLatestOrdersSectionDataProvider />
         </Suspense>
-        <div className="grid grid-cols-3 gap-x-6">
-          <Suspense fallback={<div>Loading Latest Orders...</div>}>
-            <AdminLatestOrdersSectionDataProvider />
-          </Suspense>
-          <Suspense fallback={<div>Loading Best Categories...</div>}>
-            <AdminBestCategoriesSection />
-          </Suspense>
-        </div>
-        <Suspense fallback={<div>Loading Best Products...</div>}>
-          <AdminBestProductsSectionDataProvider />
+        <Suspense fallback={<div>Loading Best Categories...</div>}>
+          <AdminBestCategoriesSection />
         </Suspense>
-      </HydrationBoundary>
+      </div>
+      <Suspense fallback={<div>Loading Best Products...</div>}>
+        <AdminBestProductsSectionDataProvider />
+      </Suspense>
     </div>
   );
 }
