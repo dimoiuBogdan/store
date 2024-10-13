@@ -1,0 +1,130 @@
+{
+  "common": {
+    "viewAll": "Vezi tot"
+  },
+  "admin": {
+    "sidebar": {
+      "overview": "Panou de control",
+      "products": "Produse",
+      "orders": "Comenzi",
+      "customers": "Cumpărători",
+      "settings": "Setări",
+      "help": "Ajutor",
+      "logout": "Deloghează-te"
+    },
+    "overview": {
+      "title": "Administrare",
+      "businessOverview": {
+        "title": "Panou de control",
+        "moneyEarned": "Sumă încasată",
+        "orders": "Numărul comenzilor",
+        "productsSold": "Produse vândute",
+        "newCustomers": "Cumpărători noi"
+      },
+      "latestOrders": {
+        "title": "Comenzi recente",
+        "empty": "Nici o comanda recentă",
+        "table": {
+          "orderNumber": {
+            "title": "Numărul comenzii",
+            "tooltip": "Click pe numărul comenzii pentru a vedea detalii și a lua acțiuni"
+          },
+          "customer": "Cumpărător",
+          "total": "Total",
+          "paid": "Plătit",
+          "status": "Status",
+          "date": "Dată"
+        }
+      },
+      "bestSellingProducts": {
+        "title": "Produse cu cele mai mari vânzări",
+        "table": {
+          "id": {
+            "title": "ID",
+            "tooltip": "Click pe ID pentru a vedea detalii și a lua acțiuni"
+          },
+          "name": "Nume",
+          "sales": "Vânzări",
+          "price": "Preț",
+          "stock": "Stoc",
+          "category": "Categorie",
+          "image": "Imagine"
+        }
+      },
+      "topCategories": {
+        "title": "Categorii cu cele mai mari vânzări",
+        "table": {
+          "category": "Categorie",
+          "sales": "Vânzări"
+        }
+      },
+      "orderDetails": {
+        "title": "Detalii despre comanda",
+        "info": {
+          "customer": "Cumpărător",
+          "orderNumber": "Numărul comenzii",
+          "orderDate": "Dată",
+          "orderStatus": "Status",
+          "orderTotal": "Total",
+          "total": "Total",
+          "paid": "Plătit",
+          "status": "Status",
+          "date": "Dată",
+          "paymentMethod": "Metodă de plată",
+          "shippingMethod": "Metodă de livrare",
+          "shippingAddress": "Adresa de livrare",
+          "billingAddress": "Adresa de facturare",
+          "phoneNumber": "Număr de telefon",
+          "email": "Email"
+        },
+        "actions": {
+          "title": "Acțiuni",
+          "downloadInvoice": "Descarcă factura",
+          "notifyCustomer": {
+            "title": "Notifică cumpărătorul",
+            "sendCurrentStatus": "Trimite statusul curent",
+            "sendInvoice": "Trimite factura",
+            "requestFeedback": "Solicită feedback"
+          },
+          "orderActions": {
+            "title": "Acțiuni",
+            "markAsShipped": "Marchează ca expediat",
+            "markAsDelivered": "Marchează ca livrat",
+            "markAsCancelled": "Marchează ca anulat",
+            "markAsRefunded": "Marchează ca refundat",
+            "markAsProcessing": "Marchează ca în procesare",
+            "markAsPending": "Marchează ca în așteptare"
+          }
+        },
+        "table": {
+          "id": "ID",
+          "name": "Nume",
+          "quantity": "Cantitate",
+          "price": "Preț",
+          "total": "Total",
+          "category": "Categorie",
+          "image": "Imagine"
+        }
+      }
+    },
+    "products": {
+      "title": "Produse",
+      "addNewProduct": "Adaugă un nou produs",
+      "table": {
+        "actions": {
+          "globalSearch": "Căutare globală",
+          "clear": "Șterge",
+          "apply": "Aplică"
+        },
+        "id": "ID",
+        "name": "Nume",
+        "price": "Preț",
+        "stock": "Stoc",
+        "category": "Categorie",
+        "image": "Imagine",
+        "sales": "Vânzări",
+        "isActive": "Este activ"
+      }
+    }
+  }
+}

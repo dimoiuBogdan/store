@@ -3,8 +3,7 @@ import localFont from "next/font/local";
 import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "./globals.css";
-import type { Locale } from "./i18n-config";
-import { default as Providers } from "./providers";
+import Providers from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,15 +21,13 @@ export const metadata: Metadata = {
   description: "Online Store Template built with Next.js and TailwindCSS",
 };
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
-  params: { lang },
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: Locale };
 }>) {
   return (
-    <html lang={lang || "en"}>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} scrollbar-custom bg-background text-zinc-200 antialiased`}
       >

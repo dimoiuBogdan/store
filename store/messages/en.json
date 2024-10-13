@@ -1,0 +1,132 @@
+{
+  "common": {
+    "viewAll": "View All"
+  },
+  "admin": {
+    "sidebar": {
+      "overview": "Overview",
+      "products": "Products",
+      "orders": "Orders",
+      "customers": "Customers",
+      "settings": "Settings",
+      "help": "Help",
+      "logout": "Logout"
+    },
+    "overview": {
+      "title": "Admin",
+      "businessOverview": {
+        "title": "Business Overview",
+        "moneyEarned": "Money Earned",
+        "orders": "Orders Count",
+        "productsSold": "Products Sold",
+        "newCustomers": "New Customers"
+      },
+      "latestOrders": {
+        "title": "Latest Orders",
+        "empty": "No orders found",
+        "table": {
+          "orderNumber": {
+            "title": "Order Number",
+            "tooltip": "Click on the order number to view details and take actions"
+          },
+          "customer": "Customer",
+          "total": "Total",
+          "paid": "Paid",
+          "status": "Status",
+          "date": "Date"
+        }
+      },
+      "bestSellingProducts": {
+        "title": "Best Selling Products",
+        "empty": "No products found",
+        "table": {
+          "id": {
+            "title": "ID",
+            "tooltip": "Click on the ID to view details and take actions"
+          },
+          "name": "Name",
+          "sales": "Sales",
+          "price": "Price",
+          "stock": "Stock",
+          "category": "Category",
+          "image": "Image"
+        }
+      },
+      "topCategories": {
+        "title": "Top Categories",
+        "empty": "No categories found",
+        "table": {
+          "category": "Category",
+          "sales": "Sales"
+        }
+      },
+      "orderDetails": {
+        "title": "Order Details",
+        "info": {
+          "customer": "Customer",
+          "orderNumber": "Order Number",
+          "orderDate": "Order Date",
+          "orderStatus": "Order Status",
+          "orderTotal": "Order Total",
+          "total": "Total",
+          "paid": "Paid",
+          "status": "Status",
+          "date": "Date",
+          "paymentMethod": "Payment Method",
+          "shippingMethod": "Shipping Method",
+          "shippingAddress": "Shipping Address",
+          "billingAddress": "Billing Address",
+          "phoneNumber": "Phone Number",
+          "email": "Email"
+        },
+        "actions": {
+          "title": "Actions",
+          "downloadInvoice": "Download Invoice",
+          "notifyCustomer": {
+            "title": "Notify Customer",
+            "sendCurrentStatus": "Send Current Status",
+            "sendInvoice": "Send Invoice",
+            "requestFeedback": "Request Feedback"
+          },
+          "orderActions": {
+            "title": "Order Actions",
+            "markAsShipped": "Mark as Shipped",
+            "markAsDelivered": "Mark as Delivered",
+            "markAsCancelled": "Mark as Canceled",
+            "markAsRefunded": "Mark as Refunded",
+            "markAsProcessing": "Mark as Processing",
+            "markAsPending": "Mark as Pending"
+          }
+        },
+        "table": {
+          "id": "ID",
+          "name": "Name",
+          "quantity": "Quantity",
+          "price": "Price",
+          "total": "Total",
+          "category": "Category",
+          "image": "Image"
+        }
+      }
+    },
+    "products": {
+      "title": "Products",
+      "addNewProduct": "Add New Product",
+      "table": {
+        "actions": {
+          "globalSearch": "Global Search",
+          "clear": "Clear",
+          "apply": "Apply"
+        },
+        "id": "ID",
+        "name": "Name",
+        "price": "Price",
+        "stock": "Stock",
+        "category": "Category",
+        "image": "Image",
+        "sales": "Sales",
+        "isActive": "Is Active"
+      }
+    }
+  }
+}
