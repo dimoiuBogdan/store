@@ -112,7 +112,6 @@
       "addNewProduct": "Adaugă un nou produs",
       "table": {
         "actions": {
-          "globalSearch": "Căutare globală",
           "clear": "Șterge",
           "apply": "Aplică"
         },
@@ -123,7 +122,8 @@
         "category": "Categorie",
         "image": "Imagine",
         "sales": "Vânzări",
-        "isActive": "Este activ"
+        "isActive": "Este activ",
+        "createdAt": "Adăugat la"
       }
     }
   }

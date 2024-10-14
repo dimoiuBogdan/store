@@ -1,5 +1,5 @@
-import { type ColumnProps } from "primereact/column";
+import { Column, type ColumnProps } from "primereact/column";
 
 export default function PRColumn(props: ColumnProps) {
-  return <PRColumn {...props} />;
+  return <Column {...props} />;
 }

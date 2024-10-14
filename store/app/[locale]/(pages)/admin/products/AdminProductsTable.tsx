@@ -2,12 +2,14 @@
 
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { FilterMatchMode, FilterOperator } from "primereact/api";
 import {
   type ColumnBodyOptions,
   type ColumnFilterApplyTemplateOptions,
   type ColumnFilterClearTemplateOptions,
   type ColumnProps,
 } from "primereact/column";
+import type { DataTableFilterMeta } from "primereact/datatable";
 import PRColumn from "../../../../common/components/PrimeReact/PRColumn";
 import PRDataTable from "../../../../common/components/PrimeReact/PRDataTable";
 import AdminService from "../../../../common/services/admin/admin.service";
@@ -16,27 +18,37 @@ import styles from "./AdminProductsTable.module.css";
 import AdminProductsActionsColumn from "./components/AdminProductsActionsColumn";
 import AdminProductsActiveColumn from "./components/AdminProductsActiveColumn";
 import AdminProductsCategoriesColumn from "./components/AdminProductsCategoriesColumn";
+import AdminProductsDateColumn from "./components/AdminProductsDateColumn";
 import AdminProductsFilterApply from "./components/AdminProductsFilter/AdminProductsFilterApply";
 import AdminProductsFilterClear from "./components/AdminProductsFilter/AdminProductsFilterClear";
 import AdminProductsImageColumn from "./components/AdminProductsImageColumn";
 import AdminProductsPriceColumn from "./components/AdminProductsPriceColumn";
 import AdminProductsStockColumn from "./components/AdminProductsStockColumn";
-import AdminProductsTableHeader from "./components/AdminProductsTableHeader";
-import useAdminProductTable from "./hooks/useAdminProductTable";
 import type { AdminProductModel } from "./types/admin-products-table.types";
 
 export default function AdminProductsTable() {
   const t = useTranslations("admin.products.table");
 
-  const { filters, globalFilterValue, onGlobalFilterChange, clearFilters } =
-    useAdminProductTable();
+  const FILTERS: DataTableFilterMeta = {
+    productId: {
+      operator: FilterOperator.OR,
+      constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+    },
+    name: {
+      operator: FilterOperator.OR,
+      constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }],
+    },
+    categories: {
+      operator: FilterOperator.OR,
+      constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }],
+    },
+  };
 
   const COLUMNS: ColumnProps[] = [
     {
       field: "productId",
       header: t("id"),
       sortable: true,
-      filter: true,
       style: { width: "5%" },
     },
     {
@@ -51,7 +63,6 @@ export default function AdminProductsTable() {
       field: "name",
       header: t("name"),
       sortable: true,
-      filter: true,
       style: { width: "20%" },
     },
     {
@@ -82,7 +93,6 @@ export default function AdminProductsTable() {
       field: "categories.name",
       header: t("category"),
       sortable: false,
-      filter: true,
       style: { width: "15%" },
       body: (data: AdminProductModel) => (
         <AdminProductsCategoriesColumn categories={data.categories} />
@@ -95,6 +105,16 @@ export default function AdminProductsTable() {
       style: { width: "10%" },
       body: (data: AdminProductModel) => (
         <AdminProductsActiveColumn isActive={data.isActive} />
+      ),
+    },
+    {
+      field: "createdAt",
+      header: t("createdAt"),
+      sortable: true,
+      dataType: "date",
+      style: { width: "10%" },
+      body: (data: AdminProductModel) => (
+        <AdminProductsDateColumn createdAt={data.createdAt} />
       ),
     },
   ];
@@ -116,24 +136,10 @@ export default function AdminProductsTable() {
     <PRDataTable
       value={productsData ?? []}
       rows={25}
-      filters={filters}
+      filters={FILTERS}
+      dataKey="productId"
       scrollHeight="calc(100vh - 20.5rem)"
       tableClassName="h-[calc(100vh-20.5rem)]"
-      globalFilterFields={[
-        "productId",
-        "name",
-        "price",
-        "stock",
-        "salesCount",
-        "categories.name",
-      ]}
-      header={
-        <AdminProductsTableHeader
-          globalFilterValue={globalFilterValue}
-          onGlobalFilterChange={onGlobalFilterChange}
-          clearFilters={clearFilters}
-        />
-      }
       emptyMessage="No products found."
       className="overflow-hidden rounded-lg text-sm shadow shadow-primary/20"
     >
@@ -147,7 +153,6 @@ export default function AdminProductsTable() {
               <>{data[column.field as keyof AdminProductModel]}</>
             )
           }
-          {...column}
           pt={{
             filterButtonbar: { className: "p-4" },
             filterConstraint: {
@@ -155,8 +160,12 @@ export default function AdminProductsTable() {
             },
           }}
           showFilterMatchModes={false}
+          showFilterOperator={false}
+          showFilterMenuOptions={false}
+          {...column}
+          filter={!!FILTERS[column.field as keyof typeof FILTERS]}
           filterApply={(options: ColumnFilterApplyTemplateOptions) => (
-            <AdminProductsFilterApply onClick={options.filterApplyCallback} />
+            <AdminProductsFilterApply options={options} />
           )}
           filterClear={(options: ColumnFilterClearTemplateOptions) => (
             <AdminProductsFilterClear onClick={options.filterClearCallback} />

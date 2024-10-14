@@ -1,4 +1,5 @@
 using AutoMapper;
+using store_api.Store.Core.Dtos.AdminDtos;
 using store_api.Store.Core.Services.IServices;
 using store_api.Store.Data.Models.ProductModels;
 using store_api.Store.Data.Repositories.IRepositories;
@@ -16,9 +17,11 @@ namespace store_api.Store.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ProductModel>> GetAllProductsAsync()
+        public async Task<List<ProductDto>> GetAllProductsAsync()
         {
-            return await _adminProductsRepository.GetAllProductsAsync();
+            var products = await _adminProductsRepository.GetAllProductsAsync();
+
+            return _mapper.Map<List<ProductDto>>(products);
         }
     }
 }

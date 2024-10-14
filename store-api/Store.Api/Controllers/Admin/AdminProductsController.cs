@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using store_api.Store.Core.Services.IServices;
-using store_api.Store.Data.Models.ProductModels;
+using store_api.Store.Core.Dtos.AdminDtos;
 
 namespace store_api.Store.Api.Controllers.Admin
 {
@@ -16,7 +16,7 @@ namespace store_api.Store.Api.Controllers.Admin
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductModel>>> GetAllProducts()
+        public async Task<ActionResult<List<ProductDto>>> GetAllProducts()
         {
             var products = await _adminProductsService.GetAllProductsAsync();
 

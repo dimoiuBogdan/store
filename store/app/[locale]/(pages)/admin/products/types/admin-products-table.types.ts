@@ -12,4 +12,5 @@ export type AdminProductModel = {
   salesCount: number;
   productImages: ImageModel[];
   isActive: boolean;
+  createdAt: string;
 };

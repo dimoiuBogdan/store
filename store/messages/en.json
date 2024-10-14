@@ -114,7 +114,6 @@
       "addNewProduct": "Add New Product",
       "table": {
         "actions": {
-          "globalSearch": "Global Search",
           "clear": "Clear",
           "apply": "Apply"
         },
@@ -125,7 +124,8 @@
         "category": "Category",
         "image": "Image",
         "sales": "Sales",
-        "isActive": "Is Active"
+        "isActive": "Is Active",
+        "createdAt": "Created At"
       }
     }
   }

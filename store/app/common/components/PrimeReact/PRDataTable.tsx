@@ -20,6 +20,7 @@ export default function PRDataTable({
     <DataTable
       value={value}
       rows={rows}
+      removableSort
       scrollable
       filterDisplay="menu"
       className={cn(

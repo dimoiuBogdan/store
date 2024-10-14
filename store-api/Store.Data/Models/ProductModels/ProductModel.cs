@@ -24,6 +24,9 @@ public class ProductModel
     [Description("is_active")]
     public required bool IsActive { get; set; }
 
+    [Description("created_at")]
+    public required DateTime CreatedAt { get; set; }
+
     public required List<CategoryModel> Categories { get; set; }
 
     public required List<ProductImageModel> ProductImages { get; set; }
