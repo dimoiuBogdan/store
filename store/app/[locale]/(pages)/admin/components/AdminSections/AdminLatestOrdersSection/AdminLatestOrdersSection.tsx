@@ -4,9 +4,9 @@ import { Check, Info, Truck, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "primereact/badge";
-import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
 import { Tooltip } from "primereact/tooltip";
+import PRColumn from "../../../../../../common/components/PrimeReact/PRColumn";
+import PRDataTable from "../../../../../../common/components/PrimeReact/PRDataTable";
 import { OrderStatus } from "../../../../../../common/types/enums";
 import { AdminLatestOrderModel } from "./types/admin-latest-orders-section.types";
 
@@ -126,59 +126,44 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
         <Truck className="h-5 w-5" />
         <h2 className="font-medium">{t("latestOrders.title")}</h2>
       </div>
-      <DataTable
+      <PRDataTable
         value={latestOrdersData}
         rows={5}
-        scrollable
-        className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow shadow-primary/20"
         tableClassName="h-[400px]"
         emptyMessage={t("latestOrders.empty")}
-        pt={{
-          wrapper: {
-            className: "bg-background",
-          },
-          column: {
-            headerCell: {
-              className: "bg-zinc-800 text-zinc-200",
-            },
-            bodyCell: {
-              className: "bg-background text-zinc-200",
-            },
-          },
-        }}
       >
-        <Column
+        <PRColumn
           field="orderNumber"
           header={orderNumberHeader}
           body={orderNumberBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="customer"
           header={t("latestOrders.table.customer")}
           body={customerBodyTemplate}
           className="max-w-[150px]"
         />
-        <Column
+        <PRColumn
           field="orderTotal"
           header={t("latestOrders.table.total")}
           body={totalBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="orderPaid"
           header={t("latestOrders.table.paid")}
           body={paidBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="orderStatus"
           header={t("latestOrders.table.status")}
           body={statusBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="createdAt"
           header={t("latestOrders.table.date")}
           body={dateBodyTemplate}
         />
-      </DataTable>
+      </PRDataTable>
     </section>
   );
 }

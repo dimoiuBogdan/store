@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Dialog } from "primereact/dialog";
 import { Suspense } from "react";
+import PRDialog from "../../../../../../../common/components/PrimeReact/PRDialog";
 import AdminLatestOrdersDetailsPopupContent from "./AdminLatestOrdersDetailsPopupContent";
 
 export default function AdminLatestOrdersDetailsPopup() {
@@ -12,27 +12,19 @@ export default function AdminLatestOrdersDetailsPopup() {
 
   const orderToEdit = params.get("orderToEdit");
 
-  return (
-    <Dialog
-      header="Order Details"
-      visible={!!orderToEdit}
-      className="w-[75vw] max-w-screen-lg"
-      headerClassName="bg-background text-zinc-200"
-      contentClassName="bg-background text-zinc-200"
-      closable
-      blockScroll
-      dismissableMask
-      onHide={() => {
-        if (orderToEdit) {
-          params.delete("orderToEdit");
+  const onHide = () => {
+    if (orderToEdit) {
+      params.delete("orderToEdit");
 
-          replace(`?${params.toString()}`);
-        }
-      }}
-    >
+      replace(`?${params.toString()}`);
+    }
+  };
+
+  return (
+    <PRDialog visible={!!orderToEdit} onHide={onHide} header="Order Details">
       <Suspense fallback={<div>Loading order details...</div>}>
         <AdminLatestOrdersDetailsPopupContent />
       </Suspense>
-    </Dialog>
+    </PRDialog>
   );
 }

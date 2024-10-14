@@ -14,7 +14,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex items-center gap-x-2 text-sm">
       <div
         className={cn(
           "cursor-pointer rounded bg-zinc-800 px-3 py-2 text-center font-medium text-zinc-200 shadow shadow-primary transition-all hover:bg-primary hover:text-zinc-800",

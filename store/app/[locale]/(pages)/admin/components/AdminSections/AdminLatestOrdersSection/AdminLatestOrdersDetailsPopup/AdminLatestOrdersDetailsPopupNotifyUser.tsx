@@ -4,13 +4,12 @@ import { Bell, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
-import { Toast } from "primereact/toast";
 import { useRef } from "react";
+import PRMenu from "../../../../../../../common/components/PrimeReact/PRMenu";
 
 export default function AdminLatestOrdersDetailsPopupNotifyUser() {
   const t = useTranslations("admin.overview.orderDetails.actions");
 
-  const toast = useRef<Toast>(null);
   const menu = useRef<Menu>(null);
 
   const items: MenuItem[] = [
@@ -34,28 +33,7 @@ export default function AdminLatestOrdersDetailsPopupNotifyUser() {
       >
         <Bell size={16} /> {t("notifyCustomer.title")} <ChevronDown size={16} />
       </div>
-      <div className="text-sm">
-        <Menu
-          className="bg-background text-sm"
-          pt={{
-            label: {
-              className: "text-zinc-200",
-            },
-            action: {
-              className: "bg-background hover:bg-background/90",
-            },
-            submenuHeader: {
-              className: "p-0",
-            },
-          }}
-          model={items}
-          popup
-          ref={menu}
-          id="notify_customer_menu"
-          popupAlignment="left"
-        />
-        <Toast ref={toast}></Toast>
-      </div>
+      <PRMenu items={items} menuRef={menu} />
     </div>
   );
 }

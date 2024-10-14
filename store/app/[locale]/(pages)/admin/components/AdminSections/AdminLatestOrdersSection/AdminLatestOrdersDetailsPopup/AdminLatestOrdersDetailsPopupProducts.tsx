@@ -3,8 +3,8 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
+import PRColumn from "../../../../../../../common/components/PrimeReact/PRColumn";
+import PRDataTable from "../../../../../../../common/components/PrimeReact/PRDataTable";
 import PRImage from "../../../../../../../common/components/PrimeReact/PRImage";
 import AdminService from "../../../../../../../common/services/admin/admin.service";
 import type { AdminOrderedProductModel } from "./types/admin-latest-orders-details-popup.types";
@@ -63,41 +63,27 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
   };
 
   return (
-    <DataTable
+    <PRDataTable
       value={orderedProductsData}
-      className="mt-8 overflow-hidden overflow-x-auto rounded-lg text-sm shadow shadow-primary/20"
+      className="mt-8"
       size="small"
-      scrollable
-      scrollHeight="40vh"
-      pt={{
-        column: {
-          headerCell: {
-            className: "bg-zinc-800 text-zinc-200",
-          },
-          footerCell: {
-            className: "bg-background text-primary",
-          },
-          bodyCell: {
-            className: "bg-background text-zinc-200",
-          },
-        },
-      }}
+      tableClassName="h-[400px]"
     >
-      <Column field="productId" header={t("id")} />
-      <Column field="name" header={t("name")} />
-      <Column field="price" header={t("price")} body={priceBodyTemplate} />
-      <Column field="quantity" header={t("quantity")} />
-      <Column field="total" header={t("total")} body={totalBodyTemplate} />
-      <Column
+      <PRColumn field="productId" header={t("id")} />
+      <PRColumn field="name" header={t("name")} />
+      <PRColumn field="price" header={t("price")} body={priceBodyTemplate} />
+      <PRColumn field="quantity" header={t("quantity")} />
+      <PRColumn field="total" header={t("total")} body={totalBodyTemplate} />
+      <PRColumn
         field="categories"
         header={t("category")}
         body={categoriesBodyTemplate}
       />
-      <Column
+      <PRColumn
         field="productImage"
         header={t("image")}
         body={imageBodyTemplate}
       />
-    </DataTable>
+    </PRDataTable>
   );
 }

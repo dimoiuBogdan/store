@@ -3,13 +3,13 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import {
-  Column,
   type ColumnBodyOptions,
   type ColumnFilterApplyTemplateOptions,
   type ColumnFilterClearTemplateOptions,
   type ColumnProps,
 } from "primereact/column";
-import { DataTable } from "primereact/datatable";
+import PRColumn from "../../../../common/components/PrimeReact/PRColumn";
+import PRDataTable from "../../../../common/components/PrimeReact/PRDataTable";
 import AdminService from "../../../../common/services/admin/admin.service";
 import { cn } from "../../../../common/utils/utils";
 import styles from "./AdminProductsTable.module.css";
@@ -113,15 +113,10 @@ export default function AdminProductsTable() {
   const { data: productsData } = useSuspenseQuery(response);
 
   return (
-    <DataTable
+    <PRDataTable
       value={productsData ?? []}
-      paginator
       rows={25}
-      removableSort
-      scrollable
-      dataKey="productId"
       filters={filters}
-      filterDisplay="menu"
       scrollHeight="calc(100vh - 20.5rem)"
       tableClassName="h-[calc(100vh-20.5rem)]"
       globalFilterFields={[
@@ -132,36 +127,6 @@ export default function AdminProductsTable() {
         "salesCount",
         "categories.name",
       ]}
-      pt={{
-        paginator: {
-          root: {
-            className: "bg-zinc-800 text-primary shadow",
-          },
-        },
-        header: {
-          className: "bg-background text-primary",
-        },
-        wrapper: {
-          className: "bg-background",
-        },
-        column: {
-          filterOverlay: {
-            className: "bg-zinc-800",
-          },
-          sortIcon: {
-            className: "text-primary",
-          },
-          headerCell: {
-            className: "bg-zinc-800 text-zinc-200",
-          },
-          footerCell: {
-            className: "bg-background text-primary",
-          },
-          bodyCell: {
-            className: "bg-background text-zinc-200",
-          },
-        },
-      }}
       header={
         <AdminProductsTableHeader
           globalFilterValue={globalFilterValue}
@@ -173,7 +138,7 @@ export default function AdminProductsTable() {
       className="overflow-hidden rounded-lg text-sm shadow shadow-primary/20"
     >
       {COLUMNS.map((column) => (
-        <Column
+        <PRColumn
           key={column.field}
           body={(data: AdminProductModel, options: ColumnBodyOptions) =>
             typeof column.body === "function" ? (
@@ -198,12 +163,11 @@ export default function AdminProductsTable() {
           )}
         />
       ))}
-
-      <Column
+      <PRColumn
         body={AdminProductsActionsColumn}
         exportable={false}
         style={{ width: "15%" }}
       />
-    </DataTable>
+    </PRDataTable>
   );
 }

@@ -4,10 +4,7 @@ import { useState, type ChangeEvent } from "react";
 const FILTERS: DataTableFilterMeta = {
   global: { value: null, matchMode: "contains" },
   productId: { value: null, matchMode: "equals" },
-  name: { value: null, matchMode: "startsWith" },
-  price: { value: null, matchMode: "equals" },
-  stock: { value: null, matchMode: "equals" },
-  salesCount: { value: null, matchMode: "equals" },
+  name: { value: null, matchMode: "contains" },
   "categories.name": { value: null, matchMode: "contains" },
 };
 const useAdminProductTable = () => {
@@ -29,15 +26,7 @@ const useAdminProductTable = () => {
   };
 
   const clearFilters = () => {
-    setFilters({
-      global: { value: null, matchMode: "contains" },
-      productId: { value: null, matchMode: "equals" },
-      name: { value: null, matchMode: "startsWith" },
-      price: { value: null, matchMode: "equals" },
-      stock: { value: null, matchMode: "equals" },
-      salesCount: { value: null, matchMode: "equals" },
-      "categories.name": { value: null, matchMode: "contains" },
-    });
+    setFilters(FILTERS);
 
     setGlobalFilterValue(null);
   };

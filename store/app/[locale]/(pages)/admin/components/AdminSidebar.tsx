@@ -59,7 +59,7 @@ export default function AdminSidebar() {
       </ul>
       <div className="flex flex-col items-center gap-y-4">
         <LanguageSwitcher />
-        <div className="w-full cursor-pointer rounded bg-zinc-800 py-3 text-center font-medium text-zinc-200 shadow shadow-primary transition-all hover:bg-primary hover:text-zinc-800">
+        <div className="w-full cursor-pointer rounded bg-zinc-800 py-3 text-center text-sm font-medium text-zinc-200 shadow shadow-primary transition-all hover:bg-primary hover:text-zinc-800">
           {t("logout")}
         </div>
       </div>

@@ -3,9 +3,9 @@
 import { Box, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
 import { Tooltip } from "primereact/tooltip";
+import PRColumn from "../../../../../../common/components/PrimeReact/PRColumn";
+import PRDataTable from "../../../../../../common/components/PrimeReact/PRDataTable";
 import PRImage from "../../../../../../common/components/PrimeReact/PRImage";
 import { cn } from "../../../../../../common/utils/utils";
 import { AdminBestProductModel } from "./types/admin-best-products-section.types";
@@ -72,50 +72,32 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
           {tCommon("viewAll")}
         </Link>
       </div>
-      <DataTable
-        value={bestProducts}
-        rows={5}
-        scrollable
-        className="overflow-hidden overflow-x-auto rounded-lg text-sm shadow shadow-primary/20"
-        tableClassName="h-[400px]"
-        pt={{
-          wrapper: {
-            className: "bg-background",
-          },
-          column: {
-            headerCell: {
-              className: "bg-zinc-800 text-zinc-200",
-            },
-            bodyCell: {
-              className: "bg-background text-zinc-200",
-            },
-          },
-        }}
-      >
-        <Column field="productId" header={idHeader} body={idBodyTemplate} />
-        <Column field="name" header={t("table.name")} />
-        <Column field="salesCount" header={t("table.sales")} />
-        <Column
+
+      <PRDataTable value={bestProducts} rows={5} tableClassName="h-[400px]">
+        <PRColumn field="productId" header={idHeader} body={idBodyTemplate} />
+        <PRColumn field="name" header={t("table.name")} />
+        <PRColumn field="salesCount" header={t("table.sales")} />
+        <PRColumn
           field="price"
           header={t("table.price")}
           body={priceBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="stock"
           header={t("table.stock")}
           body={stockBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="categories"
           header={t("table.category")}
           body={categoryBodyTemplate}
         />
-        <Column
+        <PRColumn
           field="productImage"
           header={t("table.image")}
           body={imageBodyTemplate}
         />
-      </DataTable>
+      </PRDataTable>
     </section>
   );
 }
