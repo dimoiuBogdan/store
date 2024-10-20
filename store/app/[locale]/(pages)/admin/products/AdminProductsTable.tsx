@@ -12,18 +12,18 @@ import {
 import type { DataTableFilterMeta } from "primereact/datatable";
 import PRColumn from "../../../../common/components/PrimeReact/PRColumn";
 import PRDataTable from "../../../../common/components/PrimeReact/PRDataTable";
-import AdminService from "../../../../common/services/admin/admin.service";
+import AdminProductsService from "../../../../common/services/admin/admin-products.service";
 import { cn } from "../../../../common/utils/utils";
 import styles from "./AdminProductsTable.module.css";
-import AdminProductsActionsColumn from "./components/AdminProductsActionsColumn";
-import AdminProductsActiveColumn from "./components/AdminProductsActiveColumn";
-import AdminProductsCategoriesColumn from "./components/AdminProductsCategoriesColumn";
-import AdminProductsDateColumn from "./components/AdminProductsDateColumn";
+import AdminProductsActionsColumn from "./components/AdminProductsColumns/AdminProductsActionsColumn";
+import AdminProductsActiveColumn from "./components/AdminProductsColumns/AdminProductsActiveColumn";
+import AdminProductsCategoriesColumn from "./components/AdminProductsColumns/AdminProductsCategoriesColumn";
+import AdminProductsDateColumn from "./components/AdminProductsColumns/AdminProductsDateColumn";
+import AdminProductsImageColumn from "./components/AdminProductsColumns/AdminProductsImageColumn";
+import AdminProductsPriceColumn from "./components/AdminProductsColumns/AdminProductsPriceColumn";
+import AdminProductsStockColumn from "./components/AdminProductsColumns/AdminProductsStockColumn";
 import AdminProductsFilterApply from "./components/AdminProductsFilter/AdminProductsFilterApply";
 import AdminProductsFilterClear from "./components/AdminProductsFilter/AdminProductsFilterClear";
-import AdminProductsImageColumn from "./components/AdminProductsImageColumn";
-import AdminProductsPriceColumn from "./components/AdminProductsPriceColumn";
-import AdminProductsStockColumn from "./components/AdminProductsStockColumn";
 import type { AdminProductModel } from "./types/admin-products-table.types";
 
 export default function AdminProductsTable() {
@@ -122,7 +122,7 @@ export default function AdminProductsTable() {
   const response = queryOptions<AdminProductModel[] | null>({
     queryKey: ["admin-products"],
     queryFn: async () => {
-      const { getProducts } = AdminService;
+      const { getProducts } = AdminProductsService;
 
       const products = await getProducts();
 
@@ -173,7 +173,9 @@ export default function AdminProductsTable() {
         />
       ))}
       <PRColumn
-        body={AdminProductsActionsColumn}
+        body={(data: AdminProductModel) => (
+          <AdminProductsActionsColumn productId={data.productId.toString()} />
+        )}
         exportable={false}
         style={{ width: "15%" }}
       />

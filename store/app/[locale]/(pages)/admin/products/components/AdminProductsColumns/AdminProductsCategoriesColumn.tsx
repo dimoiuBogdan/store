@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryModel } from "../../../../../common/types/types";
+import { CategoryModel } from "../../../../../../common/types/types";
 
 export default function AdminProductsCategoriesColumn({
   categories,

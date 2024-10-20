@@ -67,4 +67,19 @@ public class AdminProductsRepository : IAdminProductsRepository
 
         return productsDictionary.Values.ToList();
     }
+
+    public async Task<ProductModel> CreateProductAsync(ProductModel product)
+    {
+        const string sql = @"
+        INSERT INTO product (name, description, price, stock, status)
+        VALUES (@Name, @Description, @Price, @Stock, @Status)
+        RETURNING *;
+        ";
+
+        await using var connection = GetConnection();
+
+        var createdProduct = await connection.QuerySingleAsync<ProductModel>(sql, product);
+
+        return createdProduct;
+    }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using store_api.Store.Core.Services.IServices;
 using store_api.Store.Core.Dtos.AdminDtos;
+using store_api.Store.Core.Dtos.ProductDtos;
 
 namespace store_api.Store.Api.Controllers.Admin
 {
@@ -21,6 +22,14 @@ namespace store_api.Store.Api.Controllers.Admin
             var products = await _adminProductsService.GetAllProductsAsync();
 
             return Ok(products);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] CreateProductDto createProductDto)
+        {
+            var product = await _adminProductsService.CreateProductAsync(createProductDto);
+
+            return Ok(product);
         }
     }
 }

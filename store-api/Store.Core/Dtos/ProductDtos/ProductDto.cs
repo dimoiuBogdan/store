@@ -10,6 +10,8 @@ namespace store_api.Store.Core.Dtos.AdminDtos
 
         public required decimal Price { get; set; }
 
+        public required ProductStatus Status { get; set; }
+
         public required string Description { get; set; }
 
         public required List<ProductImageDto> ProductImages { get; set; }

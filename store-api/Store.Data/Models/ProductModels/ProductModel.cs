@@ -15,6 +15,12 @@ public class ProductModel
     [Description("sales_count")]
     public required string SalesCount { get; set; }
 
+    [Description("description")]
+    public required string Description { get; set; }
+
+    [Description("status")]
+    public required ProductStatus Status { get; set; }
+
     [Description("price")]
     public required decimal Price { get; set; }
 
@@ -33,3 +39,4 @@ public class ProductModel
 }
 
 
+// TODO: Replace isActive with status

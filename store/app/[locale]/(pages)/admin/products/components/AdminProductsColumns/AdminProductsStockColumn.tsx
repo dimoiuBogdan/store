@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../../../../../common/utils/utils";
+import { cn } from "../../../../../../common/utils/utils";
 
 export default function AdminProductsStockColumn({ stock }: { stock: number }) {
   return (

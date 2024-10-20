@@ -2,8 +2,8 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
-import PRImage from "../../../../../common/components/PrimeReact/PRImage";
-import type { AdminProductModel } from "../types/admin-products-table.types";
+import PRImage from "../../../../../../common/components/PrimeReact/PRImage";
+import type { AdminProductModel } from "../../types/admin-products-table.types";
 
 type Props = {
   rowData: AdminProductModel;

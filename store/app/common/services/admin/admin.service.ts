@@ -6,7 +6,6 @@ import type {
 import type { AdminLatestOrderModel } from "../../../[locale]/(pages)/admin/components/AdminSections/AdminLatestOrdersSection/types/admin-latest-orders-section.types";
 import type { AdminOverviewModel } from "../../../[locale]/(pages)/admin/components/AdminSections/AdminOverviewSection/types/admin-overview-section.types";
 import type { AdminBestCategoriesModel } from "../../../[locale]/(pages)/admin/components/AdminSections/AdminTopCategoriesSection/types/admin-best-categories-section.types";
-import type { AdminProductModel } from "../../../[locale]/(pages)/admin/products/types/admin-products-table.types";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/admin`;
 
@@ -114,24 +113,6 @@ const getOverview = async (): Promise<AdminOverviewModel | null> => {
   return overview;
 };
 
-const getProducts = async (): Promise<AdminProductModel[]> => {
-  const response = await fetch(`${BASE_URL}/products`, {
-    next: { revalidate: 3600, tags: ["admin-products"] },
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const products = await response.json();
-
-  if (!products || products.length === 0) {
-    return [];
-  }
-
-  return products;
-};
-
 const AdminService = {
   getBestProducts,
   getLatestOrders,
@@ -139,7 +120,6 @@ const AdminService = {
   getBestCategories,
   getLatestOrderProducts,
   getOverview,
-  getProducts,
 };
 
 export default AdminService;

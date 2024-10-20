@@ -9,16 +9,24 @@
   }
 
   ::-webkit-scrollbar-track {
-      background: theme('colors.background');
+    background: theme('colors.background');
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: theme("colors.primary");
-      border-radius: 20px;
+    border-radius: 20px;
     border: 3px solid theme("colors.background");
   }
 
   img {
     @apply select-none;
   }
+}
+
+.p-highlight {
+  @apply text-primary;
+}
+
+.p-checkbox-box[data-p-highlight="true"] {
+  @apply bg-primary;
 }

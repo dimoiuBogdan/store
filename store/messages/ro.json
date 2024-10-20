@@ -109,7 +109,8 @@
     },
     "products": {
       "title": "Produse",
-      "addNewProduct": "Adaugă un nou produs",
+      "addNewProduct": "Adaugă un produs nou",
+      "editProduct": "Editează produsul",
       "table": {
         "actions": {
           "clear": "Șterge",

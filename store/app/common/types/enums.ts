@@ -18,3 +18,8 @@ export enum UserStatus {
   SUSPENDED = 3,
 }
 
+export enum ProductStatus {
+  ACTIVE = 1,
+  PENDING = 2,
+  INACTIVE = 3,
+}
