@@ -37,7 +37,12 @@ export default function AdminSidebar() {
 
   return (
     <nav className="sticky top-0 flex h-screen flex-col p-2 py-4">
-      <h1 className="mb-8 px-4 text-2xl font-bold text-zinc-200">My Store</h1>
+      <Link
+        href="/"
+        className="mb-8 px-4 text-2xl font-bold text-zinc-200 transition-all hover:text-primary"
+      >
+        My Store
+      </Link>
       <ul className="flex flex-1 flex-col gap-y-3 overflow-y-auto text-sm font-medium text-zinc-200">
         {MENU_ITEMS.map((item) => (
           <li key={item.name}>

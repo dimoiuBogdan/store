@@ -18,17 +18,19 @@ type Props = {
   label?: string;
   loading?: boolean;
   min?: number;
+  multiple?: boolean;
   name: string;
   onChange: (value: any) => void;
   options?: SelectItem[];
   placeholder?: string;
+  pt?: any;
   required?: boolean;
   textarea?: boolean;
   timeOnly?: boolean;
   type?: HTMLInputTypeAttribute;
-  pt?: any;
+  value?: any;
   wrapperClassName?: string;
-  multiple?: boolean;
+  mode?: "currency" | "decimal";
 };
 
 const PRInput: FC<Props> = ({
@@ -51,6 +53,7 @@ const PRInput: FC<Props> = ({
   onChange,
   pt,
   multiple,
+  value,
 }) => {
   const [field, meta] = useField(name);
 
@@ -179,7 +182,7 @@ const PRInput: FC<Props> = ({
             maxFractionDigits={2}
             min={min}
             name={name}
-            value={field.value || null}
+            value={field.value || value || null}
             placeholder={placeholder}
             pt={{
               ...pt,
