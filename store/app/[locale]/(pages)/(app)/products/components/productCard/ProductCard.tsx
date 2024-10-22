@@ -52,7 +52,7 @@ export default function ProductCard({
           </span>
           <button
             aria-label="Add to cart"
-            className="rounded-full bg-primary/80 p-1.5 text-background transition-all hover:bg-primary/50 hover:text-primary group-hover:rotate-12"
+            className="rounded-full bg-primary/80 p-1.5 text-background transition-all hover:bg-primary/20 hover:text-primary group-hover:rotate-12"
           >
             <ShoppingCart size={22} />
           </button>
