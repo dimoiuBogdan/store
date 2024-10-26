@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Checkbox } from "primereact/checkbox";
+import PRCheckbox from "../../../../../../common/components/PrimeReact/Inputs/PRCheckbox";
 
 interface CategoryFilterProps {
   categories: string[];
@@ -33,24 +33,14 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
     <div className="space-y-2">
       {categories.map((category) => (
         <div key={category} className="flex items-center">
-          <Checkbox
+          <PRCheckbox
             inputId={`category-${category}`}
             name="category"
             value={category}
             onChange={() => handleCategoryChange(category)}
             checked={selectedCategories.includes(category)}
-            pt={{
-              box: {
-                className: "bg-zinc-700 shadow-sm shadow-zinc-500",
-              },
-            }}
+            label={category}
           />
-          <label
-            htmlFor={`category-${category}`}
-            className="ml-2 cursor-pointer transition-all hover:text-primary"
-          >
-            {category}
-          </label>
         </div>
       ))}
     </div>

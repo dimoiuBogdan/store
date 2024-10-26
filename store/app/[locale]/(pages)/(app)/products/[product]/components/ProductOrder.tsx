@@ -1,5 +1,5 @@
 import { Box, Minus, Plus, Star, Truck } from "lucide-react";
-import { InputNumber } from "primereact/inputnumber";
+import PRInputNumber from "../../../../../../common/components/PrimeReact/Inputs/PRInputNumber";
 import PRDropdown from "../../../../../../common/components/PrimeReact/PRDropdown";
 
 const ProductOrder = () => {
@@ -49,19 +49,7 @@ const ProductOrder = () => {
         <div>Quantity: </div>
         <div className="flex items-center gap-3">
           <Minus className="h-6 w-6 cursor-pointer rounded-full bg-primary p-1 text-background transition-all hover:bg-primary/20 hover:text-primary" />
-          <InputNumber
-            max={10}
-            min={1}
-            pt={{
-              input: {
-                root: {
-                  className:
-                    "bg-zinc-700 w-24 shadow-sm shadow-zinc-500 py-0.5 px-2",
-                },
-              },
-            }}
-            id="quantity"
-          />
+          <PRInputNumber max={10} min={1} id="quantity" />
           <Plus className="h-6 w-6 cursor-pointer rounded-full bg-primary p-1 text-background transition-all hover:bg-primary/20 hover:text-primary" />
         </div>
       </div>

@@ -3,9 +3,7 @@ import ProductDescription from "./components/ProductDescription";
 import ProductOrder from "./components/ProductOrder";
 import SimilarProducts from "./components/SimilarProducts";
 
-export const dynamic = "force-dynamic";
-
-const ProductPage = async ({ params }: { params: { product: string } }) => {
+const ProductPage = async () => {
   return (
     <div className="flex flex-col gap-24">
       <div className="flex items-center gap-8">

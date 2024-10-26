@@ -19,7 +19,6 @@ export default function PRDialog({
       headerClassName="bg-background text-zinc-200"
       contentClassName="bg-background text-zinc-200"
       closable
-      blockScroll
       dismissableMask
       onHide={onHide}
       {...props}

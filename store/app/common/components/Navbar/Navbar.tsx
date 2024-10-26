@@ -24,7 +24,7 @@ const Navbar: FC = () => {
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 bg-zinc-800 shadow-md transition-all">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">

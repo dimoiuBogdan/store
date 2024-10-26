@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { InputNumber } from "primereact/inputnumber";
 import { useEffect, useState } from "react";
+import PRInputNumber from "../../../../../../common/components/PrimeReact/Inputs/PRInputNumber";
 
 export function PriceRangeFilter() {
   const router = useRouter();
@@ -31,10 +31,13 @@ export function PriceRangeFilter() {
 
   return (
     <div className="flex flex-wrap items-center space-y-2">
-      <label htmlFor="minPrice" className="text-sm font-medium text-zinc-300">
+      <label
+        htmlFor="minPrice"
+        className="w-full text-sm font-medium text-zinc-300"
+      >
         Min Price
       </label>
-      <InputNumber
+      <PRInputNumber
         id="minPrice"
         value={priceRange[0]}
         onValueChange={(e) =>
@@ -43,18 +46,14 @@ export function PriceRangeFilter() {
         mode="currency"
         currency="USD"
         locale="en-US"
-        pt={{
-          input: {
-            root: {
-              className: "bg-zinc-700 shadow-sm shadow-zinc-500 py-0.5 px-2",
-            },
-          },
-        }}
       />
-      <label htmlFor="maxPrice" className="text-sm font-medium text-zinc-300">
+      <label
+        htmlFor="maxPrice"
+        className="w-full text-sm font-medium text-zinc-300"
+      >
         Max Price
       </label>
-      <InputNumber
+      <PRInputNumber
         id="maxPrice"
         value={priceRange[1]}
         onValueChange={(e) =>
@@ -63,13 +62,6 @@ export function PriceRangeFilter() {
         mode="currency"
         currency="USD"
         locale="en-US"
-        pt={{
-          input: {
-            root: {
-              className: "bg-zinc-700 shadow-sm shadow-zinc-500 py-0.5 px-2",
-            },
-          },
-        }}
       />
     </div>
   );

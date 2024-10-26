@@ -4,7 +4,7 @@ import type { RefObject } from "react";
 
 type Props = MenuProps & {
   items: MenuItem[];
-  menuRef: RefObject<Menu>;
+  menuRef: RefObject<Menu | null>;
 };
 
 export default function PRMenu({ items, menuRef }: Props) {

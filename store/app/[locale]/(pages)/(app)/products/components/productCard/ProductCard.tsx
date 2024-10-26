@@ -27,6 +27,7 @@ export default function ProductCard({
         <Image
           src={imageUrl}
           alt={name}
+          unoptimized
           width={500}
           height={500}
           className="h-80 w-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-110"

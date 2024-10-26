@@ -21,10 +21,10 @@
   img {
     @apply select-none;
   }
-}
 
-.p-highlight {
-  @apply text-primary;
+  .input {
+    @apply w-full rounded-md border-2 bg-zinc-700 px-2 py-1 text-zinc-200 shadow-sm transition-all hover:shadow-primary/40;
+  }
 }
 
 .ellipsis-two-lines {

@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 type Props = {
   children: React.ReactNode;
-  ref: React.RefObject<OverlayPanel>;
+  ref: React.RefObject<OverlayPanel | null>;
 } & OverlayPanelProps;
 
 const PROverlayPanel: FC<Props> = ({ children, ref, ...props }) => {
@@ -13,7 +13,7 @@ const PROverlayPanel: FC<Props> = ({ children, ref, ...props }) => {
       pt={{
         root: {
           className:
-            "mt-12 p-0 rounded-md bg-background shadow shadow-primary/30 overflow-hidden",
+            "mt-12 p-0 transform -translate-x-1/2 rounded-md bg-background shadow shadow-primary/30 overflow-hidden",
         },
         content: {
           className: "bg-background p-0 text-zinc-200",

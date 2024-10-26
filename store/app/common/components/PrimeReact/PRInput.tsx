@@ -6,7 +6,7 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
 import { SelectItem } from "primereact/selectitem";
-import { FC, HTMLInputTypeAttribute } from "react";
+import { FC, HTMLInputTypeAttribute, type JSX } from "react";
 import { cn } from "../../utils/utils";
 
 type Props = {

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { CategoryFilter } from "./CategoryFilter";
 import { FilterButton } from "./FilterButton";
 import { PriceRangeFilter } from "./PriceRangeFilter";
-import { RatingFilter } from "./RatingFilter";
 import { SortFilter } from "./SortFilter";
 
 const categories = ["Electronics", "Clothing", "Books", "Home & Garden"];
@@ -29,11 +28,6 @@ export function ProductFilter() {
           <fieldset>
             <legend className="mb-2 font-semibold">Price Range</legend>
             <PriceRangeFilter />
-          </fieldset>
-
-          <fieldset>
-            <legend className="mb-2 font-semibold">Rating</legend>
-            <RatingFilter />
           </fieldset>
 
           <fieldset>
