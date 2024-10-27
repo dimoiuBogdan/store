@@ -102,7 +102,7 @@ const PRInput: FC<Props> = ({
             onChange={(e) => {
               onChange(e.target.value);
             }}
-            panelClassName="overflow-hidden text-sm mt-2 shadow shadow-zinc-600 dropdown-panel"
+            panelClassName="overflow-hidden text-sm mt-2 shadow shadow-zinc-600"
             className={cn(
               "w-full rounded-md border border-zinc-600 bg-zinc-800 px-2 py-1 text-zinc-200 shadow-sm",
               {
@@ -126,7 +126,7 @@ const PRInput: FC<Props> = ({
                 className,
               },
             )}
-            panelClassName="overflow-hidden text-sm mt-2 shadow bg-background shadow-zinc-600 dropdown-panel"
+            panelClassName="overflow-hidden text-sm mt-2 shadow bg-background shadow-zinc-600"
             itemClassName="text-zinc-200 hover:bg-zinc-700 focus:bg-zinc-700 active:bg-zinc-700 bg-zinc-800 font-medium"
             panelHeaderTemplate={() => <></>}
             pt={{

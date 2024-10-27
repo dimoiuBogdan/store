@@ -1,5 +1,12 @@
 import { Column, type ColumnProps } from "primereact/column";
 
 export default function PRColumn(props: ColumnProps) {
-  return <Column {...props} />;
+  return (
+    <Column
+      showFilterMatchModes={false}
+      showFilterOperator={false}
+      showFilterMenuOptions={false}
+      {...props}
+    />
+  );
 }

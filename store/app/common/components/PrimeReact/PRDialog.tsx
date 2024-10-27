@@ -15,7 +15,7 @@ export default function PRDialog({
     <Dialog
       header={header}
       visible={visible}
-      className={cn("w-[75vw] max-w-screen-lg", className)}
+      className={cn("w-[75vw] max-w-screen-md", className)}
       headerClassName="bg-background text-zinc-200"
       contentClassName="bg-background text-zinc-200"
       closable

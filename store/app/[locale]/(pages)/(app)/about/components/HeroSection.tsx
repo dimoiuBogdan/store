@@ -14,10 +14,10 @@ const HeroSection: React.FC = () => {
         priority
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 p-4 text-white">
-        <h1 className="mb-4 text-center text-4xl font-bold md:text-5xl">
+        <h1 className="mb-4 text-center text-4xl font-bold">
           Accessorize Your Style
         </h1>
-        <p className="mb-8 text-center text-xl md:text-2xl">
+        <p className="mb-8 text-center text-xl">
           Crafting unique accessories that celebrate personal style
         </p>
         <Link

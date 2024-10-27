@@ -1,6 +1,6 @@
 import { Box, Minus, Plus, Star, Truck } from "lucide-react";
 import PRInputNumber from "../../../../../../common/components/PrimeReact/Inputs/PRInputNumber";
-import PRDropdown from "../../../../../../common/components/PrimeReact/PRDropdown";
+import PRDropdown from "../../../../../../common/components/PrimeReact/Inputs/PRDropdown";
 
 const ProductOrder = () => {
   return (

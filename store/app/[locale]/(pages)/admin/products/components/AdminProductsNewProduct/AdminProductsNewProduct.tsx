@@ -5,7 +5,11 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import AdminProductsNewProductPopup from "./AdminProductsNewProductPopup";
 
-export default function AdminProductsNewProduct() {
+type Props = {
+  product?: string;
+};
+
+export default function AdminProductsNewProduct({ product }: Props) {
   const router = useRouter();
   const t = useTranslations("admin.products");
 
@@ -13,7 +17,7 @@ export default function AdminProductsNewProduct() {
     const params = new URLSearchParams();
     params.set("product", "new");
 
-    router.push(`?${params.toString()}`);
+    router.replace(`?product=new`);
   };
 
   return (
@@ -25,7 +29,7 @@ export default function AdminProductsNewProduct() {
         <PlusIcon className="h-6 w-6" />
         <div>{t("addNewProduct")}</div>
       </div>
-      <AdminProductsNewProductPopup />
+      <AdminProductsNewProductPopup product={product} />
     </div>
   );
 }

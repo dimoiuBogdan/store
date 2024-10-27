@@ -3,8 +3,13 @@ import { ProductStatus } from "../../../../../../../../common/types/enums";
 import type { AdminProductsNewProduct } from "../../types/admin-products-new-product.types";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  description: Yup.string().required("Description is required"),
+  name: Yup.string()
+    .required("Name is required")
+    .min(3, "Name must be at least 3 characters")
+    .max(100, "Name cannot be longer than 100 characters"),
+  description: Yup.string()
+    .required("Description is required")
+    .max(1000, "Description cannot be longer than 1000 characters"),
   status: Yup.string()
     .oneOf(Object.values(ProductStatus).map((status) => status.toString()))
     .required("Status is required"),
@@ -25,8 +30,8 @@ const initialValues: AdminProductsNewProduct = {
   name: "",
   description: "",
   status: ProductStatus.PENDING,
-  price: 0,
-  stock: 0,
+  price: null,
+  stock: null,
   categories: [],
   images: [],
 };

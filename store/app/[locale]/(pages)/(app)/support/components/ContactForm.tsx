@@ -2,7 +2,7 @@
 
 import PRInputText from "@/app/common/components/PrimeReact/Inputs/PRInputText";
 import PRInputTextarea from "@/app/common/components/PrimeReact/Inputs/PRInputTextarea";
-import PRDropdown from "@/app/common/components/PrimeReact/PRDropdown";
+import PRDropdown from "@/app/common/components/PrimeReact/Inputs/PRDropdown";
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import React from "react";

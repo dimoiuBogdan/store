@@ -1,22 +1,23 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import PRConfirmationDialog from "../../../../../../common/components/PrimeReact/PRConfirmationDialog";
 import PRDialog from "../../../../../../common/components/PrimeReact/PRDialog";
 import AdminProductsNewProductForm from "./AdminProductsNewProductForm/AdminProductsNewProductForm";
 
-export default function AdminProductsNewProductPopup() {
+type Props = {
+  product?: string;
+};
+
+export default function AdminProductsNewProductPopup({ product }: Props) {
   const t = useTranslations("admin.products");
   const { replace } = useRouter();
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams();
 
   const [showQuitConfirmationModal, setShowQuitConfirmationModal] =
     useState<boolean>(false);
-
-  const productId = params.get("product");
 
   const handleHideNewProductPopup = () => {
     params.delete("product");
@@ -28,10 +29,13 @@ export default function AdminProductsNewProductPopup() {
     <>
       <PRDialog
         onHide={() => setShowQuitConfirmationModal(true)}
-        visible={!!productId}
-        header={productId === "new" ? t("addNewProduct") : t("editProduct")}
+        visible={!!product}
+        header={product === "new" ? t("addNewProduct") : t("editProduct")}
       >
-        <AdminProductsNewProductForm onHide={handleHideNewProductPopup} />
+        <AdminProductsNewProductForm
+          product={product}
+          onHide={handleHideNewProductPopup}
+        />
       </PRDialog>
 
       <PRConfirmationDialog

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import PRDropdown from "../../../../../../common/components/PrimeReact/PRDropdown";
+import PRDropdown from "../../../../../../common/components/PrimeReact/Inputs/PRDropdown";
 
 interface SortOption {
   label: string;

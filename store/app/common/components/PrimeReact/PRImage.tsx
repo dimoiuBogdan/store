@@ -16,7 +16,7 @@ export default function PRImage({
       className="h-20 w-20 overflow-hidden rounded-md shadow"
       pt={{
         toolbar: {
-          className: "text-purple-500",
+          className: "text-primary",
         },
         image: {
           className: "h-20 w-20 object-cover object-center",

@@ -1,5 +1,9 @@
 "use client";
 
+import PRColumn from "@/app/common/components/PrimeReact/PRColumn";
+import PRDataTable from "@/app/common/components/PrimeReact/PRDataTable";
+import AdminProductsService from "@/app/common/services/admin/admin-products.service";
+import { cn } from "@/app/common/utils/utils";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
@@ -10,10 +14,6 @@ import {
   type ColumnProps,
 } from "primereact/column";
 import type { DataTableFilterMeta } from "primereact/datatable";
-import PRColumn from "../../../../common/components/PrimeReact/PRColumn";
-import PRDataTable from "../../../../common/components/PrimeReact/PRDataTable";
-import AdminProductsService from "../../../../common/services/admin/admin-products.service";
-import { cn } from "../../../../common/utils/utils";
 import styles from "./AdminProductsTable.module.css";
 import AdminProductsActionsColumn from "./components/AdminProductsColumns/AdminProductsActionsColumn";
 import AdminProductsActiveColumn from "./components/AdminProductsColumns/AdminProductsActiveColumn";
@@ -139,9 +139,7 @@ export default function AdminProductsTable() {
       filters={FILTERS}
       dataKey="productId"
       scrollHeight="calc(100vh - 20.5rem)"
-      tableClassName="h-[calc(100vh-20.5rem)]"
       emptyMessage="No products found."
-      className="overflow-hidden rounded-lg text-sm shadow shadow-primary/20"
     >
       {COLUMNS.map((column) => (
         <PRColumn
@@ -177,7 +175,6 @@ export default function AdminProductsTable() {
           <AdminProductsActionsColumn productId={data.productId.toString()} />
         )}
         exportable={false}
-        style={{ width: "15%" }}
       />
     </PRDataTable>
   );

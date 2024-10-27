@@ -36,12 +36,12 @@ export default function AdminProductsActionsColumn({ productId }: Props) {
     <div className="flex gap-x-4">
       <EditIcon
         onClick={() => handleEditProduct(productId)}
-        className="h-6 w-6 cursor-pointer text-yellow-500"
+        className="h-5 w-5 cursor-pointer text-yellow-500"
       />
       <div>
         <TrashIcon
           onClick={() => handleDeleteProduct(productId)}
-          className="h-6 w-6 cursor-pointer text-red-500"
+          className="h-5 w-5 cursor-pointer text-red-500"
         />
         <PRConfirmationDialog
           visible={showQuitConfirmationModal}
