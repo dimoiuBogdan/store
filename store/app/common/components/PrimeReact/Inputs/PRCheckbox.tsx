@@ -1,12 +1,13 @@
 import { cn } from "@/app/common/utils/utils";
 import { Checkbox, type CheckboxProps } from "primereact/checkbox";
+import type { JSX } from "react";
 
 type Props = CheckboxProps & {
   label: string;
   error?: boolean;
 };
 
-const PRCheckbox = ({ label, error, ...props }: Props) => {
+const PRCheckbox = ({ label, error, ...props }: Props): JSX.Element => {
   return (
     <div className="flex items-center">
       <Checkbox

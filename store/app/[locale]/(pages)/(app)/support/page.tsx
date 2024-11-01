@@ -8,7 +8,7 @@ import StoreLocation from "./components/StoreLocation";
 
 const SupportPage: React.FC = () => {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <HeroSection />
       <ContactOptions />
       <FAQSection />

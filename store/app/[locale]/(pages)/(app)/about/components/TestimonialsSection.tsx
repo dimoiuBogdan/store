@@ -1,7 +1,7 @@
 "use client";
 
 import { Carousel } from "primereact/carousel";
-import React from "react";
+import React, { type JSX } from "react";
 
 interface Testimonial {
   quote: string;
@@ -30,8 +30,8 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-const TestimonialsSection: React.FC = () => {
-  const testimonialTemplate = (testimonial: Testimonial) => {
+const TestimonialsSection: React.FC = (): JSX.Element => {
+  const testimonialTemplate = (testimonial: Testimonial): JSX.Element => {
     return (
       <div className="rounded-lg bg-white p-6 text-center shadow-lg">
         <p className="mb-4 italic text-gray-600">

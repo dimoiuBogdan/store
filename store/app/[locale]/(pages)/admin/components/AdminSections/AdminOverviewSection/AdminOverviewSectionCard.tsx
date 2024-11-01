@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import { cn } from "../../../../../../common/utils/utils";
+import { cn } from "@/app/common/utils/utils";
+import type { JSX, ReactNode } from "react";
 
 interface AdminOverviewSectionCardProps {
   title: string;
@@ -15,7 +15,7 @@ export default function AdminOverviewSectionCard({
   currency,
   icon,
   color,
-}: AdminOverviewSectionCardProps) {
+}: AdminOverviewSectionCardProps): JSX.Element {
   const colorClasses = {
     green: "bg-green-100 text-green-500",
     yellow: "bg-yellow-100 text-yellow-500",

@@ -1,7 +1,8 @@
 "use client";
 
+import PRDropdown from "@/app/common/components/PrimeReact/Inputs/PRDropdown";
 import { useRouter, useSearchParams } from "next/navigation";
-import PRDropdown from "../../../../../../common/components/PrimeReact/Inputs/PRDropdown";
+import type { JSX } from "react";
 
 interface SortOption {
   label: string;
@@ -12,13 +13,13 @@ interface SortFilterProps {
   sortOptions: SortOption[];
 }
 
-export function SortFilter({ sortOptions }: SortFilterProps) {
+export function SortFilter({ sortOptions }: SortFilterProps): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const selectedSort = searchParams.get("sort") || null;
 
-  const handleSortChange = (value: string | null) => {
+  const handleSortChange = (value: string | null): void => {
     const params = new URLSearchParams(searchParams);
 
     if (value) {

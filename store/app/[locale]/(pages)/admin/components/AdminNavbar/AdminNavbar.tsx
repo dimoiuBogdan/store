@@ -3,9 +3,10 @@
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import type { JSX } from "react";
 import AdminNavbarHelper from "./helpers/admin-navbar.helper";
 
-export default function AdminNavbar() {
+export default function AdminNavbar(): JSX.Element {
   const t = useTranslations("admin");
   const pathname = usePathname();
   const { getTranslatedTitle } = AdminNavbarHelper;

@@ -1,32 +1,35 @@
 "use client";
 
+import PRColumn from "@/app/common/components/PrimeReact/PRColumn";
+import PRDataTable from "@/app/common/components/PrimeReact/PRDataTable";
+import PRImage from "@/app/common/components/PrimeReact/PRImage";
+import { cn } from "@/app/common/utils/utils";
 import { Box, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Tooltip } from "primereact/tooltip";
-import PRColumn from "../../../../../../common/components/PrimeReact/PRColumn";
-import PRDataTable from "../../../../../../common/components/PrimeReact/PRDataTable";
-import PRImage from "../../../../../../common/components/PrimeReact/PRImage";
-import { cn } from "../../../../../../common/utils/utils";
-import { AdminBestProductModel } from "./types/admin-best-products-section.types";
+import type { JSX } from "react";
+import type { AdminBestProductModel } from "./types/admin-best-products-section.types";
 
 type Props = {
   bestProducts: AdminBestProductModel[];
 };
 
-export default function AdminBestProductsSection({ bestProducts }: Props) {
+export default function AdminBestProductsSection({
+  bestProducts,
+}: Props): JSX.Element {
   const t = useTranslations("admin.overview.bestSellingProducts");
   const tCommon = useTranslations("common");
 
-  const imageBodyTemplate = (rowData: AdminBestProductModel) => {
+  const imageBodyTemplate = (rowData: AdminBestProductModel): JSX.Element => {
     return <PRImage src={rowData.productImage} alt={rowData.name} />;
   };
 
-  const priceBodyTemplate = (rowData: AdminBestProductModel) => {
+  const priceBodyTemplate = (rowData: AdminBestProductModel): JSX.Element => {
     return <span className="font-bold">{rowData.price}</span>;
   };
 
-  const stockBodyTemplate = (rowData: AdminBestProductModel) => {
+  const stockBodyTemplate = (rowData: AdminBestProductModel): JSX.Element => {
     const stockColor = rowData.stock <= 10 ? "text-red-500" : "";
 
     return <span className={cn("font-bold", stockColor)}>{rowData.stock}</span>;
@@ -42,7 +45,7 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
     </div>
   );
 
-  const idBodyTemplate = (rowData: AdminBestProductModel) => {
+  const idBodyTemplate = (rowData: AdminBestProductModel): JSX.Element => {
     return (
       <div className="cursor-pointer font-bold text-primary">
         {rowData.productId}
@@ -50,7 +53,9 @@ export default function AdminBestProductsSection({ bestProducts }: Props) {
     );
   };
 
-  const categoryBodyTemplate = (rowData: AdminBestProductModel) => {
+  const categoryBodyTemplate = (
+    rowData: AdminBestProductModel,
+  ): JSX.Element => {
     return (
       <div>
         {rowData.categories.map((category) => category.name).join(" / ")}

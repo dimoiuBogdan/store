@@ -52,13 +52,7 @@ const ContactOptions: React.FC = () => {
           icon={<MessageCircle className="text-primary" />}
           title="Live Chat"
           content={
-            <div
-              className="cursor-pointer text-primary hover:underline"
-              onClick={() => {
-                // Implement live chat functionality
-                console.log("Live chat clicked");
-              }}
-            >
+            <div className="cursor-pointer text-primary hover:underline">
               Start Chat
             </div>
           }

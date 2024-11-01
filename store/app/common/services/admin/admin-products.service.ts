@@ -1,4 +1,4 @@
-import type { AdminProductModel } from "../../../[locale]/(pages)/admin/products/types/admin-products-table.types";
+import type { AdminProductModel } from "@/app/[locale]/(pages)/admin/products/types/admin-products-table.types";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/admin/products`;
 

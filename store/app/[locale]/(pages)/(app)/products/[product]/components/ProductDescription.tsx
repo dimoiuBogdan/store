@@ -1,4 +1,6 @@
-const ProductDescription = () => {
+import type { JSX } from "react";
+
+const ProductDescription = (): JSX.Element => {
   const description = `
     <p>Introducing our revolutionary <strong>XYZ-3000</strong> - the pinnacle of innovation in personal technology!</p>
     <br />

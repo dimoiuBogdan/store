@@ -4,11 +4,10 @@ import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative h-[60vh] min-h-[400px] w-full">
+    <section className="relative h-[60vh] min-h-[500px] w-full overflow-hidden rounded-md">
       <Image
         src="https://images.unsplash.com/photo-1617719446461-b367b33450f6?q=80&w=3465&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Stylish accessories"
-        unoptimized
         layout="fill"
         objectFit="cover"
         priority

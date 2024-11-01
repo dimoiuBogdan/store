@@ -1,5 +1,6 @@
 import { cn } from "@/app/common/utils/utils";
 import { InputNumber, type InputNumberProps } from "primereact/inputnumber";
+import type { JSX } from "react";
 
 type PRInputNumberProps = {
   className?: string;
@@ -12,7 +13,7 @@ export default function PRInputNumber({
   error,
   label,
   ...props
-}: PRInputNumberProps) {
+}: PRInputNumberProps): JSX.Element {
   return (
     <>
       {label ? (
@@ -28,7 +29,7 @@ export default function PRInputNumber({
         pt={{
           input: {
             root: {
-              className: "bg-zinc-700 shadow-none",
+              className: "bg-zinc-700 shadow-none w-full",
             },
           },
         }}

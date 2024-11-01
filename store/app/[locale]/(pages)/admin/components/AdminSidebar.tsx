@@ -1,5 +1,7 @@
 "use client";
 
+import LanguageSwitcher from "@/app/common/components/LanguageSwitcher";
+import { cn, getCurrentPathWithoutLang } from "@/app/common/utils/utils";
 import {
   Clipboard,
   HelpCircle,
@@ -11,9 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
-import LanguageSwitcher from "../../../../common/components/LanguageSwitcher";
-import { cn, getCurrentPathWithoutLang } from "../../../../common/utils/utils";
+import { type JSX, type ReactNode } from "react";
 
 type MenuItemType = {
   name: string;
@@ -21,7 +21,7 @@ type MenuItemType = {
   href: string;
 };
 
-export default function AdminSidebar() {
+export default function AdminSidebar(): JSX.Element {
   const t = useTranslations("admin.sidebar");
 
   const pathname = getCurrentPathWithoutLang(usePathname());

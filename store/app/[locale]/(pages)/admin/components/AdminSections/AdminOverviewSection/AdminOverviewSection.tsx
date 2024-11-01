@@ -1,3 +1,4 @@
+import AdminService from "@/app/common/services/admin/admin.service";
 import {
   ChartColumnIncreasing,
   DollarSign,
@@ -6,11 +7,11 @@ import {
   UserPlus,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import AdminService from "../../../../../../common/services/admin/admin.service";
+import type { JSX } from "react";
 import AdminOverviewSectionCard from "./AdminOverviewSectionCard";
 import AdminOverviewSectionError from "./error";
 
-export default async function AdminOverviewSection() {
+export default async function AdminOverviewSection(): Promise<JSX.Element> {
   try {
     const { getOverview } = AdminService;
 

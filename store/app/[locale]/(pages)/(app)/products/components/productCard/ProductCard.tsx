@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { JSX } from "react";
 import ProductCardVariants from "./ProductCardVariants";
 
 type Props = {
@@ -17,7 +18,7 @@ export default function ProductCard({
   imageUrl,
   name,
   price,
-}: Props) {
+}: Props): JSX.Element {
   return (
     <Link
       href={`/products/${id}`}
@@ -27,7 +28,6 @@ export default function ProductCard({
         <Image
           src={imageUrl}
           alt={name}
-          unoptimized
           width={500}
           height={500}
           className="h-80 w-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-110"

@@ -11,7 +11,7 @@ import type { AdminProductsNewProduct } from "../types/admin-products-new-produc
 import AdminProductsNewProductFormHelper from "./helpers/admin-products-new-product-form.helper";
 
 const STATUS_OPTIONS = (
-                    Object.keys(ProductStatus) as Array<keyof typeof ProductStatus>
+  Object.keys(ProductStatus) as Array<keyof typeof ProductStatus>
 )
   .filter((key) => isNaN(Number(key)))
   .map((key) => ({
@@ -34,7 +34,7 @@ const AdminProductsNewProductForm: FC<Props> = ({ onHide, product }) => {
   const { validationSchema, initialValues, getFormData } =
     AdminProductsNewProductFormHelper;
 
-  const getInitialValues = () => {
+  const getInitialValues = (): AdminProductsNewProduct => {
     if (product !== "new") {
       const product: AdminProductsNewProduct = {
         name: "Product 1",
@@ -55,7 +55,7 @@ const AdminProductsNewProductForm: FC<Props> = ({ onHide, product }) => {
   const handleSubmit = async (
     values: AdminProductsNewProduct,
     setSubmitting: (isSubmitting: boolean) => void,
-  ) => {
+  ): Promise<void> => {
     const formData = getFormData(values);
 
     try {
@@ -179,16 +179,16 @@ const AdminProductsNewProductForm: FC<Props> = ({ onHide, product }) => {
 
       <div className="flex justify-center gap-8">
         <Button
-          type="submit"
-          label="Submit"
-          className="mt-4 bg-primary px-8 py-2 text-sm font-medium text-background transition-all hover:bg-primary/80 disabled:cursor-default disabled:opacity-50"
-          disabled={formik.isSubmitting}
-        />
-        <Button
           type="button"
           label="Cancel"
           className="mt-4 bg-red-400 px-8 py-2 text-sm font-medium text-background transition-all hover:bg-red-400/80 disabled:cursor-default disabled:opacity-50"
           onClick={onHide}
+          disabled={formik.isSubmitting}
+        />
+        <Button
+          type="submit"
+          label="Submit"
+          className="mt-4 bg-primary px-8 py-2 text-sm font-medium text-background transition-all hover:bg-primary/80 disabled:cursor-default disabled:opacity-50"
           disabled={formik.isSubmitting}
         />
       </div>

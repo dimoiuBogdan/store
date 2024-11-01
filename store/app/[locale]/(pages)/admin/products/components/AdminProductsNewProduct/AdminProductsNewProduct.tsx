@@ -3,21 +3,24 @@
 import { PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import type { JSX } from "react";
 import AdminProductsNewProductPopup from "./AdminProductsNewProductPopup";
 
 type Props = {
   product?: string;
 };
 
-export default function AdminProductsNewProduct({ product }: Props) {
+export default function AdminProductsNewProduct({
+  product,
+}: Props): JSX.Element {
   const router = useRouter();
   const t = useTranslations("admin.products");
 
-  const showNewProductPopup = () => {
+  const showNewProductPopup = (): void => {
     const params = new URLSearchParams();
     params.set("product", "new");
 
-    router.replace(`?product=new`);
+    router.replace(`?${params.toString()}`);
   };
 
   return (

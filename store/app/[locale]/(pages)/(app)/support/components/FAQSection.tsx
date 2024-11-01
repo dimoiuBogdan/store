@@ -1,5 +1,5 @@
 import { Accordion, AccordionTab } from "primereact/accordion";
-import React from "react";
+import React, { type JSX } from "react";
 
 const faqs = [
   {
@@ -20,16 +20,16 @@ const faqs = [
   // Add more FAQs as needed
 ];
 
-const FAQSection: React.FC = () => {
+const FAQSection: React.FC = (): JSX.Element => {
   return (
     <section className="mb-12">
       <h2 className="mb-6 text-3xl font-semibold">
         Frequently Asked Questions
       </h2>
       <Accordion className="space-y-6">
-        {faqs.map((faq, index) => (
+        {faqs.map((faq) => (
           <AccordionTab
-            key={index}
+            key={faq.question}
             header={faq.question}
             className="text-zinc-800"
           >

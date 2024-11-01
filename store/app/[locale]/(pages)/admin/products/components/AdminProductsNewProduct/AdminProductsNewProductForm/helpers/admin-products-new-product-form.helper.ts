@@ -1,5 +1,5 @@
+import { ProductStatus } from "@/app/common/types/enums";
 import * as Yup from "yup";
-import { ProductStatus } from "../../../../../../../../common/types/enums";
 import type { AdminProductsNewProduct } from "../../types/admin-products-new-product.types";
 
 const validationSchema = Yup.object().shape({
@@ -36,7 +36,7 @@ const initialValues: AdminProductsNewProduct = {
   images: [],
 };
 
-const getFormData = (newProduct: AdminProductsNewProduct) => {
+const getFormData = (newProduct: AdminProductsNewProduct): FormData => {
   const formData = new FormData();
 
   formData.append("name", newProduct.name);

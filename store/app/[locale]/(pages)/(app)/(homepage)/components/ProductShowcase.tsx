@@ -1,7 +1,7 @@
 "use client";
 
-import { Carousel } from "primereact/carousel";
-import React from "react";
+import { Carousel, type CarouselResponsiveOption } from "primereact/carousel";
+import React, { type JSX } from "react";
 import ProductCard from "../../products/components/ProductCard/ProductCard";
 
 const products = [
@@ -40,23 +40,42 @@ const products = [
 ];
 
 const ProductShowcase: React.FC = () => {
-  const productTemplate = (product: (typeof products)[0]) => {
+  const responsiveOptions: CarouselResponsiveOption[] = [
+    {
+      breakpoint: "1024px",
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "768px",
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "480px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+
+  const productTemplate = (product: (typeof products)[0]): JSX.Element => {
     return (
-      <div className="p-2">
+      <div className="md:p-2">
         <ProductCard {...product} />
       </div>
     );
   };
 
   return (
-    <section className="py-12">
+    <section className="pb-20">
       <h2 className="mb-8 text-center text-3xl font-bold">Featured Products</h2>
       <Carousel
         value={products}
-        numScroll={1}
+        showIndicators={false}
         numVisible={3}
-        circular
+        responsiveOptions={responsiveOptions}
         autoplayInterval={5000}
+        circular
         itemTemplate={productTemplate}
       />
     </section>

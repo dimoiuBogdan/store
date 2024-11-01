@@ -1,12 +1,13 @@
+import type { JSX } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 
-const SimilarProducts = () => {
+const SimilarProducts = (): JSX.Element => {
   return (
     <div className="flex flex-col gap-4">
       <h3 className="mb-12 text-center text-4xl font-semibold">
         Similar Products
       </h3>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
             key={index}

@@ -1,8 +1,8 @@
 "use client";
 
+import PRDropdown from "@/app/common/components/PrimeReact/Inputs/PRDropdown";
 import PRInputText from "@/app/common/components/PrimeReact/Inputs/PRInputText";
 import PRInputTextarea from "@/app/common/components/PrimeReact/Inputs/PRInputTextarea";
-import PRDropdown from "@/app/common/components/PrimeReact/Inputs/PRDropdown";
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import React from "react";
@@ -30,13 +30,11 @@ const ContactForm: React.FC = () => {
         initialValues={{ name: "", email: "", subject: "", message: "" }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          // Handle form submission
-          console.log(values);
           setSubmitting(false);
         }}
       >
         {({ errors, touched, isSubmitting }) => (
-          <Form className="rounded-lg bg-zinc-800 p-6 text-zinc-200 shadow-lg">
+          <Form className="rounded-lg bg-zinc-800 p-4 text-zinc-200 shadow-lg md:p-8">
             <div className="mb-4">
               <label htmlFor="name" className="mb-2 block text-zinc-200">
                 Name

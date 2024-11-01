@@ -1,8 +1,9 @@
+import { cn } from "@/app/common/utils/utils";
 import {
   type InputTextareaProps,
   InputTextarea,
 } from "primereact/inputtextarea";
-import { cn } from "../../../utils/utils";
+import type { JSX } from "react";
 
 type PRInputTextareaProps = InputTextareaProps & {
   error?: boolean;
@@ -14,7 +15,7 @@ const PRInputTextarea = ({
   error,
   label,
   ...props
-}: PRInputTextareaProps) => {
+}: PRInputTextareaProps): JSX.Element => {
   return (
     <>
       {label ? (

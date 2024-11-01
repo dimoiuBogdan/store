@@ -1,15 +1,16 @@
 "use client";
 
+import PRColumn from "@/app/common/components/PrimeReact/PRColumn";
+import PRDataTable from "@/app/common/components/PrimeReact/PRDataTable";
+import PRImage from "@/app/common/components/PrimeReact/PRImage";
+import AdminService from "@/app/common/services/admin/admin.service";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import PRColumn from "../../../../../../../common/components/PrimeReact/PRColumn";
-import PRDataTable from "../../../../../../../common/components/PrimeReact/PRDataTable";
-import PRImage from "../../../../../../../common/components/PrimeReact/PRImage";
-import AdminService from "../../../../../../../common/services/admin/admin.service";
+import type { JSX } from "react";
 import type { AdminOrderedProductModel } from "./types/admin-latest-orders-details-popup.types";
 
-export default function AdminLatestOrdersDetailsPopupProducts() {
+export default function AdminLatestOrdersDetailsPopupProducts(): JSX.Element {
   const t = useTranslations("admin.overview.orderDetails.table");
   const locale = useLocale();
 
@@ -38,11 +39,15 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
     return <div>No data</div>;
   }
 
-  const imageBodyTemplate = (rowData: AdminOrderedProductModel) => {
+  const imageBodyTemplate = (
+    rowData: AdminOrderedProductModel,
+  ): JSX.Element => {
     return <PRImage src={rowData.productImage} alt={rowData.name} />;
   };
 
-  const totalBodyTemplate = (rowData: AdminOrderedProductModel) => {
+  const totalBodyTemplate = (
+    rowData: AdminOrderedProductModel,
+  ): JSX.Element => {
     return (
       <div className="font-semibold text-primary">
         {rowData.total.toLocaleString(locale)}
@@ -50,7 +55,9 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
     );
   };
 
-  const categoriesBodyTemplate = (rowData: AdminOrderedProductModel) => {
+  const categoriesBodyTemplate = (
+    rowData: AdminOrderedProductModel,
+  ): JSX.Element => {
     return (
       <div>
         {rowData.categories.map((category) => category.name).join(" / ")}
@@ -58,17 +65,14 @@ export default function AdminLatestOrdersDetailsPopupProducts() {
     );
   };
 
-  const priceBodyTemplate = (rowData: AdminOrderedProductModel) => {
+  const priceBodyTemplate = (
+    rowData: AdminOrderedProductModel,
+  ): JSX.Element => {
     return <div>{rowData.price.toLocaleString(locale)}</div>;
   };
 
   return (
-    <PRDataTable
-      value={orderedProductsData}
-      className="mt-8"
-      size="small"
-      tableClassName="h-[400px]"
-    >
+    <PRDataTable value={orderedProductsData} className="mt-8" size="small">
       <PRColumn field="productId" header={t("id")} />
       <PRColumn field="name" header={t("name")} />
       <PRColumn field="price" header={t("price")} body={priceBodyTemplate} />

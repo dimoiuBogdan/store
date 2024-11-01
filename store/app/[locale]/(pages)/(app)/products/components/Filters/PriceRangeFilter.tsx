@@ -1,10 +1,10 @@
 "use client";
 
+import PRInputNumber from "@/app/common/components/PrimeReact/Inputs/PRInputNumber";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import PRInputNumber from "../../../../../../common/components/PrimeReact/Inputs/PRInputNumber";
+import { useEffect, useState, type JSX } from "react";
 
-export function PriceRangeFilter() {
+export function PriceRangeFilter(): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
@@ -18,7 +18,7 @@ export function PriceRangeFilter() {
     }
   }, [searchParams]);
 
-  const handlePriceChange = (value: [number, number]) => {
+  const handlePriceChange = (value: [number, number]): void => {
     setPriceRange(value);
 
     const params = new URLSearchParams(searchParams);

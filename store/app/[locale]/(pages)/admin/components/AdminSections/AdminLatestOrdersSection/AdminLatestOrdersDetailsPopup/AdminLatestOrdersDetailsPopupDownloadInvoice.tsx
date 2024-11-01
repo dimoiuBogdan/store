@@ -1,7 +1,7 @@
 import { File } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-export default function AdminLatestOrdersDetailsPopupDownloadInvoice() {
+import type { JSX } from "react";
+export default function AdminLatestOrdersDetailsPopupDownloadInvoice(): JSX.Element {
   const t = useTranslations("admin.overview.orderDetails.actions");
 
   return (

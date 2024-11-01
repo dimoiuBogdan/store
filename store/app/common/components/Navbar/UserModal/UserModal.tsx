@@ -1,10 +1,10 @@
 import { User } from "lucide-react";
 import Link from "next/link";
-import { OverlayPanel } from "primereact/overlaypanel";
-import { useRef } from "react";
+import type { OverlayPanel } from "primereact/overlaypanel";
+import { useRef, type JSX } from "react";
 import PROverlayPanel from "../../PrimeReact/PROverlayPanel";
 
-const UserModal = () => {
+const UserModal = (): JSX.Element => {
   const op = useRef<OverlayPanel>(null);
 
   return (
@@ -18,7 +18,7 @@ const UserModal = () => {
           <p className="text-xs">
             Access your account so that you can manage your orders
           </p>
-          <div className="mx-auto w-full border-b border-primary/40"></div>
+          <div className="mx-auto w-full border-b border-primary/40" />
           <div className="flex gap-4">
             <Link
               href="/login"

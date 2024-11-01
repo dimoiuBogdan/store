@@ -14,6 +14,7 @@ import {
   type ColumnProps,
 } from "primereact/column";
 import type { DataTableFilterMeta } from "primereact/datatable";
+import type { JSX } from "react";
 import styles from "./AdminProductsTable.module.css";
 import AdminProductsActionsColumn from "./components/AdminProductsColumns/AdminProductsActionsColumn";
 import AdminProductsActiveColumn from "./components/AdminProductsColumns/AdminProductsActiveColumn";
@@ -26,7 +27,7 @@ import AdminProductsFilterApply from "./components/AdminProductsFilter/AdminProd
 import AdminProductsFilterClear from "./components/AdminProductsFilter/AdminProductsFilterClear";
 import type { AdminProductModel } from "./types/admin-products-table.types";
 
-export default function AdminProductsTable() {
+export default function AdminProductsTable(): JSX.Element {
   const t = useTranslations("admin.products.table");
 
   const FILTERS: DataTableFilterMeta = {
@@ -148,7 +149,7 @@ export default function AdminProductsTable() {
             typeof column.body === "function" ? (
               column.body(data, options)
             ) : (
-              <>{data[column.field as keyof AdminProductModel]}</>
+              <>{String(data[column.field as keyof AdminProductModel])}</>
             )
           }
           pt={{

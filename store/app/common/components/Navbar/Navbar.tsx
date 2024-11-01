@@ -23,7 +23,7 @@ const Navbar: FC = () => {
   const currentPath = getCurrentPathWithoutLang(pathname);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 bg-zinc-800 shadow-md transition-all">
+    <nav className="fixed left-0 right-0 top-0 z-50 bg-zinc-800 px-2 shadow-md transition-all">
       <div className="container mx-auto">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}

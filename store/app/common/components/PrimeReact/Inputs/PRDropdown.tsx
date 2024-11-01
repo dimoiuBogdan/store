@@ -1,5 +1,6 @@
+import { cn } from "@/app/common/utils/utils";
 import { Dropdown, type DropdownProps } from "primereact/dropdown";
-import { cn } from "../../../utils/utils";
+import type { JSX } from "react";
 
 type PRDropdownProps = {
   className?: string;
@@ -7,7 +8,12 @@ type PRDropdownProps = {
   label?: string;
 } & DropdownProps;
 
-const PRDropdown = ({ className, error, label, ...props }: PRDropdownProps) => {
+const PRDropdown = ({
+  className,
+  error,
+  label,
+  ...props
+}: PRDropdownProps): JSX.Element => {
   return (
     <>
       {label ? (

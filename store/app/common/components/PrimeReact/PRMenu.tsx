@@ -1,13 +1,13 @@
 import { Menu, type MenuProps } from "primereact/menu";
 import type { MenuItem } from "primereact/menuitem";
-import type { RefObject } from "react";
+import type { JSX, RefObject } from "react";
 
 type Props = MenuProps & {
   items: MenuItem[];
   menuRef: RefObject<Menu | null>;
 };
 
-export default function PRMenu({ items, menuRef }: Props) {
+export default function PRMenu({ items, menuRef }: Props): JSX.Element {
   return (
     <Menu
       className="bg-background text-sm"

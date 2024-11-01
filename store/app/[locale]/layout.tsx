@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import type { JSX } from "react";
 
 export default async function LocaleLayout({
   children,
@@ -7,7 +8,7 @@ export default async function LocaleLayout({
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-}>) {
+}>): Promise<JSX.Element> {
   const { locale } = await params;
 
   unstable_setRequestLocale(locale);

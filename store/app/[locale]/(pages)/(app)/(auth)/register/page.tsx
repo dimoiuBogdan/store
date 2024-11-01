@@ -6,9 +6,10 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import * as Yup from "yup";
+import type { JSX } from "react";
+import { boolean, object, ref, string } from "yup";
 
-const RegisterPage = () => {
+const RegisterPage = (): JSX.Element => {
   const formik = useFormik({
     initialValues: {
       fullName: "",
@@ -17,20 +18,20 @@ const RegisterPage = () => {
       confirmPassword: "",
       agreeToTerms: false,
     },
-    validationSchema: Yup.object({
-      fullName: Yup.string()
+    validationSchema: object({
+      fullName: string()
         .required("Full Name is required")
         .min(4, "Full Name must be at least 4 characters"),
-      email: Yup.string()
+      email: string()
         .email("Invalid email address")
         .required("Email is required"),
-      password: Yup.string()
+      password: string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), undefined], "Passwords must match")
+      confirmPassword: string()
+        .oneOf([ref("password"), undefined], "Passwords must match")
         .required("Confirm Password is required"),
-      agreeToTerms: Yup.boolean().oneOf([true], "You must agree to the terms"),
+      agreeToTerms: boolean().oneOf([true], "You must agree to the terms"),
     }),
     onSubmit: (values) => {
       console.log("Register form submitted", values);

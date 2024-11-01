@@ -1,4 +1,5 @@
 import { Image } from "primereact/image";
+import type { JSX } from "react";
 
 export default function PRImage({
   src,
@@ -6,8 +7,7 @@ export default function PRImage({
 }: {
   src: string;
   alt: string;
-  className?: string;
-}) {
+}): JSX.Element {
   return (
     <Image
       src={src}

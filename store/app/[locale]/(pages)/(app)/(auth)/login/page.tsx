@@ -6,24 +6,25 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import * as Yup from "yup";
+import type { JSX } from "react";
+import { object, string } from "yup";
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
       rememberMe: false,
     },
-    validationSchema: Yup.object({
-      email: Yup.string()
+    validationSchema: object({
+      email: string()
         .email("Invalid email address")
         .required("Email is required"),
-      password: Yup.string()
+      password: string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values): void => {
       console.log("Login form submitted", values);
     },
   });

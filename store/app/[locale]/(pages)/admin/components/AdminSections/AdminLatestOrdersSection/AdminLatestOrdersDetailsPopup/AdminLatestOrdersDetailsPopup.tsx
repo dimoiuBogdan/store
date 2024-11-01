@@ -1,18 +1,18 @@
 "use client";
 
+import PRDialog from "@/app/common/components/PrimeReact/PRDialog";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
-import PRDialog from "../../../../../../../common/components/PrimeReact/PRDialog";
+import { Suspense, type JSX } from "react";
 import AdminLatestOrdersDetailsPopupContent from "./AdminLatestOrdersDetailsPopupContent";
 
-export default function AdminLatestOrdersDetailsPopup() {
+export default function AdminLatestOrdersDetailsPopup(): JSX.Element {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
   const orderToEdit = params.get("orderToEdit");
 
-  const onHide = () => {
+  const onHide = (): void => {
     if (orderToEdit) {
       params.delete("orderToEdit");
 

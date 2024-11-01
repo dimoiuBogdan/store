@@ -1,10 +1,13 @@
 import { useTranslations } from "next-intl";
+import type { JSX } from "react";
 
 type Props = {
   onClick: () => void;
 };
 
-export default function AdminProductsFilterClear({ onClick }: Props) {
+export default function AdminProductsFilterClear({
+  onClick,
+}: Props): JSX.Element {
   const t = useTranslations("admin.products.table.actions");
 
   return (

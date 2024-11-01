@@ -45,7 +45,7 @@ const NavbarMobileMenu: FC<Props> = ({ isOpen, setIsOpen, navItems }) => {
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 md:hidden"
           onClick={() => setIsOpen(false)}
-        ></div>
+        />
       )}
     </>
   );

@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
+import type { JSX } from "react";
 import AdminNavbar from "./components/AdminNavbar/AdminNavbar";
 import AdminSidebar from "./components/AdminSidebar";
 
@@ -11,7 +12,7 @@ export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): JSX.Element {
   return (
     <div className="flex">
       <AdminSidebar />

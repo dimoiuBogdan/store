@@ -1,8 +1,9 @@
-import AdminService from "../../../../../../common/services/admin/admin.service";
+import AdminService from "@/app/common/services/admin/admin.service";
+import type { JSX } from "react";
 import AdminBestProductsSection from "./AdminBestProductsSection";
 import AdminBestProductSectionError from "./error";
 
-export default async function AdminBestProductsSectionDataProvider() {
+export default async function AdminBestProductsSectionDataProvider(): Promise<JSX.Element> {
   try {
     const { getBestProducts } = AdminService;
 

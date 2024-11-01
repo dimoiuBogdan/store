@@ -1,19 +1,22 @@
 "use client";
 
+import PRCheckbox from "@/app/common/components/PrimeReact/Inputs/PRCheckbox";
 import { useRouter, useSearchParams } from "next/navigation";
-import PRCheckbox from "../../../../../../common/components/PrimeReact/Inputs/PRCheckbox";
+import type { JSX } from "react";
 
 interface CategoryFilterProps {
   categories: string[];
 }
 
-export function CategoryFilter({ categories }: CategoryFilterProps) {
+export function CategoryFilter({
+  categories,
+}: CategoryFilterProps): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const selectedCategories = searchParams.get("categories")?.split(",") || [];
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: string): void => {
     const updatedCategories = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];

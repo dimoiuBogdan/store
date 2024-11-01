@@ -2,11 +2,12 @@
 
 import { TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import type { JSX } from "react";
 
-export function FilterButton() {
+export function ClearFilters(): JSX.Element {
   const router = useRouter();
 
-  const handleClearFilters = () => {
+  const handleClearFilters = (): void => {
     router.replace("?");
   };
 

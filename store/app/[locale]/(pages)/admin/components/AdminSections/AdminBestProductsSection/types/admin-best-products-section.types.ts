@@ -1,4 +1,4 @@
-import type { CategoryModel } from "../../../../../../../common/types/types";
+import type { CategoryModel } from "@/app/common/types/types";
 
 export type AdminBestProductModel = {
   productId: number;

@@ -30,9 +30,9 @@ const MissionValues: React.FC = () => {
           Our Mission & Values
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {values.map((value, index) => (
+          {values.map((value) => (
             <Card
-              key={index}
+              key={value.title}
               className="rounded-lg bg-zinc-700/50 p-6 text-zinc-200 shadow-md"
             >
               <div className="text-center">

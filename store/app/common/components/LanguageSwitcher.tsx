@@ -2,14 +2,15 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import type { JSX } from "react";
 import { cn, getCurrentPathWithoutLang } from "../utils/utils";
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher(): JSX.Element {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
 
-  const handleChangeLanguage = (locale: "en" | "ro") => {
+  const handleChangeLanguage = (locale: "en" | "ro"): void => {
     router.replace(`/${locale}/${getCurrentPathWithoutLang(pathname)}`);
   };
 

@@ -1,6 +1,7 @@
+import type { JSX } from "react";
 import PRInputTextarea from "../../PrimeReact/Inputs/PRInputTextarea";
 
-const ShoppingCartModalFooter = () => {
+const ShoppingCartModalFooter = (): JSX.Element => {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between text-lg font-medium">

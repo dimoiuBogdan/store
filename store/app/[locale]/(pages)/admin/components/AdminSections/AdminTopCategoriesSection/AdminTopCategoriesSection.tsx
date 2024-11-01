@@ -1,11 +1,12 @@
+import PRColumn from "@/app/common/components/PrimeReact/PRColumn";
+import PRDataTable from "@/app/common/components/PrimeReact/PRDataTable";
+import AdminService from "@/app/common/services/admin/admin.service";
 import { ShoppingBag } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import PRColumn from "../../../../../../common/components/PrimeReact/PRColumn";
-import PRDataTable from "../../../../../../common/components/PrimeReact/PRDataTable";
-import AdminService from "../../../../../../common/services/admin/admin.service";
+import type { JSX } from "react";
 import AdminTopCategoriesSectionError from "./error";
 
-export default async function AdminBestCategoriesSection() {
+export default async function AdminBestCategoriesSection(): Promise<JSX.Element> {
   try {
     const { getBestCategories } = AdminService;
 

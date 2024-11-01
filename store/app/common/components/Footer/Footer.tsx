@@ -1,3 +1,4 @@
+import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -12,15 +13,15 @@ const Footer: React.FC = () => {
             Elevate your style with our curated collection of accessories.
           </p>
           <div className="mt-4 flex space-x-4">
-            <a href="#" aria-label="Facebook">
-              <i className="pi pi-facebook"></i>
-            </a>
-            <a href="#" aria-label="Instagram">
-              <i className="pi pi-instagram"></i>
-            </a>
-            <a href="#" aria-label="Twitter">
-              <i className="pi pi-twitter"></i>
-            </a>
+            <Link href="#" aria-label="Facebook">
+              <FacebookIcon />
+            </Link>
+            <Link href="#" aria-label="Instagram">
+              <InstagramIcon />
+            </Link>
+            <Link href="#" aria-label="Twitter">
+              <TwitterIcon />
+            </Link>
           </div>
         </div>
         <div>
@@ -58,7 +59,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div className="mt-8 bg-zinc-700 text-center">
+      <div className="mt-6 bg-zinc-700 p-1 text-center">
         <p>&copy; 2023 Your Accessory Store. All rights reserved.</p>
       </div>
     </footer>

@@ -1,7 +1,4 @@
-import type {
-  CategoryModel,
-  ImageModel,
-} from "../../../../../common/types/types";
+import type { CategoryModel, ImageModel } from "@/app/common/types/types";
 
 export type AdminProductModel = {
   productId: number;

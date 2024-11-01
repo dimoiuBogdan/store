@@ -27,7 +27,7 @@ const categories = [
 
 const FeaturedCategories: React.FC = () => {
   return (
-    <section className="mx-auto max-w-screen-xl px-4 py-12">
+    <section className="mx-auto w-full max-w-screen-xl py-20">
       <h2 className="mb-8 text-center text-3xl font-bold">
         Featured Categories
       </h2>
@@ -42,7 +42,6 @@ const FeaturedCategories: React.FC = () => {
                 src={category.image}
                 alt={category.name}
                 layout="fill"
-                unoptimized
                 objectFit="cover"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">

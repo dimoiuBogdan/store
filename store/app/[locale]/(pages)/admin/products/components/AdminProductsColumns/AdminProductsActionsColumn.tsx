@@ -1,32 +1,35 @@
 "use client";
 
+import PRConfirmationDialog from "@/app/common/components/PrimeReact/PRConfirmationDialog";
 import { EditIcon, TrashIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import PRConfirmationDialog from "../../../../../../common/components/PrimeReact/PRConfirmationDialog";
+import type { JSX } from "react";
 
 type Props = {
   productId: string;
 };
 
-export default function AdminProductsActionsColumn({ productId }: Props) {
+export default function AdminProductsActionsColumn({
+  productId,
+}: Props): JSX.Element {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
   const showQuitConfirmationModal = params.get("deleteProduct") === productId;
 
-  const handleEditProduct = (productId: string) => {
+  const handleEditProduct = (productId: string): void => {
     params.set("product", productId);
     replace(`?${params.toString()}`);
   };
 
-  const handleDeleteProduct = (productId: string) => {
+  const handleDeleteProduct = (productId: string): void => {
     params.set("deleteProduct", productId);
 
     replace(`?${params.toString()}`);
   };
 
-  const handleHideDeleteProductModal = () => {
+  const handleHideDeleteProductModal = (): void => {
     params.delete("deleteProduct");
 
     replace(`?${params.toString()}`);

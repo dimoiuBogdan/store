@@ -1,13 +1,13 @@
 "use client";
 
+import PRMenu from "@/app/common/components/PrimeReact/PRMenu";
 import { ChevronDown, Edit } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Menu } from "primereact/menu";
-import { MenuItem } from "primereact/menuitem";
-import { useRef } from "react";
-import PRMenu from "../../../../../../../common/components/PrimeReact/PRMenu";
+import type { Menu } from "primereact/menu";
+import type { MenuItem } from "primereact/menuitem";
+import { useRef, type JSX } from "react";
 
-export default function AdminLatestOrdersDetailsPopupOrderActions() {
+export default function AdminLatestOrdersDetailsPopupOrderActions(): JSX.Element {
   const t = useTranslations("admin.overview.orderDetails.actions");
 
   const menu = useRef<Menu>(null);

@@ -1,9 +1,10 @@
-import AdminService from "../../../../../../common/services/admin/admin.service";
+import AdminService from "@/app/common/services/admin/admin.service";
+import type { JSX } from "react";
 import AdminLatestOrdersDetailsPopup from "./AdminLatestOrdersDetailsPopup/AdminLatestOrdersDetailsPopup";
 import AdminLatestOrdersSection from "./AdminLatestOrdersSection";
 import AdminLatestOrdersSectionError from "./error";
 
-export default async function AdminLatestOrdersSectionDataProvider() {
+export default async function AdminLatestOrdersSectionDataProvider(): Promise<JSX.Element> {
   try {
     const { getLatestOrders } = AdminService;
 

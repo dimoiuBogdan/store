@@ -1,15 +1,15 @@
 "use client";
 
 import { ShoppingBasket } from "lucide-react";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import PRDialog from "../../PrimeReact/PRDialog";
 import ShoppingCartModalFooter from "./ShoppingCartModalFooter";
 import ShoppingCartModalProducts from "./ShoppingCartModalProducts";
 
-const ShoppingCartModal = () => {
+const ShoppingCartModal = (): JSX.Element => {
   const [showCart, setShowCart] = useState(false);
 
-  const handleShowCart = () => {
+  const handleShowCart = (): void => {
     setShowCart((prev) => !prev);
   };
 
@@ -23,7 +23,7 @@ const ShoppingCartModal = () => {
         position="right"
         header="Shopping Cart"
         draggable={false}
-        className="min-h-screen w-full max-w-sm sm:w-[20vw] sm:min-w-80"
+        className="m-0 min-h-screen w-full max-w-sm sm:w-[20vw] sm:min-w-80"
         visible={showCart}
         onHide={() => setShowCart(false)}
       >

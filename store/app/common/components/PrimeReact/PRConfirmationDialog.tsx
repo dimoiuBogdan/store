@@ -4,11 +4,11 @@ import {
   type ConfirmDialogOptions,
   type ConfirmDialogProps,
 } from "primereact/confirmdialog";
-import type { FC } from "react";
+import type { FC, JSX } from "react";
 
 type Props = ConfirmDialogProps;
 
-const PRConfirmationDialog: FC<Props> = (props) => {
+const PRConfirmationDialog: FC<Props> = (props): JSX.Element => {
   return (
     <ConfirmDialog
       dismissableMask

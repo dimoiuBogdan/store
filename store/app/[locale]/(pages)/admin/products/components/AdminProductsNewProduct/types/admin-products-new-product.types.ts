@@ -1,4 +1,4 @@
-import type { ProductStatus } from "../../../../../../../common/types/enums";
+import type { ProductStatus } from "@/app/common/types/enums";
 
 export type AdminProductsNewProduct = {
   name: string;

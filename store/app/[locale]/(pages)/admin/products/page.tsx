@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import AdminProductsTable from "./AdminProductsTable";
 import AdminProductsNewProduct from "./components/AdminProductsNewProduct/AdminProductsNewProduct";
 
@@ -5,7 +6,7 @@ type SearchParams = Promise<{ product?: string }>;
 
 export default async function AdminProductsPage(props: {
   searchParams: SearchParams;
-}) {
+}): Promise<JSX.Element> {
   const params = await props.searchParams;
   const product = params.product;
 

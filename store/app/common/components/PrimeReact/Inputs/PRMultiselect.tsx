@@ -16,7 +16,7 @@ const PRMultiselect: FC<Props> = ({ error, className, label, ...props }) => {
         </label>
       ) : null}
       <MultiSelect
-        panelHeaderTemplate={<></>}
+        panelHeaderTemplate={<div />}
         pt={{
           checkboxContainer: { className: "h-6" },
           checkbox: {

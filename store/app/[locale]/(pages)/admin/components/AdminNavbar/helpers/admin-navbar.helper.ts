@@ -9,7 +9,7 @@ const getPageTitle = (pathname: string): string => {
   return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
 };
 
-const getTranslatedTitle = (pathname: string, t: any) => {
+const getTranslatedTitle = (pathname: string, t: any): string => {
   const pageTitle = getPageTitle(pathname).toLowerCase();
 
   if (pageTitle === "admin") {

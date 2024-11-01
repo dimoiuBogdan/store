@@ -1,10 +1,11 @@
+import PRDropdown from "@/app/common/components/PrimeReact/Inputs/PRDropdown";
+import PRInputNumber from "@/app/common/components/PrimeReact/Inputs/PRInputNumber";
 import { Box, Minus, Plus, Star, Truck } from "lucide-react";
-import PRInputNumber from "../../../../../../common/components/PrimeReact/Inputs/PRInputNumber";
-import PRDropdown from "../../../../../../common/components/PrimeReact/Inputs/PRDropdown";
+import type { JSX } from "react";
 
-const ProductOrder = () => {
+const ProductOrder = (): JSX.Element => {
   return (
-    <div className="w-1/2">
+    <div className="w-full md:w-1/2">
       <h1 className="text-3xl font-bold tracking-wide">
         Whey-X5 900g / 27serv
       </h1>
@@ -49,7 +50,7 @@ const ProductOrder = () => {
         <div>Quantity: </div>
         <div className="flex items-center gap-3">
           <Minus className="h-6 w-6 cursor-pointer rounded-full bg-primary p-1 text-background transition-all hover:bg-primary/20 hover:text-primary" />
-          <PRInputNumber max={10} min={1} id="quantity" />
+          <PRInputNumber max={100} min={1} id="quantity" />
           <Plus className="h-6 w-6 cursor-pointer rounded-full bg-primary p-1 text-background transition-all hover:bg-primary/20 hover:text-primary" />
         </div>
       </div>
@@ -57,7 +58,7 @@ const ProductOrder = () => {
         <Truck className="animate-bounce text-primary" size={28} />
         <p>In stock and ready to ship</p>
       </div>
-      <button className="flex items-center justify-center gap-4 rounded-lg bg-primary px-8 py-2 text-center text-lg font-semibold text-background transition-all hover:bg-primary/20 hover:text-primary">
+      <button className="flex items-center justify-center gap-4 rounded-lg bg-primary px-6 py-2 text-center text-lg font-semibold text-background transition-all hover:bg-primary/20 hover:text-primary">
         Add to Cart <Box />
       </button>
     </div>

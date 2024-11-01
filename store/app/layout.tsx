@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import type { JSX, ReactNode } from "react";
 import "./globals.css";
 import Providers from "./providers";
 
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
 export default async function LocaleLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children: ReactNode;
+}>): Promise<JSX.Element> {
   return (
     <html lang="en">
       <body

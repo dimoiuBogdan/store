@@ -6,14 +6,12 @@ import PromotionalBanner from "./components/PromotionalBanner";
 
 const Homepage: React.FC = () => {
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-grow">
-        <HeroSection />
-        <FeaturedCategories />
-        <ProductShowcase />
-        <PromotionalBanner />
-      </main>
-    </div>
+    <main className="flex min-h-screen flex-col">
+      <HeroSection />
+      <FeaturedCategories />
+      <ProductShowcase />
+      <PromotionalBanner />
+    </main>
   );
 };
 

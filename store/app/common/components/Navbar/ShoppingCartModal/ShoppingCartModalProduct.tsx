@@ -1,19 +1,17 @@
 import { MinusCircle, PlusCircle, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { JSX } from "react";
 
-const ShoppingCartModalProduct = () => {
-  const handleRemoveProduct = (e: React.MouseEvent<SVGSVGElement>) => {
+const ShoppingCartModalProduct = (): JSX.Element => {
+  const handleRemoveProduct = (e: React.MouseEvent<SVGSVGElement>): void => {
     e.stopPropagation();
     e.preventDefault();
-
-    console.log("remove product");
   };
 
   return (
     <Link href="/products/1" className="flex items-center gap-4 transition-all">
       <Image
-        unoptimized
         src="https://images.unsplash.com/photo-1617719445949-8955477042b8?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Product"
         width={100}

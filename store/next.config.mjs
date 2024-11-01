@@ -14,6 +14,7 @@ const nextConfig = {
     reactCompiler: true,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [{ hostname: "img.kwcdn.com" }],
   },
 };

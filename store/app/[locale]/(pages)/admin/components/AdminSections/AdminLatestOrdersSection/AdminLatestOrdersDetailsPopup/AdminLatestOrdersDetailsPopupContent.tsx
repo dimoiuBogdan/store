@@ -1,22 +1,20 @@
 "use client";
 
+import AdminService from "@/app/common/services/admin/admin.service";
+import { OrderStatus, PaymentMethod } from "@/app/common/types/enums";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Badge } from "primereact/badge";
-import AdminService from "../../../../../../../common/services/admin/admin.service";
-import {
-  OrderStatus,
-  PaymentMethod,
-} from "../../../../../../../common/types/enums";
+import type { JSX } from "react";
 import AdminLatestOrdersDetailsPopupDownloadInvoice from "./AdminLatestOrdersDetailsPopupDownloadInvoice";
 import AdminLatestOrdersDetailsPopupNotifyUser from "./AdminLatestOrdersDetailsPopupNotifyUser";
 import AdminLatestOrdersDetailsPopupOrderActions from "./AdminLatestOrdersDetailsPopupOrderActions";
 import AdminLatestOrdersDetailsPopupProducts from "./AdminLatestOrdersDetailsPopupProducts";
 import type { AdminOrderDetailsModel } from "./types/admin-latest-orders-details-popup.types";
 
-export default function AdminLatestOrdersDetailsPopupContent() {
+export default function AdminLatestOrdersDetailsPopupContent(): JSX.Element {
   const t = useTranslations("admin.overview.orderDetails");
   const locale = useLocale();
 
@@ -45,7 +43,7 @@ export default function AdminLatestOrdersDetailsPopupContent() {
     return <div>No order details</div>;
   }
 
-  const statusBodyTemplate = (status: OrderStatus) => {
+  const statusBodyTemplate = (status: OrderStatus): JSX.Element => {
     const statusColor: Record<keyof typeof OrderStatus, string> = {
       PENDING: "bg-yellow-500",
       PROCESSING: "bg-sky-500",

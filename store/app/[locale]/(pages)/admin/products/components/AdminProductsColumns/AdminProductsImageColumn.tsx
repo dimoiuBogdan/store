@@ -1,18 +1,20 @@
 "use client";
 
+import PRImage from "@/app/common/components/PrimeReact/PRImage";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useState } from "react";
-import PRImage from "../../../../../../common/components/PrimeReact/PRImage";
+import { useState, type JSX } from "react";
 import type { AdminProductModel } from "../../types/admin-products-table.types";
 
 type Props = {
   rowData: AdminProductModel;
 };
 
-export default function AdminProductsImageColumn({ rowData }: Props) {
+export default function AdminProductsImageColumn({
+  rowData,
+}: Props): JSX.Element {
   const [imageIndex, setImageIndex] = useState(0);
 
-  const handleIndexChange = (index: number) => {
+  const handleIndexChange = (index: number): void => {
     if (index < 0) return setImageIndex(rowData.productImages.length - 1);
 
     if (index >= rowData.productImages.length) return setImageIndex(0);

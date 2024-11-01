@@ -3,6 +3,7 @@ import {
   type DataTableValueArray,
   DataTable,
 } from "primereact/datatable";
+import type { JSX } from "react";
 import { cn } from "../../utils/utils";
 
 type Props = DataTableProps<DataTableValueArray> & {
@@ -15,7 +16,7 @@ export default function PRDataTable({
   rows,
   className,
   ...props
-}: Props) {
+}: Props): JSX.Element {
   return (
     <DataTable
       value={value}

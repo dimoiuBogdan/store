@@ -1,4 +1,5 @@
 import { Dialog, type DialogProps } from "primereact/dialog";
+import type { JSX } from "react";
 import { cn } from "../../utils/utils";
 
 type Props = DialogProps;
@@ -10,7 +11,7 @@ export default function PRDialog({
   children,
   className,
   ...props
-}: Props) {
+}: Props): JSX.Element {
   return (
     <Dialog
       header={header}

@@ -1,12 +1,9 @@
-import {
-  OrderStatus,
-  type PaymentMethod,
-} from "../../../../../../../../common/types/enums";
+import type { OrderStatus, PaymentMethod } from "@/app/common/types/enums";
 import type {
   AddressModel,
   CategoryModel,
   UserModel,
-} from "../../../../../../../../common/types/types";
+} from "@/app/common/types/types";
 
 export type AdminOrderedProductModel = {
   productId: number;

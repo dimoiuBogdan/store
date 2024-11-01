@@ -1,26 +1,29 @@
 "use client";
 
+import PRColumn from "@/app/common/components/PrimeReact/PRColumn";
+import PRDataTable from "@/app/common/components/PrimeReact/PRDataTable";
+import { OrderStatus } from "@/app/common/types/enums";
 import { Check, Info, Truck, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "primereact/badge";
 import { Tooltip } from "primereact/tooltip";
-import PRColumn from "../../../../../../common/components/PrimeReact/PRColumn";
-import PRDataTable from "../../../../../../common/components/PrimeReact/PRDataTable";
-import { OrderStatus } from "../../../../../../common/types/enums";
-import { AdminLatestOrderModel } from "./types/admin-latest-orders-section.types";
+import type { JSX } from "react";
+import type { AdminLatestOrderModel } from "./types/admin-latest-orders-section.types";
 
 type Props = {
   latestOrdersData: AdminLatestOrderModel[];
 };
 
-export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
+export default function AdminLatestOrdersSection({
+  latestOrdersData,
+}: Props): JSX.Element {
   const t = useTranslations("admin.overview");
   const locale = useLocale();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
-  const statusBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const statusBodyTemplate = (rowData: AdminLatestOrderModel): JSX.Element => {
     const statusColor: Record<keyof typeof OrderStatus, string> = {
       PENDING: "bg-yellow-500",
       PROCESSING: "bg-sky-500",
@@ -43,7 +46,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     );
   };
 
-  const paidBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const paidBodyTemplate = (rowData: AdminLatestOrderModel): JSX.Element => {
     return (
       <span>
         {rowData.paid ? (
@@ -55,7 +58,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     );
   };
 
-  const totalBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const totalBodyTemplate = (rowData: AdminLatestOrderModel): JSX.Element => {
     return (
       <span className="truncate font-bold">
         {rowData.total.toLocaleString(locale)}
@@ -63,7 +66,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     );
   };
 
-  const dateBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const dateBodyTemplate = (rowData: AdminLatestOrderModel): JSX.Element => {
     return (
       <span>
         {new Date(rowData.createdAt).toLocaleDateString(locale)}{" "}
@@ -72,7 +75,9 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     );
   };
 
-  const customerBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const customerBodyTemplate = (
+    rowData: AdminLatestOrderModel,
+  ): JSX.Element => {
     return (
       <div className="truncate">
         <Tooltip
@@ -89,7 +94,7 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     );
   };
 
-  const handleEditOrder = (id: number) => {
+  const handleEditOrder = (id: number): void => {
     const params = new URLSearchParams(searchParams);
 
     params.set("orderToEdit", id.toString());
@@ -97,7 +102,9 @@ export default function AdminLatestOrdersSection({ latestOrdersData }: Props) {
     replace(`?${params.toString()}`);
   };
 
-  const orderNumberBodyTemplate = (rowData: AdminLatestOrderModel) => {
+  const orderNumberBodyTemplate = (
+    rowData: AdminLatestOrderModel,
+  ): JSX.Element => {
     return (
       <div
         onClick={() => handleEditOrder(rowData.orderId)}

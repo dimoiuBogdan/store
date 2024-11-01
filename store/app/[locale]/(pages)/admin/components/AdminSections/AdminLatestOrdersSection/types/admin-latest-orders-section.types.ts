@@ -1,7 +1,4 @@
-import type {
-  OrderStatus,
-  PaymentMethod,
-} from "../../../../../../../common/types/enums";
+import type { OrderStatus, PaymentMethod } from "@/app/common/types/enums";
 
 export type AdminLatestOrderModel = {
   orderId: number;

@@ -1,5 +1,6 @@
+import { cn } from "@/app/common/utils/utils";
 import { InputText, type InputTextProps } from "primereact/inputtext";
-import { cn } from "../../../utils/utils";
+import type { JSX } from "react";
 
 type PRInputTextProps = { error?: boolean; label?: string } & InputTextProps;
 
@@ -8,7 +9,7 @@ const PRInputText = ({
   error,
   label,
   ...props
-}: PRInputTextProps) => {
+}: PRInputTextProps): JSX.Element => {
   return (
     <>
       {label ? (

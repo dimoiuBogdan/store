@@ -1,14 +1,17 @@
 import { useTranslations } from "next-intl";
 import type { ColumnFilterApplyTemplateOptions } from "primereact/column";
+import type { JSX } from "react";
 
 type Props = {
   options: ColumnFilterApplyTemplateOptions;
 };
 
-export default function AdminProductsFilterApply({ options }: Props) {
+export default function AdminProductsFilterApply({
+  options,
+}: Props): JSX.Element {
   const t = useTranslations("admin.products.table.actions");
 
-  const handleApply = () => {
+  const handleApply = (): void => {
     // @ts-expect-error error
     const constraints = options.filterModel.constraints[0];
 

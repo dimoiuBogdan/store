@@ -1,11 +1,11 @@
-import clsx, { ClassValue } from "clsx";
+import clsx, { type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export const cn = (...inputs: ClassValue[]) => {
+export const cn = (...inputs: ClassValue[]): string => {
   return twMerge(clsx(inputs));
 };
 
-export const getCurrentPathWithoutLang = (path: string) => {
+export const getCurrentPathWithoutLang = (path: string): string => {
   const parts = path.split("/");
 
   // Check if the path has at least two parts and the second part is a valid language code

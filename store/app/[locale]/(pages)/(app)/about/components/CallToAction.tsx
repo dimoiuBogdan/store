@@ -3,7 +3,7 @@ import React from "react";
 
 const CallToAction: React.FC = () => {
   return (
-    <section className="mb-12 rounded-md bg-gradient-to-r from-primary via-emerald-600 to-green-800 py-12 text-white">
+    <section className="to-primary-darkest rounded-md bg-gradient-to-r from-primary py-12">
       <div className="mx-auto max-w-screen-xl px-4 text-center">
         <h2 className="mb-4 text-3xl font-bold md:text-4xl">
           Ready to Elevate Your Style?
